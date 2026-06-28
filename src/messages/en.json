@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "siteName": "Guest House Akutsa",
+    "homeTitle": "Guest House Akutsa | Family Guesthouse in Keda, Adjara, Georgia",
+    "homeDescription": "Family guesthouse, private cottage and stationary camper in Sofel Akutsa, Keda Municipality, Adjara. Mountain views, home-cooked breakfast, and warm Georgian hospitality."
+  },
+  "nav": {
+    "home": "Home",
+    "guesthouse": "Guest House",
+    "cottage": "Cottage",
+    "camper": "Camper",
+    "services": "Services",
+    "gallery": "Gallery",
+    "attractions": "Attractions",
+    "contact": "Contact",
+    "bookNow": "Book Now"
+  },
+  "footer": {
+    "tagline": "Family hospitality in the heart of Adjara's mountains.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "address": "Sofel Akutsa, Keda Municipality, Adjara, Georgia",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "bookTelegram": "Book on Telegram",
+    "bookWhatsapp": "Book on WhatsApp",
+    "learnMore": "Learn More",
+    "viewDetails": "View Details",
+    "fromPrice": "from {price} GEL / night",
+    "perNight": "per night",
+    "amenities": "Amenities",
+    "gallery": "Gallery",
+    "backToHome": "Back to Home",
+    "distance": "Distance",
+    "send": "Send Message"
+  },
+  "home": {
+    "heroTitle": "A Family Welcome in the Mountains of Adjara",
+    "heroSubtitle": "Guest House Akutsa offers cozy rooms, a private cottage, and a fully equipped camper — all surrounded by forests, rivers, and Georgian hospitality.",
+    "introTitle": "Welcome to Akutsa",
+    "introText": "Tucked in the village of Sofel Akutsa, just 3 km from Keda center, our family-run property offers three distinct ways to experience the Adjara highlands: a traditional guesthouse, a private cottage with panoramic views, and a stationary camper for a unique stay. Wake up to mountain air, enjoy a home-cooked breakfast, and let us help you discover the wonders of the region.",
+    "stayOptionsTitle": "Choose Your Stay",
+    "stayOptionsSubtitle": "Three unique ways to experience Akutsa",
+    "attractionsTitle": "Nearby Attractions",
+    "attractionsSubtitle": "Explore the natural and cultural treasures of Adjara",
+    "reviewsTitle": "What Our Guests Say",
+    "instagramTitle": "Follow Our Journey",
+    "ctaTitle": "Ready to Book Your Stay?",
+    "ctaSubtitle": "Reach out to us directly on Telegram or WhatsApp — fast replies, no booking fees."
+  },
+  "properties": {
+    "guesthouse": {
+      "name": "Guest House Akutsa",
+      "short": "4 cozy rooms, shared kitchen, two balconies and a spacious terrace with mountain views.",
+      "price": "80"
+    },
+    "cottage": {
+      "name": "Panorama Akutsa",
+      "short": "A private 20 sqm cottage with its own kitchen, bathroom and balcony overlooking the valley.",
+      "price": "120"
+    },
+    "camper": {
+      "name": "Akutsa Camper",
+      "short": "A stationary, fully equipped house truck for a unique and cozy escape.",
+      "price": "100"
+    }
+  },
+  "guesthousePage": {
+    "title": "Guest House Akutsa",
+    "subtitle": "Family rooms with shared kitchen and stunning views",
+    "description": "Guest House Akutsa is our main family house, offering 4 comfortable rooms — a mix of family and standard rooms — designed for guests who enjoy a homely atmosphere. The house features two balconies and a generous 60 sqm terrace where guests gather for breakfast, coffee, or evening conversations under the stars. The shared kitchen and bathroom encourage a warm, communal stay, just like visiting family.",
+    "roomsTitle": "Rooms",
+    "room1Name": "Family Room",
+    "room1Desc": "Spacious room ideal for families, with comfortable bedding and balcony access.",
+    "room2Name": "Standard Room",
+    "room2Desc": "Cozy double room with mountain views, perfect for couples or solo travelers.",
+    "amenitiesTitle": "Amenities",
+    "amenity1": "Shared fully-equipped kitchen",
+    "amenity2": "Shared bathroom",
+    "amenity3": "Two balconies",
+    "amenity4": "60 sqm shared terrace",
+    "amenity5": "Free Wi-Fi",
+    "amenity6": "Free parking",
+    "amenity7": "Mountain & forest views",
+    "amenity8": "Home-cooked breakfast available"
+  },
+  "cottagePage": {
+    "title": "Panorama Akutsa",
+    "subtitle": "Your private escape with panoramic mountain views",
+    "description": "Panorama Akutsa is a private 20 sqm cottage built for travelers who want independence and tranquility. It comes with its own fully equipped kitchen, private bathroom, and a balcony where you can enjoy uninterrupted views over the Keda valley. Perfect for couples or small families seeking a quiet retreat away from the main house.",
+    "amenitiesTitle": "Amenities",
+    "amenity1": "Private kitchen",
+    "amenity2": "Private bathroom",
+    "amenity3": "Private balcony",
+    "amenity4": "Panoramic valley views",
+    "amenity5": "Free Wi-Fi",
+    "amenity6": "Free parking",
+    "amenity7": "20 sqm living space",
+    "amenity8": "Heating for all seasons"
+  },
+  "camperPage": {
+    "title": "Akutsa Camper",
+    "subtitle": "A unique stationary house truck experience",
+    "description": "The Akutsa Camper is a stationary, fully equipped house truck offering a one-of-a-kind stay. Combining the charm of camper life with the comfort of a real home, it's perfect for travelers looking for something different — surrounded by nature, yet just steps away from the main guesthouse.",
+    "amenitiesTitle": "Amenities",
+    "amenity1": "Fully equipped kitchenette",
+    "amenity2": "Private bathroom",
+    "amenity3": "Comfortable double bed",
+    "amenity4": "Outdoor seating area",
+    "amenity5": "Free Wi-Fi",
+    "amenity6": "Free parking",
+    "amenity7": "Unique camper design",
+    "amenity8": "Quiet, nature-facing location"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Everything you need for a comfortable stay",
+    "breakfastTitle": "Home-Cooked Breakfast",
+    "breakfastDesc": "Start your day with a traditional Georgian breakfast made from local, often homegrown ingredients — fresh bread, cheese, eggs, honey and more.",
+    "toursTitle": "Local Tours",
+    "toursDesc": "Let us arrange guided trips to Makhuntseti Waterfall, Goderdzi Pass, Batumi and other highlights of Adjara, tailored to your interests.",
+    "transferTitle": "Transfer Service",
+    "transferDesc": "We can organize comfortable transfer from Batumi airport or city center directly to the guesthouse, and back."
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "A glimpse into life at Akutsa",
+    "filterAll": "All",
+    "filterGuesthouse": "Guest House",
+    "filterCottage": "Cottage",
+    "filterCamper": "Camper",
+    "filterNature": "Nature"
+  },
+  "attractions": {
+    "title": "Attractions Near Akutsa",
+    "subtitle": "Discover the beauty of Adjara",
+    "waterfallName": "Makhuntseti Waterfall",
+    "waterfallDesc": "A stunning 20-meter waterfall near an old arched stone bridge, one of Adjara's most beloved natural sites.",
+    "waterfallDistance": "25 km",
+    "passName": "Goderdzi Pass",
+    "passDesc": "A scenic mountain pass connecting Adjara to Samtskhe-Javakheti, famous for alpine landscapes and a ski resort.",
+    "passDistance": "55 km",
+    "batumiName": "Batumi",
+    "batumiDesc": "The vibrant Black Sea resort city with a boulevard, botanical garden, and lively nightlife.",
+    "batumiDistance": "65 km",
+    "seaName": "Black Sea Coast",
+    "seaDesc": "Pebble beaches and seaside promenades along Georgia's stunning Black Sea coastline.",
+    "seaDistance": "65 km",
+    "kedaName": "Keda Center",
+    "kedaDesc": "The nearest town with shops, cafes, and local markets — perfect for a short visit.",
+    "kedaDistance": "3 km"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you",
+    "formName": "Your Name",
+    "formEmail": "Your Email",
+    "formMessage": "Your Message",
+    "formSubmit": "Send Message",
+    "formNote": "This form does not send automatically — please also reach us via Telegram or WhatsApp for the fastest response.",
+    "addressTitle": "Address",
+    "address": "Sofel Akutsa, Keda Municipality, Adjara, Georgia",
+    "phoneTitle": "Phone / Messaging",
+    "mapTitle": "Find Us"
+  },
+  "reviews": {
+    "review1Name": "Anna K.",
+    "review1Text": "An incredible stay surrounded by nature. The family made us feel right at home and breakfast was unforgettable.",
+    "review2Name": "David M.",
+    "review2Text": "The cottage was perfect for a quiet getaway — beautiful views and total privacy. Highly recommend!",
+    "review3Name": "Elene T.",
+    "review3Text": "Staying in the camper was such a fun experience. Cozy, unique, and the hosts were incredibly welcoming."
+  }
+}

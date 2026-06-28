@@ -1,0 +1,205 @@
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import type { Metadata } from 'next';
+import Section from '@/components/ui/Section';
+import SectionHeading from '@/components/ui/SectionHeading';
+import BookingButtons from '@/components/ui/BookingButtons';
+import FadeIn from '@/components/ui/FadeIn';
+import PropertyCard from '@/components/sections/PropertyCard';
+import ReviewCard from '@/components/sections/ReviewCard';
+import AttractionCard from '@/components/sections/AttractionCard';
+import { img, instagramImages } from '@/lib/images';
+import { SOCIAL_LINKS, SITE_URL } from '@/lib/constants';
+import type { Locale } from '@/i18n/config';
+
+export async function generateMetadata({
+  params: { locale }
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  return {
+    title: t('homeTitle'),
+    description: t('homeDescription'),
+    alternates: { canonical: `${SITE_URL}/${locale}` }
+  };
+}
+
+export default function HomePage() {
+  const t = useTranslations('home');
+  const tProps = useTranslations('properties');
+  const tAttr = useTranslations('attractions');
+  const tReviews = useTranslations('reviews');
+  const tMeta = useTranslations('meta');
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Hotel',
+    name: tMeta('siteName'),
+    description: tMeta('homeDescription'),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Sofel Akutsa',
+      addressLocality: 'Keda',
+      addressRegion: 'Adjara',
+      addressCountry: 'GE'
+    },
+    image: img('akutsa-gh-1'),
+    priceRange: '80-120 GEL'
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Hero */}
+      <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center">
+        <Image
+          src={img('akutsa-hero', 1920, 1280)}
+          alt="Guest House Akutsa"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-forest/50" />
+        <div className="relative z-10 text-center text-cream container-px max-w-3xl">
+          <FadeIn>
+            <h1 className="font-serif text-4xl md:text-6xl font-semibold leading-tight">
+              {t('heroTitle')}
+            </h1>
+            <p className="mt-6 text-base md:text-lg text-cream/90">
+              {t('heroSubtitle')}
+            </p>
+            <div className="mt-8 flex justify-center">
+              <BookingButtons />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Intro */}
+      <Section>
+        <FadeIn>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-3xl md:text-4xl text-forest font-semibold">
+              {t('introTitle')}
+            </h2>
+            <p className="mt-5 text-forest/80 leading-relaxed">{t('introText')}</p>
+          </div>
+        </FadeIn>
+      </Section>
+
+      {/* Stay options */}
+      <Section className="bg-white">
+        <SectionHeading title={t('stayOptionsTitle')} subtitle={t('stayOptionsSubtitle')} />
+        <div className="grid md:grid-cols-3 gap-8">
+          <PropertyCard
+            href="/guesthouse"
+            image={img('akutsa-gh-1')}
+            name={tProps('guesthouse.name')}
+            description={tProps('guesthouse.short')}
+            price={tProps('guesthouse.price')}
+          />
+          <PropertyCard
+            href="/cottage"
+            image={img('akutsa-cottage-1')}
+            name={tProps('cottage.name')}
+            description={tProps('cottage.short')}
+            price={tProps('cottage.price')}
+            delay={0.1}
+          />
+          <PropertyCard
+            href="/camper"
+            image={img('akutsa-camper-1')}
+            name={tProps('camper.name')}
+            description={tProps('camper.short')}
+            price={tProps('camper.price')}
+            delay={0.2}
+          />
+        </div>
+      </Section>
+
+      {/* Attractions teaser */}
+      <Section>
+        <SectionHeading title={t('attractionsTitle')} subtitle={t('attractionsSubtitle')} />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <AttractionCard
+            image={img('akutsa-waterfall')}
+            name={tAttr('waterfallName')}
+            description={tAttr('waterfallDesc')}
+            distance={tAttr('waterfallDistance')}
+          />
+          <AttractionCard
+            image={img('akutsa-pass')}
+            name={tAttr('passName')}
+            description={tAttr('passDesc')}
+            distance={tAttr('passDistance')}
+            delay={0.1}
+          />
+          <AttractionCard
+            image={img('akutsa-batumi')}
+            name={tAttr('batumiName')}
+            description={tAttr('batumiDesc')}
+            distance={tAttr('batumiDistance')}
+            delay={0.2}
+          />
+          <AttractionCard
+            image={img('akutsa-sea')}
+            name={tAttr('seaName')}
+            description={tAttr('seaDesc')}
+            distance={tAttr('seaDistance')}
+            delay={0.3}
+          />
+        </div>
+      </Section>
+
+      {/* Reviews */}
+      <Section className="bg-white">
+        <SectionHeading title={t('reviewsTitle')} />
+        <div className="grid md:grid-cols-3 gap-6">
+          <ReviewCard name={tReviews('review1Name')} text={tReviews('review1Text')} />
+          <ReviewCard name={tReviews('review2Name')} text={tReviews('review2Text')} delay={0.1} />
+          <ReviewCard name={tReviews('review3Name')} text={tReviews('review3Text')} delay={0.2} />
+        </div>
+      </Section>
+
+      {/* Instagram */}
+      <Section>
+        <SectionHeading title={t('instagramTitle')} />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+          {instagramImages.map((seed, i) => (
+            <a
+              key={seed}
+              href={SOCIAL_LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative aspect-square rounded-lg overflow-hidden group"
+            >
+              <Image
+                src={img(seed, 400, 400)}
+                alt={`Instagram ${i + 1}`}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </a>
+          ))}
+        </div>
+      </Section>
+
+      {/* CTA */}
+      <Section className="bg-forest text-cream text-center">
+        <FadeIn>
+          <h2 className="font-serif text-3xl md:text-4xl font-semibold">{t('ctaTitle')}</h2>
+          <p className="mt-4 text-cream/80 max-w-xl mx-auto">{t('ctaSubtitle')}</p>
+          <div className="mt-8 flex justify-center">
+            <BookingButtons />
+          </div>
+        </FadeIn>
+      </Section>
+    </>
+  );
+}
