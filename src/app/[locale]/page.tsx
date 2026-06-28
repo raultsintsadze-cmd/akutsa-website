@@ -6,6 +6,7 @@ import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import BookingButtons from '@/components/ui/BookingButtons';
 import FadeIn from '@/components/ui/FadeIn';
+import { Link } from '@/i18n/navigation';
 import PropertyCard from '@/components/sections/PropertyCard';
 import ReviewCard from '@/components/sections/ReviewCard';
 import AttractionCard from '@/components/sections/AttractionCard';
@@ -38,6 +39,7 @@ export default function HomePage() {
   const tAttr = useTranslations('attractions');
   const tReviews = useTranslations('reviews');
   const tMeta = useTranslations('meta');
+  const tExp = useTranslations('experiences');
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -126,6 +128,58 @@ export default function HomePage() {
             price={tProps('camper.price')}
             delay={0.2}
           />
+        </div>
+      </Section>
+
+      {/* Experiences & Local Products preview */}
+      <Section className="bg-white">
+        <SectionHeading title={tExp('sectionTitle')} subtitle={tExp('sectionSubtitle')} />
+        <div className="grid md:grid-cols-3 gap-8">
+          <FadeIn>
+            <Link
+              href="/services#picnic"
+              className="block bg-cream rounded-2xl p-6 shadow-sm h-full hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-serif text-xl text-forest font-semibold">
+                {tExp('picnicTitle')}
+              </h3>
+              <p className="mt-3 text-forest/70 text-sm leading-relaxed">{tExp('picnicDesc')}</p>
+              <p className="mt-4 text-gold font-medium text-sm">{tExp('picnicPrice')}</p>
+            </Link>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <Link
+              href="/services#masterclasses"
+              className="block bg-cream rounded-2xl p-6 shadow-sm h-full hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-serif text-xl text-forest font-semibold">
+                {tExp('masterclassesTitle')}
+              </h3>
+              <p className="mt-3 text-forest/70 text-sm leading-relaxed">
+                {tExp('masterclassesSubtitle')}
+              </p>
+              <p className="mt-4 text-gold font-medium text-sm">
+                {tExp('beekeepingPrice')} &middot; {tExp('culinaryPrice')}
+              </p>
+            </Link>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <Link
+              href="/services#products"
+              className="block bg-cream rounded-2xl p-6 shadow-sm h-full hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-serif text-xl text-forest font-semibold">
+                {tExp('productsTitle')}
+              </h3>
+              <p className="mt-3 text-forest/70 text-sm leading-relaxed">
+                {tExp('productsSubtitle')}
+              </p>
+              <p className="mt-4 text-gold font-medium text-sm">
+                {tExp('honeyName')} &middot; {tExp('wineName')} &middot; {tExp('chachaName')} &middot;{' '}
+                {tExp('fruitName')}
+              </p>
+            </Link>
+          </FadeIn>
         </div>
       </Section>
 
