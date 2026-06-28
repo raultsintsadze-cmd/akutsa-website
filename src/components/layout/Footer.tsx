@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { SOCIAL_LINKS, GOOGLE_MAPS_URL } from '@/lib/constants';
+import { GOOGLE_MAPS_URL } from '@/lib/constants';
+import SocialIcons from '@/components/ui/SocialIcons';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -15,14 +16,6 @@ export default function Footer() {
     { href: '/gallery', label: tNav('gallery') },
     { href: '/attractions', label: tNav('attractions') },
     { href: '/contact', label: tNav('contact') }
-  ];
-
-  const socials = [
-    { href: SOCIAL_LINKS.facebook, label: 'Facebook' },
-    { href: SOCIAL_LINKS.instagram, label: 'Instagram' },
-    { href: SOCIAL_LINKS.tiktok, label: 'TikTok' },
-    { href: SOCIAL_LINKS.booking, label: 'Booking.com' },
-    { href: SOCIAL_LINKS.airbnb, label: 'Airbnb' }
   ];
 
   return (
@@ -57,19 +50,7 @@ export default function Footer() {
             {t('address')}
           </a>
           <h4 className="font-medium mb-3 text-gold">{t('followUs')}</h4>
-          <div className="flex flex-wrap gap-3 text-sm text-cream/70">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-gold transition-colors"
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
+          <SocialIcons className="text-cream/70" />
         </div>
       </div>
 

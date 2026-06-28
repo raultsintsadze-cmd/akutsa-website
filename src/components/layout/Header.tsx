@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
+import SocialIcons from '@/components/ui/SocialIcons';
 import { TELEGRAM_URL } from '@/lib/constants';
 
 export default function Header() {
@@ -41,6 +42,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-5">
+          <SocialIcons className="text-forest/70" iconClassName="w-[18px] h-[18px]" />
           <LanguageSwitcher />
           <a
             href={TELEGRAM_URL}
@@ -86,6 +88,7 @@ export default function Header() {
               {t('bookNow')}
             </a>
           </div>
+          <SocialIcons className="pt-2 text-forest/70" />
         </div>
       )}
     </header>
