@@ -9,7 +9,13 @@ import FadeIn from '@/components/ui/FadeIn';
 import PropertyCard from '@/components/sections/PropertyCard';
 import ReviewCard from '@/components/sections/ReviewCard';
 import AttractionCard from '@/components/sections/AttractionCard';
-import { img, instagramImages } from '@/lib/images';
+import {
+  img,
+  instagramImages,
+  GUESTHOUSE_SHARED_IMAGES,
+  COTTAGE_IMAGES,
+  CAMPER_IMAGES
+} from '@/lib/images';
 import { SOCIAL_LINKS, SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
@@ -45,8 +51,8 @@ export default function HomePage() {
       addressRegion: 'Adjara',
       addressCountry: 'GE'
     },
-    image: img('akutsa-gh-1'),
-    priceRange: '80-120 GEL'
+    image: GUESTHOUSE_SHARED_IMAGES.terrace,
+    priceRange: '90-150 GEL'
   };
 
   return (
@@ -59,7 +65,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center">
         <Image
-          src={img('akutsa-hero', 1920, 1280)}
+          src={GUESTHOUSE_SHARED_IMAGES.terrace}
           alt="Guest House Akutsa"
           fill
           priority
@@ -99,14 +105,14 @@ export default function HomePage() {
         <div className="grid md:grid-cols-3 gap-8">
           <PropertyCard
             href="/guesthouse"
-            image={img('akutsa-gh-1')}
+            image={GUESTHOUSE_SHARED_IMAGES.terrace}
             name={tProps('guesthouse.name')}
             description={tProps('guesthouse.short')}
             price={tProps('guesthouse.price')}
           />
           <PropertyCard
             href="/cottage"
-            image={img('akutsa-cottage-1')}
+            image={COTTAGE_IMAGES[0]}
             name={tProps('cottage.name')}
             description={tProps('cottage.short')}
             price={tProps('cottage.price')}
@@ -114,7 +120,7 @@ export default function HomePage() {
           />
           <PropertyCard
             href="/camper"
-            image={img('akutsa-camper-1')}
+            image={CAMPER_IMAGES[0]}
             name={tProps('camper.name')}
             description={tProps('camper.short')}
             price={tProps('camper.price')}

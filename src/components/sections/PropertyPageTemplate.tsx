@@ -3,18 +3,17 @@ import { useTranslations } from 'next-intl';
 import Section from '@/components/ui/Section';
 import BookingButtons from '@/components/ui/BookingButtons';
 import FadeIn from '@/components/ui/FadeIn';
-import { img } from '@/lib/images';
 
 export default function PropertyPageTemplate({
   namespace,
-  heroSeed,
-  gallerySeeds,
+  heroImage,
+  galleryImages,
   price,
   rooms
 }: {
   namespace: 'guesthousePage' | 'cottagePage' | 'camperPage';
-  heroSeed: string;
-  gallerySeeds: string[];
+  heroImage: string;
+  galleryImages: string[];
   price: string;
   rooms?: { nameKey: string; descKey: string }[];
 }) {
@@ -26,7 +25,7 @@ export default function PropertyPageTemplate({
   return (
     <>
       <section className="relative h-[60vh] min-h-[420px] flex items-center justify-center">
-        <Image src={img(heroSeed, 1920, 1100)} alt={t('title')} fill priority className="object-cover" />
+        <Image src={heroImage} alt={t('title')} fill priority className="object-cover" />
         <div className="absolute inset-0 bg-forest/50" />
         <div className="relative z-10 text-center text-cream container-px max-w-2xl">
           <FadeIn>
@@ -88,9 +87,9 @@ export default function PropertyPageTemplate({
             {tCommon('gallery')}
           </h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {gallerySeeds.map((seed) => (
-              <div key={seed} className="relative h-56 rounded-xl overflow-hidden">
-                <Image src={img(seed)} alt={t('title')} fill className="object-cover" />
+            {galleryImages.map((src) => (
+              <div key={src} className="relative h-56 rounded-xl overflow-hidden">
+                <Image src={src} alt={t('title')} fill className="object-cover" />
               </div>
             ))}
           </div>

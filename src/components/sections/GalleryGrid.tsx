@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { img, galleryImages } from '@/lib/images';
+import { galleryImages } from '@/lib/images';
 import { clsx } from 'clsx';
 
 const filters = ['all', 'guesthouse', 'cottage', 'camper', 'nature'] as const;
@@ -48,13 +48,13 @@ export default function GalleryGrid() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {images.map((image) => (
           <button
-            key={image.seed}
-            onClick={() => setLightbox(img(image.seed, 1200, 1200))}
+            key={image.src}
+            onClick={() => setLightbox(image.src)}
             className="relative aspect-square rounded-xl overflow-hidden group"
           >
             <Image
-              src={img(image.seed, 600, 600)}
-              alt={image.seed}
+              src={image.src}
+              alt={image.category}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />

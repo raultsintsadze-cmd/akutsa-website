@@ -6,3 +6,7 @@ out
 *.tsbuildinfo
 next-env.d.ts
 .claude/
+
+# Raw/unsupported photo formats not usable on the web (convert to .jpg/.png and re-add)
+public/images/*.DNG
+public/images/*.HEIC

@@ -53,13 +53,13 @@
   "properties": {
     "guesthouse": {
       "name": "Guest House Akutsa",
-      "short": "4 cozy rooms, shared kitchen, two balconies and a spacious terrace with mountain views.",
-      "price": "80"
+      "short": "4 themed rooms, shared kitchen, two balconies and a spacious terrace with mountain views.",
+      "price": "90"
     },
     "cottage": {
       "name": "Panorama Akutsa",
       "short": "A private 20 sqm cottage with its own kitchen, bathroom and balcony overlooking the valley.",
-      "price": "120"
+      "price": "150"
     },
     "camper": {
       "name": "Akutsa Camper",
@@ -72,10 +72,19 @@
     "subtitle": "Family rooms with shared kitchen and stunning views",
     "description": "Guest House Akutsa is our main family house, offering 4 comfortable rooms — a mix of family and standard rooms — designed for guests who enjoy a homely atmosphere. The house features two balconies and a generous 60 sqm terrace where guests gather for breakfast, coffee, or evening conversations under the stars. The shared kitchen and bathroom encourage a warm, communal stay, just like visiting family.",
     "roomsTitle": "Rooms",
-    "room1Name": "Family Room",
-    "room1Desc": "Spacious room ideal for families, with comfortable bedding and balcony access.",
-    "room2Name": "Standard Room",
-    "room2Desc": "Cozy double room with mountain views, perfect for couples or solo travelers.",
+    "room1Name": "🍋 Lemon Room",
+    "room1Beds": "2 beds",
+    "room2Name": "🍓 Strawberry Room",
+    "room2Beds": "2 beds",
+    "room3Name": "🫐 Blueberry Room",
+    "room3Beds": "2 beds",
+    "room4Name": "🩶 Fig Room",
+    "room4Beds": "1 king bed",
+    "sharedAmenitiesTitle": "Shared Amenities",
+    "sharedKitchenLabel": "Shared Kitchen",
+    "sharedBathroomLabel": "Shared Bathroom",
+    "sharedTerraceLabel": "60 sqm Terrace",
+    "sharedDinerLabel": "Dining Area",
     "amenitiesTitle": "Amenities",
     "amenity1": "Shared fully-equipped kitchen",
     "amenity2": "Shared bathroom",
@@ -84,7 +93,8 @@
     "amenity5": "Free Wi-Fi",
     "amenity6": "Free parking",
     "amenity7": "Mountain & forest views",
-    "amenity8": "Home-cooked breakfast available"
+    "amenity8": "Home-cooked breakfast available",
+    "amenity9": "Shared reception"
   },
   "cottagePage": {
     "title": "Panorama Akutsa",
