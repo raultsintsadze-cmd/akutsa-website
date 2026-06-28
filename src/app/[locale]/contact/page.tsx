@@ -6,7 +6,7 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import BookingButtons from '@/components/ui/BookingButtons';
 import ContactForm from '@/components/sections/ContactForm';
 import FadeIn from '@/components/ui/FadeIn';
-import { GOOGLE_MAPS_EMBED_SRC } from '@/lib/constants';
+import { GOOGLE_MAPS_EMBED_SRC, GOOGLE_MAPS_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -36,20 +36,6 @@ export default function ContactPage() {
               <h3 className="font-medium text-gold mb-2">{t('phoneTitle')}</h3>
               <BookingButtons size="sm" />
             </div>
-            <div>
-              <h3 className="font-medium text-gold mb-2">{t('mapTitle')}</h3>
-              <div className="rounded-2xl overflow-hidden h-72">
-                <iframe
-                  src={GOOGLE_MAPS_EMBED_SRC}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Guest House Akutsa location"
-                />
-              </div>
-            </div>
           </div>
         </FadeIn>
 
@@ -57,6 +43,34 @@ export default function ContactPage() {
           <ContactForm />
         </FadeIn>
       </div>
+
+      <FadeIn delay={0.2}>
+        <div className="mt-16">
+          <h3 className="font-medium text-gold mb-4">{t('mapTitle')}</h3>
+          <div className="w-full rounded-2xl overflow-hidden">
+            <iframe
+              src={GOOGLE_MAPS_EMBED_SRC}
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Guest House Akutsa location"
+            />
+          </div>
+          <div className="mt-6 flex justify-center">
+            <a
+              href={GOOGLE_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-forest text-cream px-6 py-3 text-sm font-medium hover:bg-forest/90 transition-colors"
+            >
+              {t('viewOnMaps')}
+            </a>
+          </div>
+        </div>
+      </FadeIn>
     </Section>
   );
 }

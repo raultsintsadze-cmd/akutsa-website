@@ -163,7 +163,8 @@
     "addressTitle": "მისამართი",
     "address": "სოფელი აქუცა, ქედის მუნიციპალიტეტი, აჭარა, საქართველო",
     "phoneTitle": "ტელეფონი / შეტყობინებები",
-    "mapTitle": "გვიპოვეთ"
+    "mapTitle": "გვიპოვეთ",
+    "viewOnMaps": "Google Maps-ზე ნახვა"
   },
   "reviews": {
     "review1Name": "ანა კ.",

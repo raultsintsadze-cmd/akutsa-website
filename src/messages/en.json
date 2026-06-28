@@ -163,7 +163,8 @@
     "addressTitle": "Address",
     "address": "Sofel Akutsa, Keda Municipality, Adjara, Georgia",
     "phoneTitle": "Phone / Messaging",
-    "mapTitle": "Find Us"
+    "mapTitle": "Find Us",
+    "viewOnMaps": "View on Google Maps"
   },
   "reviews": {
     "review1Name": "Anna K.",

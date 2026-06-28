@@ -163,7 +163,8 @@
     "addressTitle": "Адрес",
     "address": "Село Акуца, муниципалитет Кеда, Аджария, Грузия",
     "phoneTitle": "Телефон / мессенджеры",
-    "mapTitle": "Найти нас"
+    "mapTitle": "Найти нас",
+    "viewOnMaps": "Открыть в Google Maps"
   },
   "reviews": {
     "review1Name": "Анна К.",
