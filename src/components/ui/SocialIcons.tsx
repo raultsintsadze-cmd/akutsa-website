@@ -81,7 +81,7 @@ export default function SocialIcons({
   iconClassName?: string;
 }) {
   return (
-    <div className={clsx('flex items-center gap-3', className)}>
+    <div className={clsx('flex items-center gap-4', className)}>
       {socialItems.map(({ href, label, Icon }) => (
         <a
           key={label}
@@ -89,7 +89,7 @@ export default function SocialIcons({
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          className="hover:text-gold transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-full border border-cream/20 hover:border-gold hover:text-gold hover:bg-cream/5 transition-colors"
         >
           <Icon className={clsx('w-5 h-5', iconClassName)} />
         </a>
