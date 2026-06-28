@@ -214,6 +214,7 @@
     "review3Text": "Staying in the camper was such a fun experience. Cozy, unique, and the hosts were incredibly welcoming."
   },
   "tourGenerator": {
+    "floatingLabel": "AI Tour",
     "title": "AI Tour Planner",
     "subtitle": "Tell us what you're looking for, and let AI craft a personalized Adjara itinerary just for you.",
     "daysLabel": "Number of Days",

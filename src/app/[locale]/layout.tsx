@@ -7,6 +7,7 @@ import { locales, type Locale } from '@/i18n/config';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import StickyContactButtons from '@/components/layout/StickyContactButtons';
+import StickyTourButton from '@/components/layout/StickyTourButton';
 import { SITE_URL } from '@/lib/constants';
 import '../globals.css';
 
@@ -60,6 +61,7 @@ export default async function LocaleLayout({
           <main>{children}</main>
           <Footer />
           <StickyContactButtons />
+          <StickyTourButton />
         </NextIntlClientProvider>
       </body>
     </html>

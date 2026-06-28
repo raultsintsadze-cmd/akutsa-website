@@ -15,7 +15,6 @@ export default function Footer() {
     { href: '/services', label: tNav('services') },
     { href: '/gallery', label: tNav('gallery') },
     { href: '/attractions', label: tNav('attractions') },
-    { href: '/tour-planner', label: tNav('tourPlanner') },
     { href: '/contact', label: tNav('contact') }
   ];
 
