@@ -6,18 +6,15 @@ export const ROOM_IMAGES = {
   lemon: '/images/room-lemon.jpg.jpeg',
   strawberry: '/images/room-strawberry.jpg.jpeg',
   blueberry: '/images/room-blueberry.jpg.jpeg',
-  // source file supplied as RAW (.DNG) which browsers can't render — placeholder until a .jpg/.png is provided
-  fig: img('akutsa-room-fig')
+  fig: '/images/room-fig.jpg.jpg'
 };
 
 // Real shared-amenity photos (guest house)
 export const GUESTHOUSE_SHARED_IMAGES = {
   kitchen: '/images/kitchen2.jpg.jpeg',
-  // source file supplied as RAW (.DNG) which browsers can't render — placeholder until a .jpg/.png is provided
-  bathroom: img('akutsa-toilet'),
+  bathroom: '/images/toilet.jpg.jpg',
   terrace: '/images/terrace.jpg.jpeg',
-  // source file supplied as HEIC which most browsers can't render — placeholder until a .jpg/.png is provided
-  diner: img('akutsa-diner')
+  diner: '/images/diner.jpg.jpg'
 };
 
 // Real cottage photos
