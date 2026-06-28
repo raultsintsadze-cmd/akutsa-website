@@ -22,9 +22,9 @@ export const GUESTHOUSE_SHARED_IMAGES = {
 
 // Real cottage photos
 export const COTTAGE_IMAGES = [
-  '/images/COTTAGE1.JPG.jpeg',
-  '/images/COTTAGE2.JPG.jpeg',
-  '/images/COTTAGE3.JPG.jpeg'
+  '/images/cottage1.jpg.jpeg',
+  '/images/cottage2.jpg.jpeg',
+  '/images/cottage.jpg.jpeg'
 ];
 
 // Real camper photos
