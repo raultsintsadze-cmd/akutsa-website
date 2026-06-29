@@ -8,6 +8,7 @@ const paths = [
   '/cottage',
   '/camper',
   '/services',
+  '/menu',
   '/gallery',
   '/attractions',
   '/tour-planner',

@@ -13,6 +13,7 @@ export default function Footer() {
     { href: '/cottage', label: tNav('cottage') },
     { href: '/camper', label: tNav('camper') },
     { href: '/services', label: tNav('services') },
+    { href: '/menu', label: tNav('menu') },
     { href: '/gallery', label: tNav('gallery') },
     { href: '/attractions', label: tNav('attractions') },
     { href: '/news', label: tNav('news') },

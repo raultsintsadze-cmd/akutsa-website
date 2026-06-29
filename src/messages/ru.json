@@ -10,6 +10,7 @@
     "cottage": "Коттедж",
     "camper": "Кемпер",
     "services": "Услуги",
+    "menu": "Меню",
     "gallery": "Галерея",
     "attractions": "Достопримечательности",
     "explore": "Explore",
@@ -260,5 +261,20 @@
     "dropdownAll": "Все новости",
     "dropdownGuests": "Истории гостей",
     "dropdownEvents": "Мероприятия"
+  },
+  "menu": {
+    "title": "Меню",
+    "subtitle": "Изучите наше меню и сделайте заказ через Telegram",
+    "totalLabel": "Итого",
+    "nameLabel": "Ваше имя",
+    "namePlaceholder": "Введите ваше имя",
+    "noteLabel": "Примечание (необязательно)",
+    "notePlaceholder": "Есть особые пожелания?",
+    "orderButton": "Заказать через Telegram",
+    "sending": "Отправка заказа...",
+    "successMessage": "Ваш заказ отправлен! Скоро мы с вами свяжемся.",
+    "errorMessage": "Произошла ошибка при отправке заказа. Попробуйте еще раз или свяжитесь с нами напрямую.",
+    "emptyState": "Добавьте блюда из меню, чтобы сделать заказ.",
+    "currency": "лари"
   }
 }

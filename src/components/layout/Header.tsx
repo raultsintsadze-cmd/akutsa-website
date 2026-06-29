@@ -16,8 +16,12 @@ export default function Header() {
     { href: '/', label: t('home') },
     { href: '/guesthouse', label: t('guesthouse') },
     { href: '/cottage', label: t('cottage') },
-    { href: '/camper', label: t('camper') },
-    { href: '/services', label: t('services') }
+    { href: '/camper', label: t('camper') }
+  ];
+
+  const servicesDropdown = [
+    { href: '/services', label: t('services') },
+    { href: '/menu', label: t('menu') }
   ];
 
   const exploreDropdown = [
@@ -49,6 +53,7 @@ export default function Header() {
             </Link>
           ))}
 
+          <DesktopNavDropdown label={t('services')} items={servicesDropdown} />
           <DesktopNavDropdown label={t('explore')} items={exploreDropdown} />
           <DesktopNavDropdown label={t('news')} items={newsDropdown} />
 
@@ -92,6 +97,12 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+
+          <MobileNavDropdown
+            label={t('services')}
+            items={servicesDropdown}
+            onNavigate={() => setOpen(false)}
+          />
 
           <MobileNavDropdown
             label={t('explore')}

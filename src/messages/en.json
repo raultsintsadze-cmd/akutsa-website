@@ -10,6 +10,7 @@
     "cottage": "Cottage",
     "camper": "Camper",
     "services": "Services",
+    "menu": "Menu",
     "gallery": "Gallery",
     "attractions": "Attractions",
     "explore": "Explore",
@@ -260,5 +261,20 @@
     "dropdownAll": "All News",
     "dropdownGuests": "Guest Stories",
     "dropdownEvents": "Events"
+  },
+  "menu": {
+    "title": "Menu",
+    "subtitle": "Browse our menu and order ahead via Telegram",
+    "totalLabel": "Total",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Enter your name",
+    "noteLabel": "Note (optional)",
+    "notePlaceholder": "Any special requests?",
+    "orderButton": "Order via Telegram",
+    "sending": "Sending your order...",
+    "successMessage": "Your order was sent! We'll confirm with you shortly.",
+    "errorMessage": "Something went wrong sending your order. Please try again or contact us directly.",
+    "emptyState": "Add items from the menu to place an order.",
+    "currency": "GEL"
   }
 }

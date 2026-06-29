@@ -17,3 +17,7 @@ export const SITE_URL = 'https://akutsa-website.vercel.app';
 
 export const mapsSearchUrl = (query: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+
+// Telegram chat that receives menu orders (the bot token itself is read
+// server-side only from process.env.TELEGRAM_BOT_TOKEN, never hardcoded).
+export const TELEGRAM_ORDER_CHAT_ID = '6499517306';
