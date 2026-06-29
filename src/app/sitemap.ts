@@ -11,6 +11,7 @@ const paths = [
   '/gallery',
   '/attractions',
   '/tour-planner',
+  '/news',
   '/contact'
 ];
 

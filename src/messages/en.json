@@ -13,6 +13,7 @@
     "gallery": "Gallery",
     "attractions": "Attractions",
     "tourPlanner": "AI Tour Planner",
+    "news": "News",
     "contact": "Contact",
     "bookNow": "Book Now"
   },
@@ -233,5 +234,11 @@
     "resultTitle": "Your Personalized Itinerary",
     "errorGeneric": "Something went wrong. Please try again.",
     "disclaimer": "This itinerary is AI-generated and may need adjustments — feel free to ask us via Telegram or WhatsApp to fine-tune it."
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Updates, stories, and seasonal news from Guest House Akutsa",
+    "noPosts": "No news posts yet — check back soon!",
+    "publishedOn": "Published on"
   }
 }
