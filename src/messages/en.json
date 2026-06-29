@@ -239,6 +239,9 @@
     "title": "News",
     "subtitle": "Updates, stories, and seasonal news from Guest House Akutsa",
     "noPosts": "No news posts yet — check back soon!",
-    "publishedOn": "Published on"
+    "publishedOn": "Published on",
+    "dropdownAll": "All News",
+    "dropdownGuests": "Guest Stories",
+    "dropdownEvents": "Events"
   }
 }
