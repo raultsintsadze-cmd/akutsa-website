@@ -58,6 +58,12 @@ export const PRODUCT_IMAGES = [
   '/images/pducts3.jpeg'
 ];
 
+// Real nature / surroundings photos
+export const NATURE_IMAGES = Array.from(
+  { length: 16 },
+  (_, i) => `/images/galerry/FOL${i + 1}.jpeg`
+);
+
 export const galleryImages = [
   { src: ROOM_IMAGES.lemon, category: 'guesthouse' },
   { src: ROOM_IMAGES.strawberry, category: 'guesthouse' },
@@ -73,7 +79,8 @@ export const galleryImages = [
   { src: CAMPER_IMAGES[0], category: 'camper' },
   { src: CAMPER_IMAGES[1], category: 'camper' },
   { src: CAMPER_IMAGES[2], category: 'camper' },
-  { src: CAMPER_IMAGES[3], category: 'camper' }
+  { src: CAMPER_IMAGES[3], category: 'camper' },
+  ...NATURE_IMAGES.map((src) => ({ src, category: 'nature' as const }))
 ];
 
 export const instagramImages = [

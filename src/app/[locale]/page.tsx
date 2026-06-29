@@ -11,15 +11,15 @@ import PropertyCard from '@/components/sections/PropertyCard';
 import ReviewCard from '@/components/sections/ReviewCard';
 import AttractionCard from '@/components/sections/AttractionCard';
 import WeatherCurrencyWidget from '@/components/sections/WeatherCurrencyWidget';
+import GalleryCarousel from '@/components/sections/GalleryCarousel';
 import {
-  img,
-  instagramImages,
   GUESTHOUSE_SHARED_IMAGES,
   COTTAGE_IMAGES,
   CAMPER_IMAGES,
   PICNIC_IMAGES,
   MASTERCLASS_IMAGES,
-  PRODUCT_IMAGES
+  PRODUCT_IMAGES,
+  NATURE_IMAGES
 } from '@/lib/images';
 import { SOCIAL_LINKS, SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
@@ -267,26 +267,19 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
         </div>
       </Section>
 
-      {/* Instagram */}
+      {/* Gallery carousel */}
       <Section>
         <SectionHeading title={t('instagramTitle')} />
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-          {instagramImages.map((seed, i) => (
-            <a
-              key={seed}
-              href={SOCIAL_LINKS.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative aspect-square rounded-lg overflow-hidden group"
-            >
-              <Image
-                src={img(seed, 400, 400)}
-                alt={`Instagram ${i + 1}`}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </a>
-          ))}
+        <GalleryCarousel images={NATURE_IMAGES} alt={t('instagramTitle')} />
+        <div className="text-center mt-8">
+          <a
+            href={SOCIAL_LINKS.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold font-medium text-sm hover:text-forest transition-colors"
+          >
+            {t('instagramTitle')} &rarr;
+          </a>
         </div>
       </Section>
 
