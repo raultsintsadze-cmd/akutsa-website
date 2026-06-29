@@ -10,6 +10,7 @@ import { Link } from '@/i18n/navigation';
 import PropertyCard from '@/components/sections/PropertyCard';
 import ReviewCard from '@/components/sections/ReviewCard';
 import AttractionCard from '@/components/sections/AttractionCard';
+import WeatherCurrencyWidget from '@/components/sections/WeatherCurrencyWidget';
 import {
   img,
   instagramImages,
@@ -36,7 +37,7 @@ export async function generateMetadata({
   };
 }
 
-export default function HomePage() {
+export default function HomePage({ params: { locale } }: { params: { locale: Locale } }) {
   const t = useTranslations('home');
   const tProps = useTranslations('properties');
   const tAttr = useTranslations('attractions');
@@ -91,6 +92,8 @@ export default function HomePage() {
           </FadeIn>
         </div>
       </section>
+
+      <WeatherCurrencyWidget locale={locale} />
 
       {/* Intro */}
       <Section>

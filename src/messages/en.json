@@ -284,5 +284,11 @@
     "successMessage": "Your order was sent! We'll confirm with you shortly.",
     "errorMessage": "Something went wrong sending your order. Please try again or contact us directly.",
     "currency": "GEL"
+  },
+  "weatherWidget": {
+    "locationLabel": "Akutsa, Adjara 🌿",
+    "windLabel": "Wind",
+    "windUnit": "km/h",
+    "sourceLabel": "National Bank of Georgia"
   }
 }
