@@ -5,7 +5,8 @@ import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import FadeIn from '@/components/ui/FadeIn';
-import { img } from '@/lib/images';
+import PhotoGrid from '@/components/sections/PhotoGrid';
+import { img, PICNIC_IMAGES, MASTERCLASS_IMAGES, PRODUCT_IMAGES } from '@/lib/images';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -28,8 +29,18 @@ export default function ServicesPage() {
   ];
 
   const masterclasses = [
-    { titleKey: 'beekeepingTitle', descKey: 'beekeepingDesc', priceKey: 'beekeepingPrice', seed: 'akutsa-beekeeping' },
-    { titleKey: 'culinaryTitle', descKey: 'culinaryDesc', priceKey: 'culinaryPrice', seed: 'akutsa-culinary' }
+    {
+      titleKey: 'beekeepingTitle',
+      descKey: 'beekeepingDesc',
+      priceKey: 'beekeepingPrice',
+      images: MASTERCLASS_IMAGES.slice(0, 3)
+    },
+    {
+      titleKey: 'culinaryTitle',
+      descKey: 'culinaryDesc',
+      priceKey: 'culinaryPrice',
+      images: MASTERCLASS_IMAGES.slice(3, 6)
+    }
   ];
 
   const products = [
@@ -65,7 +76,7 @@ export default function ServicesPage() {
           <div className="rounded-2xl overflow-hidden bg-cream shadow-sm grid md:grid-cols-2">
             <div className="relative h-64 md:h-full">
               <Image
-                src={img('akutsa-picnic')}
+                src={PICNIC_IMAGES[0]}
                 alt={tExp('picnicTitle')}
                 fill
                 className="object-cover"
@@ -94,6 +105,10 @@ export default function ServicesPage() {
             </div>
           </div>
         </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <PhotoGrid images={PICNIC_IMAGES} alt={tExp('picnicTitle')} className="mt-6" />
+        </FadeIn>
       </Section>
 
       <Section id="masterclasses">
@@ -102,9 +117,12 @@ export default function ServicesPage() {
           {masterclasses.map((m, i) => (
             <FadeIn key={m.titleKey} delay={i * 0.1}>
               <div className="bg-white rounded-2xl overflow-hidden shadow-sm h-full">
-                <div className="relative h-48">
-                  <Image src={img(m.seed)} alt={tExp(m.titleKey)} fill className="object-cover" />
-                </div>
+                <PhotoGrid
+                  images={m.images}
+                  alt={tExp(m.titleKey)}
+                  className="p-2"
+                  gridClassName="grid-cols-3 gap-1"
+                />
                 <div className="p-6">
                   <h3 className="font-serif text-xl text-forest font-semibold">{tExp(m.titleKey)}</h3>
                   <p className="mt-3 text-forest/70 text-sm leading-relaxed">{tExp(m.descKey)}</p>
@@ -118,6 +136,16 @@ export default function ServicesPage() {
 
       <Section id="products" className="bg-white">
         <SectionHeading title={tExp('productsTitle')} subtitle={tExp('productsSubtitle')} />
+
+        <FadeIn>
+          <PhotoGrid
+            images={PRODUCT_IMAGES}
+            alt={tExp('productsTitle')}
+            className="mb-8 max-w-2xl mx-auto"
+            gridClassName="grid-cols-3 gap-3"
+          />
+        </FadeIn>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {products.map((p, i) => (
             <FadeIn key={p.nameKey} delay={i * 0.1}>

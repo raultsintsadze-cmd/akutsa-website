@@ -32,6 +32,32 @@ export const CAMPER_IMAGES = [
   '/images/camping4.jpg.jpeg'
 ];
 
+// Real picnic & event space photos
+export const PICNIC_IMAGES = [
+  '/images/picnic.jpeg',
+  '/images/picnic2.jpeg',
+  '/images/picnic3.jpeg',
+  '/images/picnic4.jpeg',
+  '/images/picnic5.jpeg'
+];
+
+// Real masterclass photos
+export const MASTERCLASS_IMAGES = [
+  '/images/masterklass.jpeg',
+  '/images/masterklass1.jpeg',
+  '/images/masterklass2.jpeg',
+  '/images/masterklass3.jpeg',
+  '/images/masterklass4.jpeg',
+  '/images/masterklass5.jpeg'
+];
+
+// Real local product photos
+export const PRODUCT_IMAGES = [
+  '/images/products1.jpeg',
+  '/images/prdoucts.jpeg',
+  '/images/pducts3.jpeg'
+];
+
 export const galleryImages = [
   { src: ROOM_IMAGES.lemon, category: 'guesthouse' },
   { src: ROOM_IMAGES.strawberry, category: 'guesthouse' },

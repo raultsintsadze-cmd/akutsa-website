@@ -15,7 +15,10 @@ import {
   instagramImages,
   GUESTHOUSE_SHARED_IMAGES,
   COTTAGE_IMAGES,
-  CAMPER_IMAGES
+  CAMPER_IMAGES,
+  PICNIC_IMAGES,
+  MASTERCLASS_IMAGES,
+  PRODUCT_IMAGES
 } from '@/lib/images';
 import { SOCIAL_LINKS, SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
@@ -138,46 +141,76 @@ export default function HomePage() {
           <FadeIn>
             <Link
               href="/services#picnic"
-              className="block bg-cream rounded-2xl p-6 shadow-sm h-full hover:shadow-md transition-shadow"
+              className="group block bg-cream rounded-2xl overflow-hidden shadow-sm h-full hover:shadow-md transition-shadow"
             >
-              <h3 className="font-serif text-xl text-forest font-semibold">
-                {tExp('picnicTitle')}
-              </h3>
-              <p className="mt-3 text-forest/70 text-sm leading-relaxed">{tExp('picnicDesc')}</p>
-              <p className="mt-4 text-gold font-medium text-sm">{tExp('picnicPrice')}</p>
+              <div className="relative h-48">
+                <Image
+                  src={PICNIC_IMAGES[0]}
+                  alt={tExp('picnicTitle')}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-serif text-xl text-forest font-semibold">
+                  {tExp('picnicTitle')}
+                </h3>
+                <p className="mt-3 text-forest/70 text-sm leading-relaxed">{tExp('picnicDesc')}</p>
+                <p className="mt-4 text-gold font-medium text-sm">{tExp('picnicPrice')}</p>
+              </div>
             </Link>
           </FadeIn>
           <FadeIn delay={0.1}>
             <Link
               href="/services#masterclasses"
-              className="block bg-cream rounded-2xl p-6 shadow-sm h-full hover:shadow-md transition-shadow"
+              className="group block bg-cream rounded-2xl overflow-hidden shadow-sm h-full hover:shadow-md transition-shadow"
             >
-              <h3 className="font-serif text-xl text-forest font-semibold">
-                {tExp('masterclassesTitle')}
-              </h3>
-              <p className="mt-3 text-forest/70 text-sm leading-relaxed">
-                {tExp('masterclassesSubtitle')}
-              </p>
-              <p className="mt-4 text-gold font-medium text-sm">
-                {tExp('beekeepingPrice')} &middot; {tExp('culinaryPrice')}
-              </p>
+              <div className="relative h-48">
+                <Image
+                  src={MASTERCLASS_IMAGES[0]}
+                  alt={tExp('masterclassesTitle')}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-serif text-xl text-forest font-semibold">
+                  {tExp('masterclassesTitle')}
+                </h3>
+                <p className="mt-3 text-forest/70 text-sm leading-relaxed">
+                  {tExp('masterclassesSubtitle')}
+                </p>
+                <p className="mt-4 text-gold font-medium text-sm">
+                  {tExp('beekeepingPrice')} &middot; {tExp('culinaryPrice')}
+                </p>
+              </div>
             </Link>
           </FadeIn>
           <FadeIn delay={0.2}>
             <Link
               href="/services#products"
-              className="block bg-cream rounded-2xl p-6 shadow-sm h-full hover:shadow-md transition-shadow"
+              className="group block bg-cream rounded-2xl overflow-hidden shadow-sm h-full hover:shadow-md transition-shadow"
             >
-              <h3 className="font-serif text-xl text-forest font-semibold">
-                {tExp('productsTitle')}
-              </h3>
-              <p className="mt-3 text-forest/70 text-sm leading-relaxed">
-                {tExp('productsSubtitle')}
-              </p>
-              <p className="mt-4 text-gold font-medium text-sm">
-                {tExp('honeyName')} &middot; {tExp('wineName')} &middot; {tExp('chachaName')} &middot;{' '}
-                {tExp('fruitName')}
-              </p>
+              <div className="relative h-48">
+                <Image
+                  src={PRODUCT_IMAGES[0]}
+                  alt={tExp('productsTitle')}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-serif text-xl text-forest font-semibold">
+                  {tExp('productsTitle')}
+                </h3>
+                <p className="mt-3 text-forest/70 text-sm leading-relaxed">
+                  {tExp('productsSubtitle')}
+                </p>
+                <p className="mt-4 text-gold font-medium text-sm">
+                  {tExp('honeyName')} &middot; {tExp('wineName')} &middot; {tExp('chachaName')} &middot;{' '}
+                  {tExp('fruitName')}
+                </p>
+              </div>
             </Link>
           </FadeIn>
         </div>
