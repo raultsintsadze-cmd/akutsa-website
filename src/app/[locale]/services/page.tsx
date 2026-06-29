@@ -98,7 +98,7 @@ export default function ServicesPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-gold mt-0.5">&#10003;</span>
-                  {tExp('picnicByof')}
+                  {tExp('picnicFoodFormat')}
                 </li>
               </ul>
               <p className="mt-5 text-gold font-medium">{tExp('picnicPrice')}</p>

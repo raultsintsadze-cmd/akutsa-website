@@ -9,18 +9,20 @@ export default function PropertyPageTemplate({
   heroImage,
   galleryImages,
   price,
-  rooms
+  rooms,
+  amenityCount = 8
 }: {
   namespace: 'guesthousePage' | 'cottagePage' | 'camperPage';
   heroImage: string;
   galleryImages: string[];
   price: string;
   rooms?: { nameKey: string; descKey: string }[];
+  amenityCount?: number;
 }) {
   const t = useTranslations(namespace);
   const tCommon = useTranslations('common');
 
-  const amenityKeys = Array.from({ length: 8 }, (_, i) => `amenity${i + 1}`);
+  const amenityKeys = Array.from({ length: amenityCount }, (_, i) => `amenity${i + 1}`);
 
   return (
     <>

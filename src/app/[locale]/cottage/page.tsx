@@ -20,6 +20,7 @@ export default function CottagePage() {
       heroImage={COTTAGE_IMAGES[0]}
       galleryImages={[COTTAGE_IMAGES[1], COTTAGE_IMAGES[2]]}
       price="150"
+      amenityCount={5}
     />
   );
 }

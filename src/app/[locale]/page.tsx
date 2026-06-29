@@ -103,6 +103,21 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
               {t('introTitle')}
             </h2>
             <p className="mt-5 text-forest/80 leading-relaxed">{t('introText')}</p>
+            <ul className="mt-5 space-y-2 text-left inline-block">
+              <li className="flex items-start gap-2 text-forest/80">
+                <span className="text-gold mt-0.5">&#10003;</span>
+                {t('introProperty1')}
+              </li>
+              <li className="flex items-start gap-2 text-forest/80">
+                <span className="text-gold mt-0.5">&#10003;</span>
+                {t('introProperty2')}
+              </li>
+              <li className="flex items-start gap-2 text-forest/80">
+                <span className="text-gold mt-0.5">&#10003;</span>
+                {t('introProperty3')}
+              </li>
+            </ul>
+            <p className="mt-5 text-forest/80 leading-relaxed">{t('introClosing')}</p>
           </div>
         </FadeIn>
       </Section>
