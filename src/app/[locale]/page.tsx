@@ -188,30 +188,34 @@ export default function HomePage() {
         <SectionHeading title={t('attractionsTitle')} subtitle={t('attractionsSubtitle')} />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <AttractionCard
-            image={img('akutsa-waterfall')}
-            name={tAttr('waterfallName')}
-            description={tAttr('waterfallDesc')}
-            distance={tAttr('waterfallDistance')}
+            images={['/images/attractions/makhuntseti1.jpg']}
+            name={tAttr('item2Name')}
+            description={tAttr('item2Desc')}
+            distance={tAttr('item2Distance')}
+            mapsQuery="Makhuntseti Waterfall, Keda, Adjara, Georgia"
           />
           <AttractionCard
-            image={img('akutsa-pass')}
-            name={tAttr('passName')}
-            description={tAttr('passDesc')}
-            distance={tAttr('passDistance')}
+            images={['/images/attractions/eklesia1.jpg']}
+            name={tAttr('item5Name')}
+            description={tAttr('item5Desc')}
+            distance={tAttr('item5Distance')}
+            mapsQuery="Zvari St. George Church, Keda, Adjara, Georgia"
             delay={0.1}
           />
           <AttractionCard
-            image={img('akutsa-batumi')}
-            name={tAttr('batumiName')}
-            description={tAttr('batumiDesc')}
-            distance={tAttr('batumiDistance')}
+            images={['/images/attractions/qarxana1.jpg']}
+            name={tAttr('item8Name')}
+            description={tAttr('item8Desc')}
+            distance={tAttr('item8Distance')}
+            mapsQuery="Keda Winery, Keda, Adjara, Georgia"
             delay={0.2}
           />
           <AttractionCard
-            image={img('akutsa-sea')}
-            name={tAttr('seaName')}
-            description={tAttr('seaDesc')}
-            distance={tAttr('seaDistance')}
+            images={['/images/attractions/parki1.jpg']}
+            name={tAttr('item9Name')}
+            description={tAttr('item9Desc')}
+            distance={tAttr('item9Distance')}
+            mapsQuery="Khalvashi Park, Keda, Adjara, Georgia"
             delay={0.3}
           />
         </div>

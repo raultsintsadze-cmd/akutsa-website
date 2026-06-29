@@ -14,3 +14,6 @@ export const SOCIAL_LINKS = {
 };
 
 export const SITE_URL = 'https://akutsa-website.vercel.app';
+
+export const mapsSearchUrl = (query: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
