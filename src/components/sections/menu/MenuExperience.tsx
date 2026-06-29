@@ -109,7 +109,7 @@ export default function MenuExperience() {
         onSelect={handleSelectCategory}
       />
 
-      <div className="space-y-16 pb-32 lg:pb-16">
+      <div className="space-y-16 pb-32 lg:pb-16 lg:pr-80">
         {MENU_CATEGORIES.map((category) => (
           <CategorySection
             key={category.id}
@@ -141,6 +141,10 @@ export default function MenuExperience() {
         }}
         onConfirm={handleConfirm}
         status={status}
+        lines={lines}
+        total={total}
+        currency={t('currency')}
+        totalLabel={t('totalLabel')}
         labels={{
           title: t('bookingTitle'),
           subtitle: t('bookingSubtitle'),

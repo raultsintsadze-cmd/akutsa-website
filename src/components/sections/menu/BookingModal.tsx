@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { CartLine } from './OrderSummaryPanel';
 
 const TIME_SLOTS = [
   '09:00',
@@ -19,6 +20,9 @@ const TIME_SLOTS = [
   '21:00'
 ];
 
+const inputClasses =
+  'w-full rounded-lg border border-forest/15 px-4 py-2.5 text-sm focus:outline-none focus:border-forest focus:ring-1 focus:ring-forest/20 transition-colors';
+
 export interface BookingDetails {
   name: string;
   date: string;
@@ -31,12 +35,20 @@ export default function BookingModal({
   onClose,
   onConfirm,
   status,
+  lines,
+  total,
+  currency,
+  totalLabel,
   labels
 }: {
   open: boolean;
   onClose: () => void;
   onConfirm: (details: BookingDetails) => void;
   status: 'idle' | 'sending' | 'success' | 'error';
+  lines: CartLine[];
+  total: number;
+  currency: string;
+  totalLabel: string;
   labels: {
     title: string;
     subtitle: string;
@@ -71,24 +83,31 @@ export default function BookingModal({
   return (
     <AnimatePresence>
       {open && (
-        <>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-forest/50 z-50"
+            className="absolute inset-0 bg-forest/60"
             onClick={onClose}
           />
           <motion.div
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-            className="fixed bottom-0 left-0 right-0 sm:top-1/2 sm:left-1/2 sm:bottom-auto sm:right-auto sm:-translate-x-1/2 sm:-translate-y-1/2 z-50 bg-white rounded-t-2xl sm:rounded-2xl shadow-xl w-full sm:max-w-md max-h-[90vh] overflow-y-auto"
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+            className="relative bg-white rounded-2xl border border-forest/15 shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto"
           >
             <div className="p-6">
               <div className="flex items-start justify-between mb-1">
-                <h2 className="font-serif text-2xl text-forest font-semibold">{labels.title}</h2>
+                <div className="flex items-center gap-3">
+                  <span className="w-11 h-11 rounded-full bg-forest/10 flex items-center justify-center text-xl shrink-0">
+                    🍽️
+                  </span>
+                  <h2 className="font-serif text-xl sm:text-2xl text-gold font-semibold">
+                    {labels.title}
+                  </h2>
+                </div>
                 <button
                   type="button"
                   onClick={onClose}
@@ -98,7 +117,33 @@ export default function BookingModal({
                   &times;
                 </button>
               </div>
-              <p className="text-forest/60 text-sm mb-6">{labels.subtitle}</p>
+              <p className="text-forest/60 text-sm mt-2 mb-5">{labels.subtitle}</p>
+
+              {lines.length > 0 && status !== 'success' && (
+                <div className="bg-cream rounded-xl p-4 mb-5 border border-forest/10">
+                  <ul className="space-y-1.5">
+                    {lines.map((line) => (
+                      <li
+                        key={line.itemId}
+                        className="flex justify-between text-sm text-forest/80"
+                      >
+                        <span>
+                          {line.name} &times;{line.qty}
+                        </span>
+                        <span className="text-gold font-medium">
+                          {line.price * line.qty} {currency}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="border-t border-forest/15 mt-2 pt-2 flex items-center justify-between">
+                    <span className="text-forest/70 text-sm font-medium">{totalLabel}</span>
+                    <span className="text-gold font-semibold">
+                      {total} {currency}
+                    </span>
+                  </div>
+                </div>
+              )}
 
               {status === 'success' ? (
                 <p className="text-center text-forest font-medium py-6">{labels.successMessage}</p>
@@ -114,7 +159,7 @@ export default function BookingModal({
                       onChange={(e) => setName(e.target.value)}
                       placeholder={labels.namePlaceholder}
                       required
-                      className="w-full rounded-lg border border-forest/15 px-4 py-2.5 text-sm focus:outline-none focus:border-gold"
+                      className={inputClasses}
                     />
                   </div>
 
@@ -129,7 +174,7 @@ export default function BookingModal({
                         min={today}
                         onChange={(e) => setDate(e.target.value)}
                         required
-                        className="w-full rounded-lg border border-forest/15 px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
+                        className={inputClasses}
                       />
                     </div>
                     <div>
@@ -140,7 +185,7 @@ export default function BookingModal({
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
                         required
-                        className="w-full rounded-lg border border-forest/15 px-3 py-2.5 text-sm focus:outline-none focus:border-gold bg-white"
+                        className={`${inputClasses} bg-white`}
                       >
                         <option value="" disabled>
                           {labels.selectTime}
@@ -163,7 +208,7 @@ export default function BookingModal({
                       onChange={(e) => setNote(e.target.value)}
                       placeholder={labels.notePlaceholder}
                       rows={3}
-                      className="w-full rounded-lg border border-forest/15 px-4 py-2.5 text-sm focus:outline-none focus:border-gold"
+                      className={inputClasses}
                     />
                   </div>
 
@@ -171,27 +216,46 @@ export default function BookingModal({
                     <p className="text-red-600 text-sm">{labels.errorMessage}</p>
                   )}
 
-                  <div className="flex gap-3 pt-2">
-                    <button
-                      type="button"
-                      onClick={onClose}
-                      className="flex-1 rounded-full border border-forest/20 text-forest py-2.5 text-sm font-medium hover:bg-cream transition-colors"
-                    >
-                      {labels.backButton}
-                    </button>
+                  <div className="space-y-2 pt-2">
                     <button
                       type="submit"
                       disabled={!canSubmit || status === 'sending'}
-                      className="flex-1 rounded-full bg-forest text-cream py-2.5 text-sm font-medium hover:bg-forest/90 transition-colors disabled:opacity-50"
+                      className="w-full flex items-center justify-center gap-2 rounded-full bg-forest text-cream py-3 text-sm font-medium hover:bg-forest/90 transition-colors disabled:opacity-50"
                     >
-                      {status === 'sending' ? labels.sending : labels.confirmButton}
+                      {status === 'sending' ? (
+                        labels.sending
+                      ) : (
+                        <>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="w-4 h-4"
+                          >
+                            <path
+                              d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          {labels.confirmButton}
+                        </>
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="w-full rounded-full border border-forest/20 text-forest py-2.5 text-sm font-medium hover:bg-cream transition-colors"
+                    >
+                      {labels.backButton}
                     </button>
                   </div>
                 </form>
               )}
             </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );

@@ -279,7 +279,7 @@
     "noteLabel": "Note (optional)",
     "notePlaceholder": "Any special requests?",
     "backButton": "Back",
-    "confirmButton": "Confirm Order",
+    "confirmButton": "Send Order",
     "sending": "Sending your order...",
     "successMessage": "Your order was sent! We'll confirm with you shortly.",
     "errorMessage": "Something went wrong sending your order. Please try again or contact us directly.",

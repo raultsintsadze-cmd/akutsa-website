@@ -25,7 +25,7 @@ export default function OrderSummaryPanel({
   return (
     <>
       {/* Desktop floating panel */}
-      <div className="hidden lg:block fixed right-6 top-1/3 w-72 bg-white rounded-2xl shadow-lg p-5 z-40 max-h-[60vh] overflow-y-auto">
+      <div className="hidden lg:block fixed right-6 top-32 w-72 bg-white rounded-2xl border border-forest/10 shadow-lg p-5 z-40 max-h-[65vh] overflow-y-auto">
         {lines.length === 0 ? (
           <p className="text-forest/50 text-sm">{emptyState}</p>
         ) : (
