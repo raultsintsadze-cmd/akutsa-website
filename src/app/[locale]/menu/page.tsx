@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
-import MenuOrder from '@/components/sections/MenuOrder';
+import MenuExperience from '@/components/sections/menu/MenuExperience';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -24,7 +24,7 @@ export default async function MenuPage({
   return (
     <Section>
       <SectionHeading title={t('title')} subtitle={t('subtitle')} />
-      <MenuOrder />
+      <MenuExperience />
     </Section>
   );
 }

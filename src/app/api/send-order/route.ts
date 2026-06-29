@@ -4,6 +4,22 @@ import { TELEGRAM_ORDER_CHAT_ID } from '@/lib/constants';
 
 export const runtime = 'nodejs';
 
+const TIME_SLOTS = [
+  '09:00',
+  '10:00',
+  '11:00',
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+  '21:00'
+];
+
 interface OrderLine {
   itemId: string;
   qty: number;
@@ -12,11 +28,19 @@ interface OrderLine {
 interface OrderRequest {
   lines: OrderLine[];
   name: string;
+  date: string;
+  time: string;
   note?: string;
 }
 
-function escapeHtml(text: string): string {
-  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function isValidDate(dateStr: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+  const date = new Date(`${dateStr}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date >= today;
 }
 
 export async function POST(req: Request) {
@@ -38,15 +62,23 @@ export async function POST(req: Request) {
 
   const lines = Array.isArray(body.lines) ? body.lines : [];
   const name = typeof body.name === 'string' ? body.name.trim() : '';
+  const date = typeof body.date === 'string' ? body.date : '';
+  const time = typeof body.time === 'string' ? body.time : '';
   const note = typeof body.note === 'string' ? body.note.trim() : '';
 
-  if (lines.length === 0 || !name) {
-    return NextResponse.json({ error: 'Order must include at least one item and a name.' }, {
-      status: 400
-    });
+  if (
+    lines.length === 0 ||
+    !name ||
+    !isValidDate(date) ||
+    !TIME_SLOTS.includes(time)
+  ) {
+    return NextResponse.json(
+      { error: 'Order must include items, a name, a valid future date, and a valid time slot.' },
+      { status: 400 }
+    );
   }
 
-  const resolvedLines: { name: string; qty: number; subtotal: number }[] = [];
+  const resolvedLines: { name: string; qty: number; price: number }[] = [];
   let total = 0;
 
   for (const line of lines) {
@@ -56,9 +88,8 @@ export async function POST(req: Request) {
     const found = findMenuItem(line.itemId);
     if (!found) continue;
 
-    const subtotal = found.item.price * qty;
-    total += subtotal;
-    resolvedLines.push({ name: found.item.name.ka, qty, subtotal });
+    total += found.item.price * qty;
+    resolvedLines.push({ name: found.item.name.ka, qty, price: found.item.price });
   }
 
   if (resolvedLines.length === 0) {
@@ -66,23 +97,30 @@ export async function POST(req: Request) {
   }
 
   const itemsText = resolvedLines
-    .map((l) => `• ${escapeHtml(l.name)} x${l.qty} = ${l.subtotal} ₾`)
+    .map((l) => `- ${l.name} x${l.qty} — ${l.price * l.qty} ₾`)
     .join('\n');
 
-  const dateText = new Date().toLocaleString('ka-GE', { timeZone: 'Asia/Tbilisi' });
+  const dateText = new Date(`${date}T00:00:00`).toLocaleDateString('ka-GE', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
 
   const messageLines = [
-    '🍽️ <b>ახალი შეკვეთა - Guest House Akutsa</b>',
+    '🍽️ ახალი შეკვეთა - Guest House Akutsa',
     '',
+    `👤 სახელი: ${name}`,
+    `📅 თარიღი: ${dateText}`,
+    `🕐 საათი: ${time}`,
+    '',
+    'კერძები:',
     itemsText,
     '',
-    `💰 სულ: ${total} ₾`,
-    `📅 ${dateText}`,
-    `📍 მომხმარებელი: ${escapeHtml(name)}`
+    `💰 სულ: ${total} ₾`
   ];
 
   if (note) {
-    messageLines.push(`📝 შენიშვნა: ${escapeHtml(note)}`);
+    messageLines.push(`📝 შენიშვნა: ${note}`);
   }
 
   const text = messageLines.join('\n');
@@ -93,8 +131,7 @@ export async function POST(req: Request) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: TELEGRAM_ORDER_CHAT_ID,
-        text,
-        parse_mode: 'HTML'
+        text
       })
     });
 
