@@ -38,6 +38,9 @@ export async function generateMetadata({
       siteName: t('siteName'),
       type: 'website',
       locale
+    },
+    verification: {
+      google: '1EUArV0lIlDEKF1hjylfAlklnq087sNDULadiXgcU8Y'
     }
   } as Metadata;
 }
