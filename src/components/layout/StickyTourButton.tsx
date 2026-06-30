@@ -1,8 +1,14 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { useFloatingButtons } from '@/context/FloatingButtonsContext';
 
 export default function StickyTourButton() {
   const t = useTranslations('tourGenerator');
+  const { hideFloatingButtons } = useFloatingButtons();
+
+  if (hideFloatingButtons) return null;
 
   return (
     <div className="fixed bottom-5 left-5 z-50 group">

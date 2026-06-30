@@ -9,6 +9,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import StickyContactButtons from '@/components/layout/StickyContactButtons';
 import StickyTourButton from '@/components/layout/StickyTourButton';
+import { FloatingButtonsProvider } from '@/context/FloatingButtonsContext';
 import { SITE_URL } from '@/lib/constants';
 import '../globals.css';
 
@@ -68,11 +69,13 @@ export default async function LocaleLayout({
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SGF4Q9SSR7');`}
         </Script>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <StickyContactButtons />
-          <StickyTourButton />
+          <FloatingButtonsProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <StickyContactButtons />
+            <StickyTourButton />
+          </FloatingButtonsProvider>
         </NextIntlClientProvider>
       </body>
     </html>

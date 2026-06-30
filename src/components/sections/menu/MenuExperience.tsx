@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { MENU_CATEGORIES } from '@/lib/menuData';
 import type { Locale } from '@/i18n/config';
+import { useFloatingButtons } from '@/context/FloatingButtonsContext';
 import CategoryFilterBar from './CategoryFilterBar';
 import CategorySection from './CategorySection';
 import OrderSummaryPanel, { type CartLine } from './OrderSummaryPanel';
@@ -13,6 +14,7 @@ import UtensilsIcon from './UtensilsIcon';
 export default function MenuExperience() {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
+  const { setHideFloatingButtons } = useFloatingButtons();
 
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [activeCategory, setActiveCategory] = useState(MENU_CATEGORIES[0].id);
@@ -67,6 +69,11 @@ export default function MenuExperience() {
     });
 
   const total = lines.reduce((sum, l) => sum + l.price * l.qty, 0);
+
+  useEffect(() => {
+    setHideFloatingButtons(lines.length > 0 || modalOpen);
+    return () => setHideFloatingButtons(false);
+  }, [lines.length, modalOpen, setHideFloatingButtons]);
 
   async function handleConfirm(details: BookingDetails) {
     setStatus('sending');

@@ -1,6 +1,13 @@
+'use client';
+
+import { useFloatingButtons } from '@/context/FloatingButtonsContext';
 import { TELEGRAM_URL, WHATSAPP_URL } from '@/lib/constants';
 
 export default function StickyContactButtons() {
+  const { hideFloatingButtons } = useFloatingButtons();
+
+  if (hideFloatingButtons) return null;
+
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
       <a
