@@ -9,7 +9,7 @@ export default function StickyContactButtons() {
   if (hideFloatingButtons) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+    <div className="hidden sm:flex fixed bottom-5 right-5 z-50 flex-col gap-3">
       <a
         href={WHATSAPP_URL}
         target="_blank"
