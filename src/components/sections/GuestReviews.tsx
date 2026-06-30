@@ -56,7 +56,7 @@ export default function GuestReviews({
   bookingUrl,
   googleUrl
 }: {
-  reviews: Review[];
+  reviews: readonly Review[];
   seeAllLabel: string;
   bookingUrl: string;
   googleUrl: string;
