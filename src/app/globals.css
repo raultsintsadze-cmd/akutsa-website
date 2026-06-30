@@ -9,6 +9,14 @@ html {
 body {
   background-color: #FAF8F5;
   color: #1C3A2E;
+  /* space for the mobile booking bar */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (max-width: 639px) {
+  body {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom));
+  }
 }
 
 .font-serif {

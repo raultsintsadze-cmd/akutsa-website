@@ -9,6 +9,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import StickyContactButtons from '@/components/layout/StickyContactButtons';
 import StickyTourButton from '@/components/layout/StickyTourButton';
+import MobileBookingBar from '@/components/layout/MobileBookingBar';
 import { FloatingButtonsProvider } from '@/context/FloatingButtonsContext';
 import { SITE_URL } from '@/lib/constants';
 import '../globals.css';
@@ -75,6 +76,7 @@ export default async function LocaleLayout({
             <Footer />
             <StickyContactButtons />
             <StickyTourButton />
+            <MobileBookingBar />
           </FloatingButtonsProvider>
         </NextIntlClientProvider>
       </body>
