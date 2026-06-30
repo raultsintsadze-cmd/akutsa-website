@@ -1,8 +1,9 @@
 {
   "meta": {
     "siteName": "Guest House Akutsa",
-    "homeTitle": "Guest House Akutsa | Family Guesthouse in Keda, Adjara, Georgia",
-    "homeDescription": "Family guesthouse, private cottage and stationary camper in Sofel Akutsa, Keda Municipality, Adjara. Mountain views, home-cooked breakfast, and warm Georgian hospitality."
+    "homeTitle": "Guest House Akutsa | Family Hotel & Mountain Cottage near Batumi, Adjara",
+    "homeDescription": "Family guesthouse, private mountain cottage and camper in Keda, Adjara — just 1 hour from Batumi. Stunning views, home-cooked Georgian food, free parking. Halal-friendly, family hotel. Perfect day trip or mountain stay from Batumi.",
+    "homeKeywords": "guesthouse Adjara, family hotel Keda, mountain guesthouse Georgia, cottage near Batumi, camping Adjara, Batumi mountain trip, halal friendly hotel Georgia, family resort Adjara, mountain stay Georgia, Keda accommodation, Adjara tourism"
   },
   "nav": {
     "home": "Home",
@@ -79,6 +80,9 @@
     }
   },
   "guesthousePage": {
+    "metaTitle": "Guest House Akutsa | Family Guesthouse in the Mountains of Adjara, Georgia",
+    "metaDescription": "Stay in one of 4 cozy rooms at our family guesthouse in Keda, Adjara. Mountain views, home-cooked breakfast, shared terrace. Family guesthouse in the mountains of Georgia — 1 hour from Batumi.",
+    "metaKeywords": "family guesthouse mountains Georgia, guesthouse Keda Adjara, mountain hotel Georgia, family hotel Adjara, rooms near Batumi, halal friendly guesthouse Georgia, Georgian mountain hospitality",
     "title": "Guest House Akutsa",
     "subtitle": "Family rooms with shared kitchen and stunning views",
     "description": "Guest House Akutsa is our main family house, offering 4 comfortable rooms — a mix of family and standard rooms — designed for guests who enjoy a homely atmosphere. The house features two balconies and a generous 60 sqm terrace where guests gather for breakfast, coffee, or evening conversations under the stars. The shared kitchen and bathroom encourage a warm, communal stay, just like visiting family.",
@@ -108,6 +112,9 @@
     "amenity9": "Shared reception"
   },
   "cottagePage": {
+    "metaTitle": "Panorama Akutsa — Private Mountain Cottage with Valley Views | Keda, Adjara",
+    "metaDescription": "Rent a private 20 sqm cottage with panoramic mountain views in Keda, Adjara. Private kitchen, bathroom and balcony overlooking the Keda valley. Perfect mountain retreat 1 hour from Batumi, Georgia.",
+    "metaKeywords": "private cottage mountain view Adjara, mountain cottage Georgia, cottage near Batumi, romantic getaway Adjara, private accommodation Georgia, mountain retreat Keda, Adjara cottage rental",
     "title": "Panorama Akutsa — your personal mountain retreat",
     "subtitle": "Your private escape with panoramic mountain views",
     "description": "For travelers who value independence and tranquility, our 20 sqm cottage is the ideal choice. \"Panorama Akutsa\" was built for those who want to retreat and savor the beauty of the Adjara mountains. The cottage is equipped with every comfort you need to feel right at home. From the cottage's balcony, breathtaking, panoramic views of the Keda valley unfold — the perfect spot for a morning coffee or a starlit evening.",
@@ -119,6 +126,9 @@
     "amenity5": "Heating for all seasons (ideal for both summer and winter stays)"
   },
   "camperPage": {
+    "metaTitle": "Akutsa Camper | Unique Camping Experience in the Mountains of Adjara, Georgia",
+    "metaDescription": "Stay in a stationary house truck surrounded by nature in Keda, Adjara. A unique camping experience in Georgia — cozy, fully equipped, and just 1 hour from Batumi. Unusual stay, unforgettable memories.",
+    "metaKeywords": "camping experience Georgia, unique stay Adjara, camper accommodation Georgia, glamping Adjara, unusual accommodation near Batumi, nature stay Georgia, adventure travel Adjara",
     "title": "Akutsa Camper",
     "subtitle": "A unique stationary house truck experience",
     "description": "The Akutsa Camper is a stationary, fully equipped house truck offering a one-of-a-kind stay. Combining the charm of camper life with the comfort of a real home, it's perfect for travelers looking for something different — surrounded by nature, yet just steps away from the main guesthouse.",
@@ -258,6 +268,9 @@
     "dropdownEvents": "Events"
   },
   "menu": {
+    "metaTitle": "Menu | Traditional Georgian & Adjarian Food at Guest House Akutsa",
+    "metaDescription": "Browse our menu of traditional Adjarian and Georgian dishes. Home-cooked food made from local mountain ingredients — order ahead via Telegram. Georgian cuisine in the mountains near Batumi.",
+    "metaKeywords": "traditional Adjarian food, Georgian cuisine mountains, Georgian food near Batumi, Adjarian dishes, home cooked Georgian food, local food Keda, mountain restaurant Georgia",
     "title": "Menu",
     "subtitle": "Browse our menu and order ahead via Telegram",
     "totalLabel": "Total",

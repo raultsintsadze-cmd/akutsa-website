@@ -10,7 +10,16 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'camperPage' });
-  return { title: t('title'), description: t('description') };
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    keywords: t('metaKeywords'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      type: 'website'
+    }
+  };
 }
 
 export default function CamperPage() {

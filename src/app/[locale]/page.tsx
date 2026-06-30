@@ -33,7 +33,14 @@ export async function generateMetadata({
   return {
     title: t('homeTitle'),
     description: t('homeDescription'),
-    alternates: { canonical: `${SITE_URL}/${locale}` }
+    keywords: t('homeKeywords'),
+    alternates: { canonical: `${SITE_URL}/${locale}` },
+    openGraph: {
+      title: t('homeTitle'),
+      description: t('homeDescription'),
+      type: 'website',
+      siteName: t('siteName')
+    }
   };
 }
 

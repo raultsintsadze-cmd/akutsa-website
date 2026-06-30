@@ -11,7 +11,16 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'menu' });
-  return { title: t('title'), description: t('subtitle') };
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    keywords: t('metaKeywords'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      type: 'website'
+    }
+  };
 }
 
 export default async function MenuPage({
