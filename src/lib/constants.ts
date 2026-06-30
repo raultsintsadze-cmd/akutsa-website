@@ -13,7 +13,7 @@ export const SOCIAL_LINKS = {
   booking: 'https://www.booking.com/hotel/ge/guest-house-aku-tsa-keda.html'
 };
 
-export const SITE_URL = 'https://akutsa-website.vercel.app';
+export const SITE_URL = 'https://www.akutsaresosort.ge';
 
 export const mapsSearchUrl = (query: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
