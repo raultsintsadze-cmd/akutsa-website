@@ -18,6 +18,7 @@
     "tourPlanner": "AI Tour Planner",
     "news": "News",
     "contact": "Contact",
+    "faq": "FAQ",
     "bookNow": "Book Now"
   },
   "footer": {
@@ -291,5 +292,30 @@
     "windLabel": "Wind",
     "windUnit": "km/h",
     "sourceLabel": "National Bank of Georgia"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know before your stay at Akutsa",
+    "navLabel": "FAQ",
+    "q1": "What are the check-in and check-out times?",
+    "a1": "Check-in is from 14:00. Check-out is by 12:00 noon. Early check-in or late check-out may be arranged upon request.",
+    "q2": "What is the cancellation policy?",
+    "a2": "Cancellations made at least 48 hours before arrival are free of charge. Late cancellations may incur a charge equivalent to one night's stay.",
+    "q3": "Are pets allowed?",
+    "a3": "Yes, pets are welcome with prior arrangement. Please let us know when booking.",
+    "q4": "Is parking available?",
+    "a4": "Yes, free on-site parking is available for all guests.",
+    "q5": "Is breakfast included in the price?",
+    "a5": "Breakfast is priced separately. You can order from our menu — home-cooked meals made from local ingredients.",
+    "q6": "Is Wi-Fi available?",
+    "a6": "Yes, free Wi-Fi is available throughout the property. Password: 12345678.",
+    "q7": "How do I get to the guesthouse?",
+    "a7": "The drive from Batumi takes approximately 1 hour. The final stretch is a mountain village road — we recommend using navigation or contacting us at +995 577 22 52 89 for directions. We can also arrange a transfer from Batumi airport or city center.",
+    "q8": "Is it suitable for children?",
+    "a8": "Absolutely! Our guesthouse has a warm family atmosphere and children are very welcome.",
+    "q9": "How far is the sea?",
+    "a9": "The Batumi seafront is approximately 60 km away — about a 1-hour drive.",
+    "q10": "Can I pay on arrival?",
+    "a10": "Yes, cash payment on arrival is accepted. Bank transfer in advance is also an option."
   }
 }

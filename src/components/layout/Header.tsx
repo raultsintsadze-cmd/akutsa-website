@@ -60,6 +60,9 @@ export default function Header() {
           <Link href="/contact" className="text-forest/80 hover:text-gold transition-colors">
             {t('contact')}
           </Link>
+          <Link href="/faq" className="text-forest/80 hover:text-gold transition-colors">
+            {t('faq')}
+          </Link>
         </nav>
 
         <div className="hidden lg:flex items-center gap-5">
@@ -122,6 +125,14 @@ export default function Header() {
             className="text-forest/80 hover:text-gold transition-colors text-base"
           >
             {t('contact')}
+          </Link>
+
+          <Link
+            href="/faq"
+            onClick={() => setOpen(false)}
+            className="text-forest/80 hover:text-gold transition-colors text-base"
+          >
+            {t('faq')}
           </Link>
 
           <div className="pt-2 flex items-center justify-between">

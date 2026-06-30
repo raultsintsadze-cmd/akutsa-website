@@ -17,7 +17,8 @@ export default function Footer() {
     { href: '/gallery', label: tNav('gallery') },
     { href: '/attractions', label: tNav('attractions') },
     { href: '/news', label: tNav('news') },
-    { href: '/contact', label: tNav('contact') }
+    { href: '/contact', label: tNav('contact') },
+    { href: '/faq', label: tNav('faq') }
   ];
 
   return (
