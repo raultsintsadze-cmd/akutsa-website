@@ -227,14 +227,6 @@
     "mapTitle": "Find Us",
     "viewOnMaps": "View on Google Maps"
   },
-  "reviews": {
-    "review1Name": "Anna K.",
-    "review1Text": "An incredible stay surrounded by nature. The family made us feel right at home and breakfast was unforgettable.",
-    "review2Name": "David M.",
-    "review2Text": "The cottage was perfect for a quiet getaway — beautiful views and total privacy. Highly recommend!",
-    "review3Name": "Elene T.",
-    "review3Text": "Staying in the camper was such a fun experience. Cozy, unique, and the hosts were incredibly welcoming."
-  },
   "tourGenerator": {
     "floatingLabel": "AI Tour",
     "title": "AI Tour Planner",
