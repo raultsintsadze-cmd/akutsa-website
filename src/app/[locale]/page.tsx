@@ -8,7 +8,7 @@ import BookingButtons from '@/components/ui/BookingButtons';
 import FadeIn from '@/components/ui/FadeIn';
 import { Link } from '@/i18n/navigation';
 import PropertyCard from '@/components/sections/PropertyCard';
-import ReviewCard from '@/components/sections/ReviewCard';
+import GuestReviews from '@/components/sections/GuestReviews';
 import AttractionCard from '@/components/sections/AttractionCard';
 import WeatherCurrencyWidget from '@/components/sections/WeatherCurrencyWidget';
 import GalleryCarousel from '@/components/sections/GalleryCarousel';
@@ -21,7 +21,7 @@ import {
   PRODUCT_IMAGES,
   NATURE_IMAGES
 } from '@/lib/images';
-import { SOCIAL_LINKS, SITE_URL } from '@/lib/constants';
+import { SOCIAL_LINKS, SITE_URL, GOOGLE_MAPS_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -37,11 +37,41 @@ export async function generateMetadata({
   };
 }
 
+const REAL_REVIEWS = [
+  {
+    text: 'Удивительное место, захватывающие виды, тишина, гармония... Хозяин Рауль - человек добрейшей души и большого сердца. Такого гостеприимства не встречали никогда в жизни... Настоятельно рекомендуем обязательно бывать в этом замечательном месте.',
+    source: 'booking' as const
+  },
+  {
+    text: 'I recently stayed at this place... The location is incredibly peaceful, and the view is truly beautiful. The owner is one of the nicest people I\'ve met—very friendly, welcoming, and kind-hearted... I highly recommend this place to everyone.',
+    name: 'Chaudhry Zohaib',
+    source: 'google' as const
+  },
+  {
+    text: 'A cozy guesthouse in a beautiful picturesque place almost at the very top of the mountain... The owner is a kind-hearted person with a big heart, we felt at home in the Keda municipality during our entire stay.',
+    name: 'Aleksei Bondarev',
+    source: 'google' as const
+  },
+  {
+    text: 'Guesthouse Akutsa ადგილი სადაც სიმშვიდე, სისუფთავე და გულთბილი მომსახურება ერთ სივრცეში იყრის თავს! ადგილი ძალიან კომფორტული და მყუდროა, მასპინძელი — ყურადღებიანი და თავაზიანი.',
+    name: 'Ramini Diasamidze',
+    source: 'google' as const
+  },
+  {
+    text: 'ულამაზესი გარემო, სასწაული ხედები, სტუმართმოყვარე და უზომოდ ყურადღებიანი მასპინძელი. რეკომენდაცია 10/10',
+    name: 'ანა ლიპარტია',
+    source: 'google' as const
+  },
+  {
+    text: 'We were a group of 8 friends and everything was great! Thanks to Raul for his hospitality. Highly recommended this place. Its definitely worth a visit!',
+    source: 'booking' as const
+  }
+] as const;
+
 export default function HomePage({ params: { locale } }: { params: { locale: Locale } }) {
   const t = useTranslations('home');
   const tProps = useTranslations('properties');
   const tAttr = useTranslations('attractions');
-  const tReviews = useTranslations('reviews');
   const tMeta = useTranslations('meta');
   const tExp = useTranslations('experiences');
 
@@ -275,11 +305,12 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
       {/* Reviews */}
       <Section className="bg-white">
         <SectionHeading title={t('reviewsTitle')} />
-        <div className="grid md:grid-cols-3 gap-6">
-          <ReviewCard name={tReviews('review1Name')} text={tReviews('review1Text')} />
-          <ReviewCard name={tReviews('review2Name')} text={tReviews('review2Text')} delay={0.1} />
-          <ReviewCard name={tReviews('review3Name')} text={tReviews('review3Text')} delay={0.2} />
-        </div>
+        <GuestReviews
+          reviews={REAL_REVIEWS}
+          seeAllLabel={t('reviewsSeeAll')}
+          bookingUrl={SOCIAL_LINKS.booking}
+          googleUrl={GOOGLE_MAPS_URL}
+        />
       </Section>
 
       {/* Gallery carousel */}
