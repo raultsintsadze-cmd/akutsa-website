@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import { locales, type Locale } from '@/i18n/config';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -59,6 +60,13 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans bg-cream text-forest antialiased">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-SGF4Q9SSR7"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SGF4Q9SSR7');`}
+        </Script>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
           <main>{children}</main>
