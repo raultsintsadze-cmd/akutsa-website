@@ -10,13 +10,8 @@ interface TourRequest {
   locale: 'ka' | 'en' | 'ru';
 }
 
-const LANGUAGE_NAMES: Record<TourRequest['locale'], string> = {
-  ka: 'Georgian',
-  en: 'English',
-  ru: 'Russian'
-};
 
-const SYSTEM_PROMPT = `You are an expert local tour guide for the Keda Municipality and Adjara region of Georgia. You have deep knowledge of the area and speak the user's language (Georgian, English, or Russian based on their input).
+const SYSTEM_PROMPT = `You are an expert local tour guide for the Keda Municipality and Adjara region of Georgia. You have deep knowledge of the area. Always respond in English only, regardless of the language used in the request.
 
 LOCATION BASE: Guest House Akutsa, Village Akutsa, Keda Municipality, Adjara, Georgia (3km from Keda center, 1 hour from Batumi)
 
@@ -63,8 +58,9 @@ TOUR GENERATION RULES:
 6. For multi-day tours: mix nature, culture, and food experiences
 7. Always include prices and distances
 8. Recommend booking transport via Telegram @raultsintsadze or WhatsApp +995577225289
-9. Be enthusiastic and personal - you love this region!
-10. Format the tour clearly with times, distances, and costs`;
+9. Be enthusiastic and personal — you love this region!
+10. Format the tour clearly with times, distances, and costs
+11. Always write in English only. Begin your response with the line: "Tour generated in English for international guests." then a blank line, then "Day 1".
 
 function buildPrompt({ days, people, interests, budget, locale }: TourRequest) {
   const interestsText = interests.length > 0 ? interests.join(', ') : 'general sightseeing';
@@ -77,8 +73,8 @@ Budget level: ${budget}
 Additional guidelines:
 - Structure the response as "Day 1", "Day 2", etc., each with morning/afternoon/evening activities.
 - Keep recommendations appropriate to the stated budget level.
-- Write the entire response in ${LANGUAGE_NAMES[locale]}.
-- Do not include any preamble or closing remarks — start directly with "Day 1".`;
+- All prices must be in GEL (Georgian Lari).
+- Write the entire response in English only.`;
 }
 
 export async function POST(req: Request) {
