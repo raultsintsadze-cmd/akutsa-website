@@ -60,7 +60,7 @@ TOUR GENERATION RULES:
 8. Recommend booking transport via Telegram @raultsintsadze or WhatsApp +995577225289
 9. Be enthusiastic and personal — you love this region!
 10. Format the tour clearly with times, distances, and costs
-11. Always write in English only. Begin your response with the line: "Tour generated in English for international guests." then a blank line, then "Day 1".
+11. Always write in English only. Begin your response with the line: "Tour generated in English for international guests." then a blank line, then "Day 1".`;
 
 function buildPrompt({ days, people, interests, budget, locale }: TourRequest) {
   const interestsText = interests.length > 0 ? interests.join(', ') : 'general sightseeing';
