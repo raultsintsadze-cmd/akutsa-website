@@ -58,6 +58,30 @@ export const PRODUCT_IMAGES = [
   '/images/pducts3.jpeg'
 ];
 
+// Home-cooked breakfast photos
+export const BREAKFAST_IMAGES = [
+  '/images/homecoocked/home1.jpg',
+  '/images/homecoocked/home2.jpg',
+  '/images/homecoocked/home3.jpg',
+  '/images/homecoocked/home4.jpg',
+  '/images/homecoocked/home5.jpg',
+  '/images/homecoocked/home6.jpg',
+  '/images/homecoocked/home7.jpg'
+];
+
+// Local tours photos
+export const TOURS_IMAGES = [
+  '/images/localtours/loc1.jpg',
+  '/images/localtours/loc2.jpg',
+  '/images/localtours/loc3.jpg',
+  '/images/localtours/loc4.jpg',
+  '/images/localtours/loc5.jpg',
+  '/images/localtours/loc6.jpg',
+  '/images/localtours/loc7.jpg',
+  '/images/localtours/loc8.jpg',
+  '/images/localtours/loc10.jpg'
+];
+
 // Transfer vehicle photos
 export const TRANSFER_IMAGES = {
   delika: [

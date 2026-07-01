@@ -7,7 +7,8 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import FadeIn from '@/components/ui/FadeIn';
 import PhotoGrid from '@/components/sections/PhotoGrid';
 import TransferSection from '@/components/sections/TransferSection';
-import { img, PICNIC_IMAGES, MASTERCLASS_IMAGES, PRODUCT_IMAGES, TRANSFER_IMAGES } from '@/lib/images';
+import ServiceCard from '@/components/sections/ServiceCard';
+import { BREAKFAST_IMAGES, TOURS_IMAGES, PICNIC_IMAGES, MASTERCLASS_IMAGES, PRODUCT_IMAGES, TRANSFER_IMAGES } from '@/lib/images';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -23,10 +24,6 @@ export default function ServicesPage() {
   const t = useTranslations('services');
   const tExp = useTranslations('experiences');
 
-  const services = [
-    { titleKey: 'breakfastTitle', descKey: 'breakfastDesc', seed: 'akutsa-breakfast' },
-    { titleKey: 'toursTitle', descKey: 'toursDesc', seed: 'akutsa-tours' }
-  ];
 
   const transferVehicles = [
     {
@@ -80,19 +77,17 @@ export default function ServicesPage() {
       <Section>
         <SectionHeading title={t('title')} subtitle={t('subtitle')} />
         <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {services.map((s, i) => (
-            <FadeIn key={s.titleKey} delay={i * 0.1}>
-              <div className="bg-white rounded-2xl overflow-hidden shadow-sm h-full">
-                <div className="relative h-48">
-                  <Image src={img(s.seed)} alt={t(s.titleKey)} fill className="object-cover" />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-serif text-xl text-forest font-semibold">{t(s.titleKey)}</h3>
-                  <p className="mt-3 text-forest/70 text-sm leading-relaxed">{t(s.descKey)}</p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
+          <ServiceCard
+            title={t('breakfastTitle')}
+            description={t('breakfastDesc')}
+            photos={BREAKFAST_IMAGES}
+          />
+          <ServiceCard
+            title={t('toursTitle')}
+            description={t('toursDesc')}
+            photos={TOURS_IMAGES}
+            delay={0.1}
+          />
         </div>
       </Section>
 
