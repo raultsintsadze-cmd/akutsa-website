@@ -66,9 +66,9 @@ export const TRANSFER_IMAGES = {
     '/images/transfer/delika3.jpg'
   ],
   minivan: [
-    '/images/transfer/miniven1.jpg',
-    '/images/transfer/miniven2.jpg',
-    '/images/transfer/miniven3.jpg'
+    '/images/transfer/miniven1.jpeg',
+    '/images/transfer/miniven2.jpeg',
+    '/images/transfer/miniven3.jpeg'
   ]
 };
 
