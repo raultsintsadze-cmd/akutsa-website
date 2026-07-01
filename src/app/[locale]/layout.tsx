@@ -43,7 +43,8 @@ export async function generateMetadata({
       locale
     },
     verification: {
-      google: '1EUArV0lIlDEKF1hjylfAlklnq087sNDULadiXgcU8Y'
+      google: '1EUArV0lIlDEKF1hjylfAlklnq087sNDULadiXgcU8Y',
+      other: { 'yandex-verification': '68b786e0ac7c9967' }
     }
   } as Metadata;
 }
