@@ -58,6 +58,20 @@ export const PRODUCT_IMAGES = [
   '/images/pducts3.jpeg'
 ];
 
+// Transfer vehicle photos
+export const TRANSFER_IMAGES = {
+  delika: [
+    '/images/transfer/delika1.jpg',
+    '/images/transfer/delika2.jpg',
+    '/images/transfer/delika3.jpg'
+  ],
+  minivan: [
+    '/images/transfer/miniven1.jpg',
+    '/images/transfer/miniven2.jpg',
+    '/images/transfer/miniven3.jpg'
+  ]
+};
+
 // Real nature / surroundings photos
 export const NATURE_IMAGES = Array.from(
   { length: 16 },

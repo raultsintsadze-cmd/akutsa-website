@@ -6,7 +6,8 @@ import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import FadeIn from '@/components/ui/FadeIn';
 import PhotoGrid from '@/components/sections/PhotoGrid';
-import { img, PICNIC_IMAGES, MASTERCLASS_IMAGES, PRODUCT_IMAGES } from '@/lib/images';
+import TransferSection from '@/components/sections/TransferSection';
+import { img, PICNIC_IMAGES, MASTERCLASS_IMAGES, PRODUCT_IMAGES, TRANSFER_IMAGES } from '@/lib/images';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -24,8 +25,32 @@ export default function ServicesPage() {
 
   const services = [
     { titleKey: 'breakfastTitle', descKey: 'breakfastDesc', seed: 'akutsa-breakfast' },
-    { titleKey: 'toursTitle', descKey: 'toursDesc', seed: 'akutsa-tours' },
-    { titleKey: 'transferTitle', descKey: 'transferDesc', seed: 'akutsa-transfer' }
+    { titleKey: 'toursTitle', descKey: 'toursDesc', seed: 'akutsa-tours' }
+  ];
+
+  const transferVehicles = [
+    {
+      name: t('delikaName'),
+      capacity: t('delikaCapacity'),
+      type: t('delikaType'),
+      photos: TRANSFER_IMAGES.delika
+    },
+    {
+      name: t('minivanName'),
+      capacity: t('minivanCapacity'),
+      type: t('minivanType'),
+      photos: TRANSFER_IMAGES.minivan
+    }
+  ];
+
+  const transferHighlights = [
+    t('transferH1'),
+    t('transferH2'),
+    t('transferH3'),
+    t('transferH4'),
+    t('transferH5'),
+    t('transferH6'),
+    t('transferH7')
   ];
 
   const masterclasses = [
@@ -54,7 +79,7 @@ export default function ServicesPage() {
     <>
       <Section>
         <SectionHeading title={t('title')} subtitle={t('subtitle')} />
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {services.map((s, i) => (
             <FadeIn key={s.titleKey} delay={i * 0.1}>
               <div className="bg-white rounded-2xl overflow-hidden shadow-sm h-full">
@@ -71,7 +96,17 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section id="picnic" className="bg-white">
+      <Section id="transfer" className="bg-white">
+        <TransferSection
+          title={t('transferSectionTitle')}
+          description={t('transferDescription')}
+          highlights={transferHighlights}
+          pricing={t('transferPricing')}
+          vehicles={transferVehicles}
+        />
+      </Section>
+
+      <Section id="picnic">
         <FadeIn>
           <div className="rounded-2xl overflow-hidden bg-cream shadow-sm grid md:grid-cols-2">
             <div className="relative h-64 md:h-full">
