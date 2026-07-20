@@ -130,18 +130,46 @@ export async function getPostById(id: string): Promise<NewsPost | null> {
     const page = await notion.pages.retrieve({ page_id: id });
     if (!('properties' in page)) return null;
 
-    const blocksResponse = await notion.blocks.children.list({ block_id: id });
-    const blocks = blocksResponse.results.filter(
-      (b): b is BlockObjectResponse => 'type' in b
+    const typedPage = page as PageObjectResponse;
+
+    // Find the "Text" rich_text property entry to get its property ID
+    const textEntry = Object.entries(typedPage.properties).find(
+      ([key, value]) => value.type === 'rich_text' && key.toLowerCase() === 'text'
     );
+
+    let content: RichTextItemResponse[] = [];
+
+    if (textEntry) {
+      const [, textProp] = textEntry;
+      if (textProp.type === 'rich_text') {
+        // Try inline value first; if empty, fetch via properties API (handles long text)
+        if (textProp.rich_text.length > 0) {
+          content = textProp.rich_text;
+        } else {
+          try {
+            const propResponse = await notion.pages.properties.retrieve({
+              page_id: id,
+              property_id: textProp.id
+            });
+            if (propResponse.object === 'list') {
+              content = (propResponse.results as unknown as RichTextItemResponse[]);
+            } else if (propResponse.type === 'rich_text') {
+              content = [propResponse.rich_text as unknown as RichTextItemResponse];
+            }
+          } catch {
+            // fall through with empty content
+          }
+        }
+      }
+    }
 
     return {
       id: page.id,
-      title: getTitle(page as PageObjectResponse),
-      date: getDate(page as PageObjectResponse),
-      image: getImage(page as PageObjectResponse),
-      content: getText(page as PageObjectResponse),
-      blocks
+      title: getTitle(typedPage),
+      date: getDate(typedPage),
+      image: getImage(typedPage),
+      content,
+      blocks: []
     };
   } catch (err) {
     console.error('Failed to fetch Notion post:', err);
