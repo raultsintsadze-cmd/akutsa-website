@@ -111,6 +111,31 @@ export async function getPublishedPosts(locale: Locale): Promise<NewsPost[]> {
   }
 }
 
+export async function getPostById(id: string): Promise<NewsPost | null> {
+  if (!notion) return null;
+
+  try {
+    const page = await notion.pages.retrieve({ page_id: id });
+    if (!('properties' in page)) return null;
+
+    const blocksResponse = await notion.blocks.children.list({ block_id: id });
+    const blocks = blocksResponse.results.filter(
+      (b): b is BlockObjectResponse => 'type' in b
+    );
+
+    return {
+      id: page.id,
+      title: getTitle(page as PageObjectResponse),
+      date: getDate(page as PageObjectResponse),
+      image: getImage(page as PageObjectResponse),
+      blocks
+    };
+  } catch (err) {
+    console.error('Failed to fetch Notion post:', err);
+    return null;
+  }
+}
+
 export function isNotionConfigured(): boolean {
   return Boolean(NOTION_TOKEN && NOTION_DATABASE_ID);
 }

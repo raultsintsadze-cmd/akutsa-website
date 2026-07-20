@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
-import NotionBlocks from '@/components/sections/NotionBlocks';
 import { getPublishedPosts } from '@/lib/notion';
 import type { Locale } from '@/i18n/config';
 
@@ -34,34 +34,42 @@ export default async function NewsPage({
       {posts.length === 0 ? (
         <p className="text-center text-forest/60">{t('noPosts')}</p>
       ) : (
-        <div className="max-w-3xl mx-auto space-y-16">
+        <div className="max-w-3xl mx-auto space-y-8">
           {posts.map((post) => (
-            <article key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-sm">
-              {post.image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-72 object-cover"
-                />
-              )}
-              <div className="p-8">
-                <h2 className="font-serif text-2xl text-forest font-semibold">{post.title}</h2>
-                {post.date && (
-                  <p className="mt-1 text-sm text-gold font-medium">
-                    {t('publishedOn')}{' '}
-                    {new Date(post.date).toLocaleDateString(dateLocale, {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </p>
+            <Link
+              key={post.id}
+              href={`/${locale}/news/${post.id}`}
+              className="block group"
+            >
+              <article className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                {post.image && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-56 object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                  />
                 )}
-                <div className="mt-6">
-                  <NotionBlocks blocks={post.blocks} />
+                <div className="p-6">
+                  <h2 className="font-serif text-xl text-forest font-semibold group-hover:text-gold transition-colors">
+                    {post.title}
+                  </h2>
+                  {post.date && (
+                    <p className="mt-1 text-sm text-gold font-medium">
+                      {t('publishedOn')}{' '}
+                      {new Date(post.date).toLocaleDateString(dateLocale, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                  )}
+                  <p className="mt-3 text-sm text-forest/60 font-medium group-hover:text-forest transition-colors">
+                    {t('readMore')} →
+                  </p>
                 </div>
-              </div>
-            </article>
+              </article>
+            </Link>
           ))}
         </div>
       )}
