@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import Section from '@/components/ui/Section';
-import NotionBlocks from '@/components/sections/NotionBlocks';
 import { getPostById } from '@/lib/notion';
+import type { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { Locale } from '@/i18n/config';
 
 export const revalidate = 3600;
@@ -17,6 +17,25 @@ export async function generateMetadata({
   const post = await getPostById(id);
   if (!post) return {};
   return { title: post.title };
+}
+
+function RichText({ items }: { items: RichTextItemResponse[] }) {
+  if (!items.length) return null;
+  return (
+    <div className="prose prose-forest max-w-none text-forest/80 leading-relaxed whitespace-pre-wrap">
+      {items.map((item, i) => {
+        const text = item.plain_text;
+        if (item.type !== 'text') return <span key={i}>{text}</span>;
+        const { bold, italic, underline, code } = item.annotations;
+        let node: React.ReactNode = text;
+        if (code) node = <code key={i} className="bg-forest/10 px-1 rounded text-sm font-mono">{node}</code>;
+        if (bold) node = <strong key={i}>{node}</strong>;
+        if (italic) node = <em key={i}>{node}</em>;
+        if (underline) node = <u key={i}>{node}</u>;
+        return <span key={i}>{node}</span>;
+      })}
+    </div>
+  );
 }
 
 export default async function NewsPostPage({
@@ -68,7 +87,7 @@ export default async function NewsPostPage({
               </p>
             )}
             <div className="mt-8">
-              <NotionBlocks blocks={post.blocks} />
+              <RichText items={post.content} />
             </div>
           </div>
         </article>
