@@ -12,6 +12,8 @@ import GuestReviews from '@/components/sections/GuestReviews';
 import AttractionCard from '@/components/sections/AttractionCard';
 import WeatherCurrencyWidget from '@/components/sections/WeatherCurrencyWidget';
 import GalleryCarousel from '@/components/sections/GalleryCarousel';
+import HeroParallax from '@/components/sections/HeroParallax';
+import StatsCounter from '@/components/sections/StatsCounter';
 import {
   GUESTHOUSE_SHARED_IMAGES,
   COTTAGE_IMAGES,
@@ -81,6 +83,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
   const tAttr = useTranslations('attractions');
   const tMeta = useTranslations('meta');
   const tExp = useTranslations('experiences');
+  const tStats = useTranslations('stats');
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -105,30 +108,20 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero */}
-      <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center">
-        <Image
-          src={GUESTHOUSE_SHARED_IMAGES.terrace}
-          alt="Guest House Akutsa"
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-forest/50" />
-        <div className="relative z-10 text-center text-cream container-px max-w-3xl">
-          <FadeIn>
-            <h1 className="font-serif text-4xl md:text-6xl font-semibold leading-tight">
-              {t('heroTitle')}
-            </h1>
-            <p className="mt-6 text-base md:text-lg text-cream/90">
-              {t('heroSubtitle')}
-            </p>
-            <div className="mt-8 flex justify-center">
-              <BookingButtons />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      {/* Hero with parallax */}
+      <HeroParallax src={GUESTHOUSE_SHARED_IMAGES.terrace} alt="Guest House Akutsa">
+        <FadeIn>
+          <h1 className="font-serif text-4xl md:text-6xl font-semibold leading-tight">
+            {t('heroTitle')}
+          </h1>
+          <p className="mt-6 text-base md:text-lg text-cream/90">
+            {t('heroSubtitle')}
+          </p>
+          <div className="mt-8 flex justify-center">
+            <BookingButtons />
+          </div>
+        </FadeIn>
+      </HeroParallax>
 
       <WeatherCurrencyWidget locale={locale} />
 
@@ -334,6 +327,20 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
             {t('instagramTitle')} &rarr;
           </a>
         </div>
+      </Section>
+
+      {/* Stats */}
+      <Section className="bg-forest text-cream">
+        <FadeIn>
+          <StatsCounter
+            stats={[
+              { value: 60, suffix: '+', label: tStats('guestsLabel') },
+              { value: 10, suffix: '+', label: tStats('locationsLabel') },
+              { value: 3, suffix: '', label: tStats('accommodationsLabel') },
+              { value: 1, suffix: '', label: tStats('batumLabel') }
+            ]}
+          />
+        </FadeIn>
       </Section>
 
       {/* CTA */}

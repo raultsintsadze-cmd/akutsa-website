@@ -283,7 +283,9 @@
     "dropdownGuests": "Guest Stories",
     "dropdownEvents": "Events",
     "readMore": "Read more",
-    "backToNews": "Back to News"
+    "backToNews": "Back to News",
+    "readMin": "min read",
+    "categoryDefault": "News"
   },
   "menu": {
     "metaTitle": "Menu | Traditional Georgian & Adjarian Food at Guest House Akutsa",
@@ -310,6 +312,12 @@
     "successMessage": "Your order was sent! We'll confirm with you shortly.",
     "errorMessage": "Something went wrong sending your order. Please try again or contact us directly.",
     "currency": "GEL"
+  },
+  "stats": {
+    "guestsLabel": "Happy Guests",
+    "locationsLabel": "Nearby Locations",
+    "accommodationsLabel": "Accommodation Types",
+    "batumLabel": "Hour from Batumi"
   },
   "weatherWidget": {
     "locationLabel": "Akutsa, Adjara 🌿",

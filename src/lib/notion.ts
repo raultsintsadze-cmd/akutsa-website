@@ -16,6 +16,7 @@ export interface NewsPost {
   title: string;
   date: string | null;
   image: string | null;
+  category: string | null;
   content: RichTextItemResponse[];
   blocks: BlockObjectResponse[];
 }
@@ -47,6 +48,15 @@ function getImage(page: PageObjectResponse): string | null {
     if (page.cover.type === 'file') return page.cover.file.url;
     if (page.cover.type === 'external') return page.cover.external.url;
   }
+  return null;
+}
+
+function getCategory(page: PageObjectResponse): string | null {
+  const entry = Object.entries(page.properties).find(
+    ([key, value]) => value.type === 'select' && key.toLowerCase() === 'category'
+  );
+  const prop = entry?.[1];
+  if (prop?.type === 'select' && prop.select) return prop.select.name;
   return null;
 }
 
@@ -110,6 +120,7 @@ export async function getPublishedPosts(locale: Locale): Promise<NewsPost[]> {
           title: getTitle(page),
           date: getDate(page),
           image: getImage(page),
+          category: getCategory(page),
           content: getText(page),
           blocks
         };
@@ -168,6 +179,7 @@ export async function getPostById(id: string): Promise<NewsPost | null> {
       title: getTitle(typedPage),
       date: getDate(typedPage),
       image: getImage(typedPage),
+      category: getCategory(typedPage),
       content,
       blocks: []
     };

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -11,6 +11,13 @@ export default function Header() {
   const t = useTranslations('nav');
   const tNews = useTranslations('news');
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
   const links = [
     { href: '/', label: t('home') },
@@ -36,7 +43,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-forest/10">
+    <header className={`sticky top-0 z-50 border-b transition-all duration-300 ${scrolled ? 'bg-cream/95 backdrop-blur-md shadow-sm border-forest/20' : 'bg-cream/90 backdrop-blur-sm border-forest/10'}`}>
       <div className="container-px max-w-7xl mx-auto flex items-center justify-between h-20">
         <Link href="/" className="font-serif text-xl md:text-2xl text-forest font-semibold">
           Akutsa

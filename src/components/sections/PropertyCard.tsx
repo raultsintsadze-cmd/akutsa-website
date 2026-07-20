@@ -24,7 +24,7 @@ export default function PropertyCard({
     <FadeIn delay={delay}>
       <Link
         href={href}
-        className="group block rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow"
+        className="group block rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
       >
         <div className="relative h-64 overflow-hidden">
           <Image
@@ -41,7 +41,7 @@ export default function PropertyCard({
             <span className="text-gold font-medium text-sm">
               {t('fromPrice', { price })}
             </span>
-            <span className="text-forest text-sm font-medium group-hover:text-gold transition-colors">
+            <span className="text-sm font-medium px-3 py-1 rounded-full border border-forest/20 text-forest group-hover:bg-forest group-hover:text-cream group-hover:border-forest transition-all duration-300">
               {t('viewDetails')} &rarr;
             </span>
           </div>
