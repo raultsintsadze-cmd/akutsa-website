@@ -109,7 +109,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
       />
 
       {/* Hero with parallax */}
-      <HeroParallax src={GUESTHOUSE_SHARED_IMAGES.terrace} alt="Guest House Akutsa">
+      <HeroParallax src={GUESTHOUSE_SHARED_IMAGES.terrace} alt="Guest House Akutsa" video="/videos/hero.mp4">
         <FadeIn>
           <h1 className="font-serif text-4xl md:text-6xl font-semibold leading-tight">
             {t('heroTitle')}
