@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useScroll, useTransform, motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 
 export default function HeroParallax({
   src,
@@ -16,6 +16,13 @@ export default function HeroParallax({
   children: React.ReactNode;
 }) {
   const ref = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleCanPlay = useCallback(() => {
+    const v = videoRef.current;
+    if (v) v.style.opacity = '1';
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start']
@@ -30,22 +37,26 @@ export default function HeroParallax({
       <motion.div className="absolute inset-0 w-full h-full" style={{ y }}>
         {video ? (
           <>
-            <video
-              src={video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster={src}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* Fallback image shown until video loads */}
+            {/* Poster image always visible underneath */}
             <Image
               src={src}
               alt={alt}
               fill
               priority
-              className="object-cover -z-10"
+              className="object-cover"
+            />
+            {/* Video fades in over the poster once it can play */}
+            <video
+              ref={videoRef}
+              src={video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onCanPlay={handleCanPlay}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ opacity: 0, transition: 'opacity 0.8s ease' }}
             />
           </>
         ) : (
