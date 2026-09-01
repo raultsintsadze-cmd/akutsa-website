@@ -13,7 +13,8 @@ const paths = [
   '/attractions',
   '/tour-planner',
   '/news',
-  '/contact'
+  '/contact',
+  '/rtveli'
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

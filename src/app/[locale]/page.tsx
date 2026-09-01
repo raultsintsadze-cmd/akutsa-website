@@ -14,6 +14,7 @@ import WeatherCurrencyWidget from '@/components/sections/WeatherCurrencyWidget';
 import GalleryCarousel from '@/components/sections/GalleryCarousel';
 import HeroParallax from '@/components/sections/HeroParallax';
 import StatsCounter from '@/components/sections/StatsCounter';
+import RtveliBanner from '@/components/sections/RtveliBanner';
 import {
   GUESTHOUSE_SHARED_IMAGES,
   COTTAGE_IMAGES,
@@ -124,6 +125,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
       </HeroParallax>
 
       <WeatherCurrencyWidget locale={locale} />
+      <RtveliBanner />
 
       {/* Intro */}
       <Section>
