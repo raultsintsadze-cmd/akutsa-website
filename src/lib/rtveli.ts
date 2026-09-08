@@ -26,14 +26,10 @@ export async function getAvailableRtveliDates(): Promise<RtveliDate[]> {
   if (!notion || !NOTION_RTVELI_DATABASE_ID) return [];
 
   try {
-    const database = await notion.databases.retrieve({ database_id: NOTION_RTVELI_DATABASE_ID });
-    const dataSourceId = 'data_sources' in database ? database.data_sources[0]?.id : undefined;
-    if (!dataSourceId) return [];
-
     const today = new Date().toISOString().split('T')[0];
 
     const response = await notion.dataSources.query({
-      data_source_id: dataSourceId,
+      data_source_id: NOTION_RTVELI_DATABASE_ID,
       filter: {
         and: [
           { property: 'Active', checkbox: { equals: true } },
