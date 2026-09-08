@@ -304,7 +304,19 @@
     "overnightCta": "See Accommodation",
     "bannerTitle": "Rtveli Season is Here",
     "bannerDesc": "Grape harvest, foot-pressing & Adjarian cooking — our exclusive Autumn Experience. September–October.",
-    "bannerCta": "See the Package"
+    "bannerCta": "See the Package",
+    "bookingTitle": "Reserve Your Spot",
+    "bookingSubtitle": "Select an available date and send us your details — we confirm within 24 hours.",
+    "noAvailableDates": "No upcoming dates are open yet. Contact us directly to check availability.",
+    "seatsRemaining": "{count} seats left",
+    "seatsLabel": "Number of Seats",
+    "nameLabel": "Your Name",
+    "contactLabel": "Phone or Telegram",
+    "submitBtn": "Send Booking Request",
+    "submitting": "Sending...",
+    "successTitle": "Booking Request Sent!",
+    "successMsg": "We received your request and will confirm via Telegram or WhatsApp within 24 hours.",
+    "errorMsg": "Something went wrong. Please try again or contact us directly."
   },
   "news": {
     "title": "News",

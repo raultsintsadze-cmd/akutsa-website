@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation';
 import Section from '@/components/ui/Section';
 import FadeIn from '@/components/ui/FadeIn';
 import BookingButtons from '@/components/ui/BookingButtons';
+import RtveliBooking from '@/components/sections/RtveliBooking';
 import { TOURS_IMAGES, MASTERCLASS_IMAGES, PICNIC_IMAGES } from '@/lib/images';
 import { SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
@@ -159,6 +160,9 @@ export default function RtveliPage() {
           )}
         </div>
       </div>
+
+      {/* ── Booking ───────────────────────────────────────────── */}
+      <RtveliBooking />
 
       {/* ── Overnight option ──────────────────────────────────── */}
       <Section>
