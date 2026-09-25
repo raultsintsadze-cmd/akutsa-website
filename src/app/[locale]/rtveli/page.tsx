@@ -7,6 +7,7 @@ import Section from '@/components/ui/Section';
 import FadeIn from '@/components/ui/FadeIn';
 import BookingButtons from '@/components/ui/BookingButtons';
 import RtveliBooking from '@/components/sections/RtveliBooking';
+import PhotoGrid from '@/components/sections/PhotoGrid';
 import { TOURS_IMAGES, MASTERCLASS_IMAGES, PICNIC_IMAGES } from '@/lib/images';
 import { SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
@@ -31,6 +32,57 @@ const STEPS = [
   { emoji: '🍽️', colorClass: 'bg-orange-100 text-orange-700 border-orange-200' },
   { emoji: '🏡', colorClass: 'bg-green-100 text-green-700 border-green-200' }
 ] as const;
+
+const STRIP_IMAGES = [
+  MASTERCLASS_IMAGES[0],
+  TOURS_IMAGES[2],
+  PICNIC_IMAGES[0],
+  MASTERCLASS_IMAGES[3],
+  TOURS_IMAGES[4]
+];
+
+// Gold vine divider: grape cluster flanked by leaves and fading rules.
+function GrapeDivider() {
+  return (
+    <svg
+      viewBox="0 0 240 32"
+      className="mx-auto mt-3 w-56 h-8 text-gold"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <defs>
+        {/* userSpaceOnUse: a flat line has a zero-height bbox, which breaks bbox-relative gradients */}
+        <linearGradient id="rtveli-rule-l" gradientUnits="userSpaceOnUse" x1="8" x2="82" y1="0" y2="0">
+          <stop offset="0" stopColor="currentColor" stopOpacity="0" />
+          <stop offset="1" stopColor="currentColor" />
+        </linearGradient>
+        <linearGradient id="rtveli-rule-r" gradientUnits="userSpaceOnUse" x1="232" x2="158" y1="0" y2="0">
+          <stop offset="0" stopColor="currentColor" stopOpacity="0" />
+          <stop offset="1" stopColor="currentColor" />
+        </linearGradient>
+      </defs>
+      <path d="M8 16h74" stroke="url(#rtveli-rule-l)" />
+      <path d="M158 16h74" stroke="url(#rtveli-rule-r)" />
+      {/* leaves */}
+      <path d="M100 16c-6-7-14-6-16 0 2 6 10 7 16 0Z" fill="currentColor" fillOpacity=".2" />
+      <path d="M140 16c6-7 14-6 16 0-2 6-10 7-16 0Z" fill="currentColor" fillOpacity=".2" />
+      {/* stem + tendril */}
+      <path d="M120 3v6M120 6c3-3 7-2 7 1" />
+      {/* grape cluster */}
+      <g fill="currentColor" stroke="none">
+        <circle cx="114" cy="12" r="3.2" />
+        <circle cx="120" cy="12" r="3.2" />
+        <circle cx="126" cy="12" r="3.2" />
+        <circle cx="117" cy="17.5" r="3.2" />
+        <circle cx="123" cy="17.5" r="3.2" />
+        <circle cx="120" cy="23" r="3.2" />
+      </g>
+    </svg>
+  );
+}
 
 export default function RtveliPage() {
   const t = useTranslations('rtveli');
@@ -97,11 +149,7 @@ export default function RtveliPage() {
             <h2 className="font-serif text-3xl md:text-4xl text-forest font-semibold">
               {t('itineraryTitle')}
             </h2>
-            <div className="mt-2 flex justify-center gap-1" aria-hidden>
-              {'🍇🍂🌿'.split('').map((ch, i) => (
-                <span key={i} className="text-xl">{ch}</span>
-              ))}
-            </div>
+            <GrapeDivider />
           </div>
         </FadeIn>
 
@@ -144,22 +192,12 @@ export default function RtveliPage() {
       </Section>
 
       {/* ── Photo strip ───────────────────────────────────────── */}
-      <div className="overflow-hidden">
-        <div className="flex gap-1 h-48 md:h-64">
-          {[MASTERCLASS_IMAGES[0], TOURS_IMAGES[2], PICNIC_IMAGES[0], MASTERCLASS_IMAGES[3], TOURS_IMAGES[4]].map(
-            (src, i) => (
-              <div key={i} className="relative flex-1 overflow-hidden">
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-            )
-          )}
-        </div>
-      </div>
+      <PhotoGrid
+        images={STRIP_IMAGES}
+        alt={t('heroTitle')}
+        gridClassName="grid-cols-5 gap-1 h-48 md:h-64"
+        imageClassName="h-full"
+      />
 
       {/* ── Booking ───────────────────────────────────────────── */}
       <RtveliBooking />

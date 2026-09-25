@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { clsx } from 'clsx';
+import Lightbox from '@/components/ui/Lightbox';
 
 const CLONE_COUNT = 4;
 const AUTOPLAY_MS = 3000;
@@ -14,6 +15,7 @@ export default function GalleryCarousel({ images, alt }: { images: string[]; alt
   const [index, setIndex] = useState(CLONE_COUNT);
   const [animate, setAnimate] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [open, setOpen] = useState<number | null>(null);
 
   const rendered = [...images.slice(-CLONE_COUNT), ...images, ...images.slice(0, CLONE_COUNT)];
 
@@ -80,10 +82,10 @@ export default function GalleryCarousel({ images, alt }: { images: string[]; alt
   }
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || open !== null) return;
     const interval = setInterval(() => goTo(1), AUTOPLAY_MS);
     return () => clearInterval(interval);
-  }, [paused]);
+  }, [paused, open]);
 
   const activeDot = ((((index - CLONE_COUNT) % total) + total) % total);
 
@@ -95,12 +97,15 @@ export default function GalleryCarousel({ images, alt }: { images: string[]; alt
     >
       <div ref={trackRef} className="flex gap-4 overflow-x-hidden">
         {rendered.map((src, i) => (
-          <div
+          <button
             key={i}
-            className="shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 relative aspect-square rounded-xl overflow-hidden"
+            type="button"
+            // Map the cloned slide position back to its real image index.
+            onClick={() => setOpen((((i - CLONE_COUNT) % total) + total) % total)}
+            className="shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 relative aspect-square rounded-xl overflow-hidden cursor-zoom-in"
           >
             <Image src={src} alt={`${alt} ${i + 1}`} fill className="object-cover" />
-          </div>
+          </button>
         ))}
       </div>
 
@@ -135,6 +140,8 @@ export default function GalleryCarousel({ images, alt }: { images: string[]; alt
           />
         ))}
       </div>
+
+      <Lightbox images={images} index={open} alt={alt} onClose={() => setOpen(null)} onIndexChange={setOpen} />
     </div>
   );
 }

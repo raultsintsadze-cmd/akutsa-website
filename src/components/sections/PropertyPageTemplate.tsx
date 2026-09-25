@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import Section from '@/components/ui/Section';
 import BookingButtons from '@/components/ui/BookingButtons';
 import FadeIn from '@/components/ui/FadeIn';
+import PhotoGrid from '@/components/sections/PhotoGrid';
 
 export default function PropertyPageTemplate({
   namespace,
@@ -88,13 +89,12 @@ export default function PropertyPageTemplate({
           <h2 className="font-serif text-2xl text-forest font-semibold mb-5">
             {tCommon('gallery')}
           </h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryImages.map((src) => (
-              <div key={src} className="relative h-56 rounded-xl overflow-hidden">
-                <Image src={src} alt={t('title')} fill className="object-cover" />
-              </div>
-            ))}
-          </div>
+          <PhotoGrid
+            images={galleryImages}
+            alt={t('title')}
+            gridClassName="sm:grid-cols-2 md:grid-cols-3 gap-4"
+            imageClassName="h-56 rounded-xl"
+          />
         </div>
       </Section>
     </>
