@@ -29,6 +29,7 @@ const STEPS = [
   { emoji: '🚐', colorClass: 'bg-amber-100 text-amber-700 border-amber-200' },
   { emoji: '💧', colorClass: 'bg-sky-100 text-sky-700 border-sky-200' },
   { emoji: '🍇', colorClass: 'bg-purple-100 text-purple-700 border-purple-200' },
+  { emoji: '🍷', colorClass: 'bg-rose-100 text-rose-700 border-rose-200' },
   { emoji: '🍽️', colorClass: 'bg-orange-100 text-orange-700 border-orange-200' },
   { emoji: '🏡', colorClass: 'bg-green-100 text-green-700 border-green-200' }
 ] as const;
@@ -92,6 +93,7 @@ export default function RtveliPage() {
     { time: t('step1Time'), title: t('step1Title'), desc: t('step1Desc') },
     { time: t('step2Time'), title: t('step2Title'), desc: t('step2Desc') },
     { time: t('step3Time'), title: t('step3Title'), desc: t('step3Desc') },
+    { time: t('stepWineTime'), title: t('stepWineTitle'), desc: t('stepWineDesc') },
     { time: t('step4Time'), title: t('step4Title'), desc: t('step4Desc') },
     { time: t('step5Time'), title: t('step5Title'), desc: t('step5Desc') }
   ];
