@@ -36,7 +36,7 @@ NEARBY ATTRACTIONS WITH REAL DISTANCES FROM AKUTSA:
 
 LOCAL EXPERIENCES AVAILABLE AT AKUTSA:
 - Beekeeping masterclass (20 GEL/person) - visit real beehives, taste fresh honey
-- Culinary masterclass - cook traditional Adjarian dishes (30 GEL/person)
+- Culinary masterclass - cook traditional Adjarian dishes (50 GEL/person, only for guests staying overnight at Guest House Akutsa)
 - Picnic space for up to 60 people (5 GEL/person)
 - Local products: natural honey (30 GEL), wine (15 GEL), chacha/vodka (12 GEL/500ml), fresh fruits (5 GEL)
 - Home-cooked traditional Adjarian breakfast available
