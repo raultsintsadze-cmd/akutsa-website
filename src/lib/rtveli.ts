@@ -60,9 +60,10 @@ export async function getAvailableRtveliDates(): Promise<RtveliDate[]> {
             : '';
       const total = totalProp?.type === 'number' ? (totalProp.number ?? 0) : 0;
       const booked = bookedProp?.type === 'number' ? (bookedProp.number ?? 0) : 0;
-      const remaining = total - booked;
+      // Full vans stay listed: guests without transport can still book that date.
+      const remaining = Math.max(0, total - booked);
 
-      if (!date || remaining <= 0) continue;
+      if (!date) continue;
 
       dates.push({
         id: page.id,

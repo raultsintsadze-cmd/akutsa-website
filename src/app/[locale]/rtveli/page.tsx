@@ -8,6 +8,7 @@ import FadeIn from '@/components/ui/FadeIn';
 import BookingButtons from '@/components/ui/BookingButtons';
 import RtveliBooking from '@/components/sections/RtveliBooking';
 import PhotoGrid from '@/components/sections/PhotoGrid';
+import RtveliPricing from '@/components/sections/RtveliPricing';
 import { TOURS_IMAGES, MASTERCLASS_IMAGES, PICNIC_IMAGES } from '@/lib/images';
 import { SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
@@ -25,13 +26,15 @@ export async function generateMetadata({
   };
 }
 
+// Itinerary in order; `key` is the translation prefix (e.g. 'step1' → step1Time/Title/Desc).
 const STEPS = [
-  { emoji: '🚐', colorClass: 'bg-amber-100 text-amber-700 border-amber-200' },
-  { emoji: '💧', colorClass: 'bg-sky-100 text-sky-700 border-sky-200' },
-  { emoji: '🍇', colorClass: 'bg-purple-100 text-purple-700 border-purple-200' },
-  { emoji: '🍷', colorClass: 'bg-rose-100 text-rose-700 border-rose-200' },
-  { emoji: '🍽️', colorClass: 'bg-orange-100 text-orange-700 border-orange-200' },
-  { emoji: '🏡', colorClass: 'bg-green-100 text-green-700 border-green-200' }
+  { key: 'step1', emoji: '🚐', colorClass: 'bg-amber-100 text-amber-700 border-amber-200' },
+  { key: 'step2', emoji: '💧', colorClass: 'bg-sky-100 text-sky-700 border-sky-200' },
+  { key: 'stepWine', emoji: '🍷', colorClass: 'bg-rose-100 text-rose-700 border-rose-200' },
+  { key: 'step3', emoji: '🍇', colorClass: 'bg-purple-100 text-purple-700 border-purple-200' },
+  { key: 'step4', emoji: '🧑‍🍳', colorClass: 'bg-orange-100 text-orange-700 border-orange-200' },
+  { key: 'stepDinner', emoji: '🍽️', colorClass: 'bg-red-100 text-red-700 border-red-200' },
+  { key: 'step5', emoji: '🏡', colorClass: 'bg-green-100 text-green-700 border-green-200' }
 ] as const;
 
 const STRIP_IMAGES = [
@@ -89,14 +92,12 @@ export default function RtveliPage() {
   const t = useTranslations('rtveli');
   const tCommon = useTranslations('common');
 
-  const steps = [
-    { time: t('step1Time'), title: t('step1Title'), desc: t('step1Desc') },
-    { time: t('step2Time'), title: t('step2Title'), desc: t('step2Desc') },
-    { time: t('step3Time'), title: t('step3Title'), desc: t('step3Desc') },
-    { time: t('stepWineTime'), title: t('stepWineTitle'), desc: t('stepWineDesc') },
-    { time: t('step4Time'), title: t('step4Title'), desc: t('step4Desc') },
-    { time: t('step5Time'), title: t('step5Title'), desc: t('step5Desc') }
-  ];
+  const steps = STEPS.map((s) => ({
+    ...s,
+    time: t(`${s.key}Time`),
+    title: t(`${s.key}Title`),
+    desc: t(`${s.key}Desc`)
+  }));
 
   return (
     <>
@@ -157,17 +158,16 @@ export default function RtveliPage() {
 
         <div className="max-w-2xl mx-auto">
           {steps.map((step, i) => {
-            const meta = STEPS[i];
             const isLast = i === steps.length - 1;
             return (
-              <FadeIn key={i} delay={i * 0.08}>
+              <FadeIn key={step.key} delay={i * 0.08}>
                 <div className="flex gap-5">
                   {/* Left: connector line + icon */}
                   <div className="flex flex-col items-center">
                     <div
-                      className={`w-12 h-12 rounded-full border-2 flex items-center justify-center text-xl shrink-0 shadow-sm ${meta.colorClass}`}
+                      className={`w-12 h-12 rounded-full border-2 flex items-center justify-center text-xl shrink-0 shadow-sm ${step.colorClass}`}
                     >
-                      {meta.emoji}
+                      {step.emoji}
                     </div>
                     {!isLast && (
                       <div className="flex-1 w-0.5 bg-gradient-to-b from-amber-300 to-amber-100 my-1 min-h-[2.5rem]" />
@@ -175,7 +175,7 @@ export default function RtveliPage() {
                   </div>
 
                   {/* Right: content */}
-                  <div className={`pb-8 ${isLast ? '' : ''}`}>
+                  <div className="pb-8">
                     <span className="inline-block bg-gold/15 text-gold text-xs font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-1">
                       {step.time}
                     </span>
@@ -191,6 +191,10 @@ export default function RtveliPage() {
             );
           })}
         </div>
+
+        <FadeIn>
+          <RtveliPricing className="max-w-2xl mx-auto mt-4" />
+        </FadeIn>
       </Section>
 
       {/* ── Photo strip ───────────────────────────────────────── */}
@@ -245,7 +249,7 @@ export default function RtveliPage() {
               {t('bookCta')}
             </h2>
             <div className="mt-4 inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/30 text-amber-200 text-sm px-4 py-2 rounded-full">
-              <span>💰</span> {t('pricingNote')}
+              <span>💰</span> {t('pricingRange')}
             </div>
             <p className="mt-3 text-cream/60 text-xs uppercase tracking-widest">
               🍂 {t('seasonNote')}

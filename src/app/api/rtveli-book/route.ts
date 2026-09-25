@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { TELEGRAM_ORDER_CHAT_ID } from '@/lib/constants';
+import { TELEGRAM_ORDER_CHAT_ID, RTVELI_PRICES, type RtveliTransport } from '@/lib/constants';
 
 export const runtime = 'nodejs';
 
@@ -7,6 +7,7 @@ interface BookingRequest {
   date: string;
   vehicle: string;
   seats: number;
+  transport: RtveliTransport;
   name: string;
   contact: string;
 }
@@ -30,8 +31,9 @@ export async function POST(req: Request) {
   const seats = Number(body.seats);
   const name = typeof body.name === 'string' ? body.name.trim() : '';
   const contact = typeof body.contact === 'string' ? body.contact.trim() : '';
+  const transport = body.transport === 'with' || body.transport === 'without' ? body.transport : null;
 
-  if (!date || !name || !contact || !Number.isFinite(seats) || seats < 1 || seats > 6) {
+  if (!date || !transport || !name || !contact || !Number.isInteger(seats) || seats < 1 || seats > 6) {
     return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
   }
 
@@ -42,14 +44,19 @@ export async function POST(req: Request) {
     day: 'numeric'
   });
 
+  // Computed here, not taken from the client.
+  const total = RTVELI_PRICES[transport] * seats;
+
   const text = [
     '🍇 New Rtveli Booking Request',
     '',
     `📅 Date: ${formattedDate}`,
     `👥 Seats requested: ${seats}`,
-    `🚐 Vehicle: ${vehicle || 'Not specified'}`,
+    `🚐 Transport: ${transport === 'with' ? 'With' : 'Without'}`,
+    ...(transport === 'with' ? [`🚌 Vehicle: ${vehicle || 'Not specified'}`] : []),
     `👤 Name: ${name}`,
-    `📱 Contact: ${contact}`
+    `📱 Contact: ${contact}`,
+    `💰 Total: ${total} GEL`
   ].join('\n');
 
   try {

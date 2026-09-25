@@ -21,3 +21,7 @@ export const mapsSearchUrl = (query: string) =>
 // Telegram chat that receives menu orders (the bot token itself is read
 // server-side only from process.env.TELEGRAM_BOT_TOKEN, never hardcoded).
 export const TELEGRAM_ORDER_CHAT_ID = '6499517306';
+
+// Rtveli day tour price per person (GEL). Van seats in Notion only limit the "with" option.
+export const RTVELI_PRICES = { with: 250, without: 200 } as const;
+export type RtveliTransport = keyof typeof RTVELI_PRICES;
