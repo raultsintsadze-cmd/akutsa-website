@@ -339,7 +339,12 @@
     "transportWithout": "Without transport ({price} GEL)",
     "vanFull": "Van full — without transport only",
     "totalLabel": "Total",
-    "chooseTransport": "Please choose an option"
+    "chooseTransport": "Please choose an option",
+    "videoTitle": "Rtveli 2026 — How It Went",
+    "videoSubtitle": "Real moments from our first harvest day with guests.",
+    "videoCta": "Book your spot",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off"
   },
   "news": {
     "title": "News",

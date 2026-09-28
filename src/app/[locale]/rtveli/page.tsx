@@ -9,6 +9,7 @@ import BookingButtons from '@/components/ui/BookingButtons';
 import RtveliBooking from '@/components/sections/RtveliBooking';
 import PhotoGrid from '@/components/sections/PhotoGrid';
 import RtveliPricing from '@/components/sections/RtveliPricing';
+import RtveliVideo from '@/components/sections/RtveliVideo';
 import { TOURS_IMAGES, MASTERCLASS_IMAGES, PICNIC_IMAGES } from '@/lib/images';
 import { SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
@@ -205,8 +206,11 @@ export default function RtveliPage() {
         imageClassName="h-full"
       />
 
+      {/* ── Rtveli 2026 video ──────────────────────────────────── */}
+      <RtveliVideo src="/videos/rtveli-2026.mp4" bookingAnchor="book" />
+
       {/* ── Booking ───────────────────────────────────────────── */}
-      <RtveliBooking />
+      <RtveliBooking id="book" />
 
       {/* ── Overnight option ──────────────────────────────────── */}
       <Section>

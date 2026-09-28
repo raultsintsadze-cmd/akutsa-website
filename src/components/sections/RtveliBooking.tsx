@@ -18,7 +18,7 @@ interface RtveliDate {
   seatsRemaining: number;
 }
 
-export default function RtveliBooking() {
+export default function RtveliBooking({ id }: { id?: string }) {
   const t = useTranslations('rtveli');
   const locale = useLocale();
 
@@ -92,7 +92,7 @@ export default function RtveliBooking() {
 
   if (status === 'success') {
     return (
-      <Section>
+      <Section id={id} className="scroll-mt-24">
         <FadeIn>
           <div className="max-w-lg mx-auto text-center bg-amber-50 border border-amber-200 rounded-3xl p-10">
             <div className="text-4xl mb-3" aria-hidden>🍇</div>
@@ -105,7 +105,7 @@ export default function RtveliBooking() {
   }
 
   return (
-    <Section>
+    <Section id={id} className="scroll-mt-24">
       <FadeIn>
         <div className="text-center mb-10">
           <h2 className="font-serif text-3xl md:text-4xl text-forest font-semibold">
