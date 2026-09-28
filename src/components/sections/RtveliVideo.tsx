@@ -9,15 +9,44 @@ export default function RtveliVideo({ src, bookingAnchor }: { src: string; booki
   const t = useTranslations('rtveli');
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+  // True while playing muted only because the browser refused sound; shows the big overlay.
+  const [autoMuted, setAutoMuted] = useState(false);
+  const inViewRef = useRef(false);
+  // Set once the visitor mutes on purpose, so scrolling back doesn't force sound on again.
+  const userMutedRef = useRef(false);
 
   // Play only while at least half the video is on screen; pause when scrolled away.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    function playMuted() {
+      if (!video || !inViewRef.current) return;
+      video.muted = true;
+      video.play().then(() => setAutoMuted(!userMutedRef.current), () => {});
+    }
+
+    function playWithSound() {
+      if (!video) return;
+      if (userMutedRef.current) return playMuted();
+      video.muted = false;
+      // Rejected by the autoplay policy when the visitor hasn't interacted yet.
+      video.play().then(
+        () => {
+          if (!inViewRef.current) video.pause();
+          else setAutoMuted(false);
+        },
+        playMuted
+      );
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {});
-        else video.pause();
+        inViewRef.current = entry.isIntersecting;
+        if (!entry.isIntersecting) return video.pause();
+        // Browsers remember whether the visitor has already clicked/tapped/typed on the page
+        // (sticky user activation); if so, sound is allowed and this plays unmuted directly.
+        playWithSound();
       },
       { threshold: 0.5 }
     );
@@ -25,11 +54,28 @@ export default function RtveliVideo({ src, bookingAnchor }: { src: string; booki
     return () => observer.disconnect();
   }, []);
 
+  function unmuteFromStart() {
+    const video = videoRef.current;
+    if (!video) return;
+    userMutedRef.current = false;
+    video.muted = false;
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    setAutoMuted(false);
+  }
+
   function toggleSound() {
     const video = videoRef.current;
     if (!video) return;
-    video.muted = !video.muted;
-    if (!video.muted) video.play().catch(() => {});
+    if (video.muted) {
+      userMutedRef.current = false;
+      video.muted = false;
+      video.play().catch(() => {});
+    } else {
+      userMutedRef.current = true;
+      video.muted = true;
+    }
+    setAutoMuted(false);
   }
 
   return (
@@ -60,9 +106,24 @@ export default function RtveliVideo({ src, bookingAnchor }: { src: string; booki
               loop
               controls
               preload="metadata"
-              onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
+              onVolumeChange={(e) => {
+                setMuted(e.currentTarget.muted);
+                // Unmuted via the native controls: the overlay is no longer needed.
+                if (!e.currentTarget.muted) setAutoMuted(false);
+              }}
               className="absolute inset-0 w-full h-full object-cover"
             />
+            {autoMuted && (
+              <button
+                type="button"
+                onClick={unmuteFromStart}
+                className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors hover:bg-black/35"
+              >
+                <span className="rounded-full bg-white/95 px-6 py-3 text-base font-semibold text-forest shadow-lg">
+                  {t('tapForSound')}
+                </span>
+              </button>
+            )}
             <button
               type="button"
               onClick={toggleSound}
