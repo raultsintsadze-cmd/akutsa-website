@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, SITE_URL } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import Section from '@/components/ui/Section';
@@ -17,7 +17,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = await getPostById(id);
   if (!post) return {};
-  return pageMetadata({ locale, path: `/news/${id}`, title: post.title });
+  // A post exists in one language only (Notion "Language"), but this route serves it under
+  // every locale prefix: canonicalise to the post's own language and don't claim translations.
+  const postLocale = post.locale ?? locale;
+  const url = `${SITE_URL}/${postLocale}/news/${id}`;
+  return {
+    ...(await pageMetadata({ locale: postLocale, path: `/news/${id}`, title: post.title })),
+    alternates: { canonical: url, languages: { [postLocale]: url, 'x-default': url } }
+  };
 }
 
 function RichText({ items }: { items: RichTextItemResponse[] }) {

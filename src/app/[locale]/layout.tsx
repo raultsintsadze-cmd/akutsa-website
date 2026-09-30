@@ -12,7 +12,7 @@ import StickyTourButton from '@/components/layout/StickyTourButton';
 import MobileBookingBar from '@/components/layout/MobileBookingBar';
 import { FloatingButtonsProvider } from '@/context/FloatingButtonsContext';
 import { SITE_URL } from '@/lib/constants';
-import { OG_DEFAULT_IMAGE } from '@/lib/seo';
+import { OG_DEFAULT_IMAGE, OG_LOCALES } from '@/lib/seo';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' });
@@ -41,7 +41,7 @@ export async function generateMetadata({
       description: t('homeDescription'),
       siteName: t('siteName'),
       type: 'website',
-      locale,
+      locale: OG_LOCALES[locale],
       images: [{ url: OG_DEFAULT_IMAGE, width: 1200, height: 630 }]
     },
     twitter: { card: 'summary_large_image', images: [OG_DEFAULT_IMAGE] },

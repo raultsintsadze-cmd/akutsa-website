@@ -4,7 +4,7 @@ import type {
   BlockObjectResponse,
   RichTextItemResponse
 } from '@notionhq/client/build/src/api-endpoints';
-import type { Locale } from '@/i18n/config';
+import { locales, type Locale } from '@/i18n/config';
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
@@ -17,6 +17,8 @@ export interface NewsPost {
   date: string | null;
   image: string | null;
   category: string | null;
+  locale: Locale | null;
+  lastEdited: string;
   content: RichTextItemResponse[];
   blocks: BlockObjectResponse[];
 }
@@ -71,37 +73,66 @@ function getText(page: PageObjectResponse): RichTextItemResponse[] {
 
 function getLocale(page: PageObjectResponse): Locale | null {
   const entry = Object.entries(page.properties).find(
-    ([key, value]) => value.type === 'select' && key.toLowerCase() === 'locale'
+    ([key, value]) => value.type === 'select' && ['language', 'locale'].includes(key.toLowerCase())
   );
   const prop = entry?.[1];
-  if (prop?.type === 'select' && prop.select) {
-    return prop.select.name as Locale;
+  const name = prop?.type === 'select' ? prop.select?.name : undefined;
+  return name && (locales as readonly string[]).includes(name) ? (name as Locale) : null;
+}
+
+// All published pages, newest first, following Notion's pagination.
+async function queryPublishedPages(): Promise<PageObjectResponse[]> {
+  if (!notion || !NOTION_DATABASE_ID) return [];
+
+  const database = await notion.databases.retrieve({ database_id: NOTION_DATABASE_ID });
+  const dataSourceId = 'data_sources' in database ? database.data_sources[0]?.id : undefined;
+  if (!dataSourceId) return [];
+
+  const pages: PageObjectResponse[] = [];
+  let cursor: string | undefined;
+  do {
+    const response = await notion.dataSources.query({
+      data_source_id: dataSourceId,
+      filter: { property: 'Published', checkbox: { equals: true } },
+      sorts: [{ property: 'Date', direction: 'descending' }],
+      start_cursor: cursor
+    });
+    pages.push(
+      ...response.results.filter(
+        (p): p is PageObjectResponse => p.object === 'page' && 'properties' in p
+      )
+    );
+    cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined;
+  } while (cursor);
+  return pages;
+}
+
+export interface PostRef {
+  id: string;
+  locale: Locale | null;
+  lastEdited: string;
+}
+
+// Lightweight list for the sitemap (no block content).
+export async function getAllPublishedPostRefs(): Promise<PostRef[]> {
+  try {
+    const pages = await queryPublishedPages();
+    return pages.map((page) => ({
+      id: page.id,
+      locale: getLocale(page),
+      lastEdited: page.last_edited_time
+    }));
+  } catch (err) {
+    console.error('Failed to fetch Notion post list:', err);
+    return [];
   }
-  return null;
 }
 
 export async function getPublishedPosts(locale: Locale): Promise<NewsPost[]> {
-  if (!notion || !NOTION_DATABASE_ID) return [];
+  if (!notion) return [];
 
   try {
-    const database = await notion.databases.retrieve({ database_id: NOTION_DATABASE_ID });
-    const dataSourceId =
-      'data_sources' in database ? database.data_sources[0]?.id : undefined;
-
-    if (!dataSourceId) return [];
-
-    const response = await notion.dataSources.query({
-      data_source_id: dataSourceId,
-      filter: {
-        property: 'Published',
-        checkbox: { equals: true }
-      },
-      sorts: [{ property: 'Date', direction: 'descending' }]
-    });
-
-    const pages = response.results.filter(
-      (p): p is PageObjectResponse => p.object === 'page' && 'properties' in p
-    );
+    const pages = await queryPublishedPages();
 
     const localized = pages.filter((page) => {
       const pageLocale = getLocale(page);
@@ -121,6 +152,8 @@ export async function getPublishedPosts(locale: Locale): Promise<NewsPost[]> {
           date: getDate(page),
           image: getImage(page),
           category: getCategory(page),
+          locale: getLocale(page),
+          lastEdited: page.last_edited_time,
           content: getText(page),
           blocks
         };
@@ -180,6 +213,8 @@ export async function getPostById(id: string): Promise<NewsPost | null> {
       date: getDate(typedPage),
       image: getImage(typedPage),
       category: getCategory(typedPage),
+      locale: getLocale(typedPage),
+      lastEdited: typedPage.last_edited_time,
       content,
       blocks: []
     };
