@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
 import Link from 'next/link';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
@@ -69,14 +70,16 @@ export default async function NewsPage({
 
       {/* Featured post — full-width, large image, overlay text */}
       <FadeIn>
-        <Link href={`/${locale}/news/${featured.id}`} className="group block mb-12">
+        <Link href={`/${locale}/news/${featured.slug}`} className="group block mb-12">
           <article className="relative rounded-3xl overflow-hidden shadow-lg min-h-[480px] md:min-h-[560px] flex items-end">
             {featured.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <Image
                 src={featured.image}
                 alt={featured.title}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1216px"
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
               />
             ) : (
               <div className="absolute inset-0 bg-forest" />
@@ -108,15 +111,16 @@ export default async function NewsPage({
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {rest.map((post, i) => (
             <FadeIn key={post.id} delay={i * 0.05}>
-              <Link href={`/${locale}/news/${post.id}`} className="group block h-full">
+              <Link href={`/${locale}/news/${post.slug}`} className="group block h-full">
                 <article className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-[1.02] h-full flex flex-col">
                   {post.image ? (
                     <div className="relative h-48 overflow-hidden shrink-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={post.image}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   ) : (

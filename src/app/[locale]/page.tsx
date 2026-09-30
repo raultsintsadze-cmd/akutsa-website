@@ -25,7 +25,7 @@ import {
   PRODUCT_IMAGES,
   NATURE_IMAGES
 } from '@/lib/images';
-import { SOCIAL_LINKS, GOOGLE_MAPS_URL } from '@/lib/constants';
+import { SOCIAL_LINKS, GOOGLE_MAPS_URL, SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -79,6 +79,9 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Hotel',
+    // Referenced as `publisher` by blog posts' BlogPosting schema.
+    '@id': `${SITE_URL}/#lodging`,
+    url: SITE_URL,
     name: tMeta('siteName'),
     description: tMeta('homeDescription'),
     address: {

@@ -362,7 +362,12 @@
     "backToNews": "Back to News",
     "readMin": "min read",
     "categoryDefault": "News",
-    "metaDescription": "News, travel guides and seasonal events from Guest House Akutsa in Keda, Adjara — Rtveli harvest days, local food and day trips 1 hour from Batumi."
+    "metaDescription": "News, travel guides and seasonal events from Guest House Akutsa in Keda, Adjara — Rtveli harvest days, local food and day trips 1 hour from Batumi.",
+    "readIn": "Read in:",
+    "ctaTitle": "Stay with us in Akutsa",
+    "ctaText": "Like what you read? Book a room, the Panorama cottage or the camper — we reply quickly on WhatsApp.",
+    "ctaWhatsapp": "Ask on WhatsApp",
+    "whatsappMessage": "Hi! I found you through your blog and would like to book a stay. Which dates are available?"
   },
   "menu": {
     "metaTitle": "Menu — Georgian & Adjarian Food",
