@@ -1,17 +1,20 @@
 export default function SectionHeading({
   title,
   subtitle,
-  center = true
+  center = true,
+  as: Heading = 'h2'
 }: {
   title: string;
   subtitle?: string;
   center?: boolean;
+  // Use 'h1' when this is the page's main title (one per page).
+  as?: 'h1' | 'h2';
 }) {
   return (
     <div className={center ? 'text-center mb-12' : 'mb-12'}>
-      <h2 className="font-serif text-3xl md:text-4xl text-forest font-semibold">
+      <Heading className="font-serif text-3xl md:text-4xl text-forest font-semibold">
         {title}
-      </h2>
+      </Heading>
       {subtitle && (
         <p
           className={`mt-3 text-forest/70 max-w-2xl ${center ? 'mx-auto' : ''}`}

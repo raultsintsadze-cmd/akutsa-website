@@ -1,8 +1,8 @@
 {
   "meta": {
     "siteName": "Guest House Akutsa",
-    "homeTitle": "Guest House Akutsa | Family Hotel & Mountain Cottage near Batumi, Adjara",
-    "homeDescription": "Family guesthouse, private mountain cottage and camper in Keda, Adjara — just 1 hour from Batumi. Stunning views, home-cooked Georgian food, free parking. Halal-friendly, family hotel. Perfect day trip or mountain stay from Batumi.",
+    "homeTitle": "Guest House Akutsa | Mountain Guesthouse near Batumi",
+    "homeDescription": "Family guesthouse, mountain cottage and camper in Keda, Adjara — 1 hour from Batumi. Rooms from 90 GEL a night, home-cooked Georgian food, free parking.",
     "homeKeywords": "guesthouse Adjara, family hotel Keda, mountain guesthouse Georgia, cottage near Batumi, camping Adjara, Batumi mountain trip, halal friendly hotel Georgia, family resort Adjara, mountain stay Georgia, Keda accommodation, Adjara tourism"
   },
   "nav": {
@@ -27,7 +27,7 @@
     "quickLinks": "Quick Links",
     "contact": "Contact",
     "followUs": "Follow Us",
-    "address": "Sofel Akutsa, Keda Municipality, Adjara, Georgia",
+    "address": "Akutsa village, Keda Municipality, Adjara, Georgia",
     "rights": "All rights reserved."
   },
   "common": {
@@ -80,7 +80,7 @@
     }
   },
   "guesthousePage": {
-    "metaTitle": "Guest House Akutsa | Family Guesthouse in the Mountains of Adjara, Georgia",
+    "metaTitle": "Family Guesthouse in Keda, Adjara",
     "metaDescription": "Stay in one of 4 cozy rooms at our family guesthouse in Keda, Adjara. Mountain views, home-cooked breakfast, shared terrace. Family guesthouse in the mountains of Georgia — 1 hour from Batumi.",
     "metaKeywords": "family guesthouse mountains Georgia, guesthouse Keda Adjara, mountain hotel Georgia, family hotel Adjara, rooms near Batumi, halal friendly guesthouse Georgia, Georgian mountain hospitality",
     "title": "Guest House Akutsa",
@@ -112,7 +112,7 @@
     "amenity9": "Shared reception"
   },
   "cottagePage": {
-    "metaTitle": "Panorama Akutsa — Private Mountain Cottage with Valley Views | Keda, Adjara",
+    "metaTitle": "Panorama Cottage with Valley Views",
     "metaDescription": "Rent a private 20 sqm cottage with panoramic mountain views in Keda, Adjara. Private kitchen, bathroom and balcony overlooking the Keda valley. Perfect mountain retreat 1 hour from Batumi, Georgia.",
     "metaKeywords": "private cottage mountain view Adjara, mountain cottage Georgia, cottage near Batumi, romantic getaway Adjara, private accommodation Georgia, mountain retreat Keda, Adjara cottage rental",
     "title": "Panorama Akutsa — your personal mountain retreat",
@@ -126,7 +126,7 @@
     "amenity5": "Heating for all seasons (ideal for both summer and winter stays)"
   },
   "camperPage": {
-    "metaTitle": "Akutsa Camper | Unique Camping Experience in the Mountains of Adjara, Georgia",
+    "metaTitle": "Mountain Camper Stay in Adjara",
     "metaDescription": "Stay in a stationary house truck surrounded by nature in Keda, Adjara. A unique camping experience in Georgia — cozy, fully equipped, and just 1 hour from Batumi. Unusual stay, unforgettable memories.",
     "metaKeywords": "camping experience Georgia, unique stay Adjara, camper accommodation Georgia, glamping Adjara, unusual accommodation near Batumi, nature stay Georgia, adventure travel Adjara",
     "title": "Akutsa Camper",
@@ -166,7 +166,8 @@
     "delikaType": "4×4 mountain vehicle — perfect for off-road and mountain routes",
     "minivanName": "Mercedes Sprinter",
     "minivanCapacity": "8 passengers",
-    "minivanType": "Comfortable minivan — perfect for airport transfers and city trips"
+    "minivanType": "Comfortable minivan — perfect for airport transfers and city trips",
+    "metaDescription": "Picnics, beekeeping and Adjarian cooking masterclasses, plus local honey, wine and chacha at Guest House Akutsa in Keda — 1 hour from Batumi."
   },
   "experiences": {
     "sectionTitle": "Experiences & Local Products",
@@ -237,7 +238,8 @@
     "item9Distance": "3km",
     "item10Name": "რესტორანი მასპინძელი (Restaurant Maspidzeli)",
     "item10Desc": "A restaurant in Keda serving authentic Adjarian cuisine, with a welcoming atmosphere and local dishes.",
-    "item10Distance": "3km"
+    "item10Distance": "3km",
+    "metaDescription": "Waterfalls, wineries, old churches and mountain trails around Keda, Adjara — the best sights near Guest House Akutsa, just 1 hour from Batumi."
   },
   "contact": {
     "title": "Contact Us",
@@ -251,7 +253,8 @@
     "address": "Sofel Akutsa, Keda Municipality, Adjara, Georgia",
     "phoneTitle": "Phone / Messaging",
     "mapTitle": "Find Us",
-    "viewOnMaps": "View on Google Maps"
+    "viewOnMaps": "View on Google Maps",
+    "metaDescription": "Contact Guest House Akutsa in Keda, Adjara: call +995 577 22 52 89 or write on Telegram or WhatsApp. 1 hour from Batumi, with free parking on site."
   },
   "tourGenerator": {
     "floatingLabel": "AI Tour",
@@ -275,7 +278,7 @@
     "disclaimer": "This itinerary is AI-generated and may need adjustments — feel free to ask us via Telegram or WhatsApp to fine-tune it."
   },
   "rtveli": {
-    "metaTitle": "Rtveli Autumn Harvest Experience | Guest House Akutsa, Adjara",
+    "metaTitle": "Rtveli Grape Harvest Day Tour",
     "metaDescription": "Join our exclusive one-day Rtveli package — grape harvest, traditional foot-pressing, a 7-wine tasting at the Keda Wine Factory, an Adjarian culinary masterclass, and a scenic waterfall stop. Available mid-September to October near Batumi.",
     "heroTitle": "Rtveli",
     "heroSubtitle": "Autumn Harvest Experience",
@@ -358,10 +361,11 @@
     "readMore": "Read more",
     "backToNews": "Back to News",
     "readMin": "min read",
-    "categoryDefault": "News"
+    "categoryDefault": "News",
+    "metaDescription": "News, travel guides and seasonal events from Guest House Akutsa in Keda, Adjara — Rtveli harvest days, local food and day trips 1 hour from Batumi."
   },
   "menu": {
-    "metaTitle": "Menu | Traditional Georgian & Adjarian Food at Guest House Akutsa",
+    "metaTitle": "Menu — Georgian & Adjarian Food",
     "metaDescription": "Browse our menu of traditional Adjarian and Georgian dishes. Home-cooked food made from local mountain ingredients — order ahead via Telegram. Georgian cuisine in the mountains near Batumi.",
     "metaKeywords": "traditional Adjarian food, Georgian cuisine mountains, Georgian food near Batumi, Adjarian dishes, home cooked Georgian food, local food Keda, mountain restaurant Georgia",
     "title": "Menu",
@@ -413,7 +417,7 @@
     "q5": "Is breakfast included in the price?",
     "a5": "Breakfast is priced separately. You can order from our menu — home-cooked meals made from local ingredients.",
     "q6": "Is Wi-Fi available?",
-    "a6": "Yes, free Wi-Fi is available throughout the property. Password: 12345678.",
+    "a6": "Free Wi-Fi is available throughout the property; the password is given at check-in.",
     "q7": "How do I get to the guesthouse?",
     "a7": "The drive from Batumi takes approximately 1 hour. The final stretch is a mountain village road — we recommend using navigation or contacting us at +995 577 22 52 89 for directions. We can also arrange a transfer from Batumi airport or city center.",
     "q8": "Is it suitable for children?",
@@ -421,6 +425,7 @@
     "q9": "How far is the sea?",
     "a9": "The Batumi seafront is approximately 60 km away — about a 1-hour drive.",
     "q10": "Can I pay on arrival?",
-    "a10": "Yes, cash payment on arrival is accepted. Bank transfer in advance is also an option."
+    "a10": "Yes, cash payment on arrival is accepted. Bank transfer in advance is also an option.",
+    "metaDescription": "Staying at Guest House Akutsa in Keda, Adjara: rooms from 90 GEL a night, check-in, breakfast, parking, Wi-Fi and how to get here from Batumi."
   }
 }

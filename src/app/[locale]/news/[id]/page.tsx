@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import Section from '@/components/ui/Section';
@@ -16,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = await getPostById(id);
   if (!post) return {};
-  return { title: post.title };
+  return pageMetadata({ locale, path: `/news/${id}`, title: post.title });
 }
 
 function RichText({ items }: { items: RichTextItemResponse[] }) {

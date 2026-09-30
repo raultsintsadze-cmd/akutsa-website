@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
@@ -11,7 +12,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'tourGenerator' });
-  return { title: t('title'), description: t('subtitle') };
+  return pageMetadata({ locale, path: '/tour-planner', title: t('title'), description: t('subtitle') });
 }
 
 export default async function TourPlannerPage({
@@ -23,7 +24,7 @@ export default async function TourPlannerPage({
 
   return (
     <Section>
-      <SectionHeading title={t('title')} subtitle={t('subtitle')} />
+      <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
       <TourGeneratorForm />
     </Section>
   );

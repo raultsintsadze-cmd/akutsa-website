@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
 import PropertyPageTemplate from '@/components/sections/PropertyPageTemplate';
 import { CAMPER_IMAGES } from '@/lib/images';
@@ -10,16 +11,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'camperPage' });
-  return {
-    title: t('metaTitle'),
-    description: t('metaDescription'),
-    keywords: t('metaKeywords'),
-    openGraph: {
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      type: 'website'
-    }
-  };
+  return pageMetadata({ locale, path: '/camper', title: t('metaTitle'), description: t('metaDescription'), keywords: t('metaKeywords'), image: '/og/og-camper.jpg' });
 }
 
 export default function CamperPage() {

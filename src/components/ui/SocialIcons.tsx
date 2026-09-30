@@ -31,19 +31,12 @@ function TikTokIcon({ className }: { className?: string }) {
 
 function BookingIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <rect x="2" y="2" width="20" height="20" rx="4" />
-      <text
-        x="12"
-        y="16.5"
-        textAnchor="middle"
-        fontSize="9"
-        fontWeight="700"
-        fill="white"
-        fontFamily="Arial, sans-serif"
-      >
-        B
-      </text>
+    // "B." mark drawn as paths (no <text>), so crawlers don't read a stray "B" as link text.
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path
+        fillRule="evenodd"
+        d="M6 2h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4Zm1.8 4.5v11h5.1c2.3 0 3.8-1.3 3.8-3.3 0-1.4-.8-2.4-2-2.8.9-.4 1.5-1.3 1.5-2.4 0-1.8-1.3-2.5-3.4-2.5h-5Zm2.4 2v2.9h2c1 0 1.6-.5 1.6-1.5S13.2 8.5 12.2 8.5h-2Zm0 4.8v2.9h2.4c1.1 0 1.7-.6 1.7-1.5s-.6-1.4-1.7-1.4h-2.4Zm8.6 2.6a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6Z"
+      />
     </svg>
   );
 }

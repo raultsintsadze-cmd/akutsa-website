@@ -1,4 +1,6 @@
 export const TELEGRAM_URL = 'https://t.me/raultsintsadze';
+export const PHONE_DISPLAY = '+995 577 22 52 89';
+export const PHONE_TEL = 'tel:+995577225289';
 export const WHATSAPP_URL = 'https://wa.me/995577225289';
 export const GOOGLE_MAPS_URL =
   'https://www.google.com/maps/place/Guest+House+Akutsa/@41.6003593,41.9625711,438m/data=!3m1!1e3!4m9!3m8!1s0x405d5fccc6c655c3:0x624767535c8b1db1!5m2!4m1!1i2!8m2!3d41.6001497!4d41.963986!16s%2Fg%2F11wn5tzvfy';

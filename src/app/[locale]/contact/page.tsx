@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
@@ -6,7 +7,7 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import BookingButtons from '@/components/ui/BookingButtons';
 import ContactForm from '@/components/sections/ContactForm';
 import FadeIn from '@/components/ui/FadeIn';
-import { GOOGLE_MAPS_EMBED_SRC, GOOGLE_MAPS_URL } from '@/lib/constants';
+import { GOOGLE_MAPS_EMBED_SRC, GOOGLE_MAPS_URL, PHONE_DISPLAY, PHONE_TEL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -15,7 +16,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'contact' });
-  return { title: t('title'), description: t('subtitle') };
+  return pageMetadata({ locale, path: '/contact', title: t('title'), description: t('metaDescription') });
 }
 
 export default function ContactPage() {
@@ -23,7 +24,7 @@ export default function ContactPage() {
 
   return (
     <Section>
-      <SectionHeading title={t('title')} subtitle={t('subtitle')} />
+      <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
 
       <div className="grid lg:grid-cols-2 gap-12">
         <FadeIn>
@@ -34,6 +35,12 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="font-medium text-gold mb-2">{t('phoneTitle')}</h3>
+              <a
+                href={PHONE_TEL}
+                className="inline-block mb-3 text-lg font-medium text-forest hover:text-gold transition-colors"
+              >
+                {PHONE_DISPLAY}
+              </a>
               <BookingButtons size="sm" />
             </div>
           </div>

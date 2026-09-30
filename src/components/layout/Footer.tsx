@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { GOOGLE_MAPS_URL } from '@/lib/constants';
+import { GOOGLE_MAPS_URL, PHONE_DISPLAY, PHONE_TEL } from '@/lib/constants';
 import SocialIcons from '@/components/ui/SocialIcons';
 
 export default function Footer() {
@@ -51,6 +51,12 @@ export default function Footer() {
             className="text-cream/70 text-sm hover:text-gold transition-colors block mb-4"
           >
             {t('address')}
+          </a>
+          <a
+            href={PHONE_TEL}
+            className="text-cream/70 text-sm hover:text-gold transition-colors block mb-4"
+          >
+            {PHONE_DISPLAY}
           </a>
           <h4 className="font-medium mb-3 text-gold">{t('followUs')}</h4>
           <SocialIcons className="text-cream/70" />

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import BookingButtons from '@/components/ui/BookingButtons';
@@ -24,7 +25,7 @@ import {
   PRODUCT_IMAGES,
   NATURE_IMAGES
 } from '@/lib/images';
-import { SOCIAL_LINKS, SITE_URL, GOOGLE_MAPS_URL } from '@/lib/constants';
+import { SOCIAL_LINKS, GOOGLE_MAPS_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -33,18 +34,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'meta' });
-  return {
-    title: t('homeTitle'),
-    description: t('homeDescription'),
-    keywords: t('homeKeywords'),
-    alternates: { canonical: `${SITE_URL}/${locale}` },
-    openGraph: {
-      title: t('homeTitle'),
-      description: t('homeDescription'),
-      type: 'website',
-      siteName: t('siteName')
-    }
-  };
+  return pageMetadata({ locale, path: '', title: t('homeTitle'), description: t('homeDescription'), keywords: t('homeKeywords'), absoluteTitle: true });
 }
 
 const REAL_REVIEWS = [
@@ -110,7 +100,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
       />
 
       {/* Hero with parallax */}
-      <HeroParallax src={GUESTHOUSE_SHARED_IMAGES.terrace} alt="Guest House Akutsa" video="/videos/hero.mp4">
+      <HeroParallax src={GUESTHOUSE_SHARED_IMAGES.terrace} alt="Guest House Akutsa" video="/videos/hero.mp4" poster="/videos/hero-poster.jpg">
         <FadeIn>
           <h1 className="font-serif text-4xl md:text-6xl font-semibold leading-tight">
             {t('heroTitle')}

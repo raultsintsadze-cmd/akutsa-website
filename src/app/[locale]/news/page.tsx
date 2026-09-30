@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import Section from '@/components/ui/Section';
@@ -16,7 +17,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'news' });
-  return { title: t('title'), description: t('subtitle') };
+  return pageMetadata({ locale, path: '/news', title: t('title'), description: t('metaDescription') });
 }
 
 function readingTime(post: NewsPost): number {
@@ -54,7 +55,7 @@ export default async function NewsPage({
   if (posts.length === 0) {
     return (
       <Section>
-        <SectionHeading title={t('title')} subtitle={t('subtitle')} />
+        <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
         <p className="text-center text-forest/60">{t('noPosts')}</p>
       </Section>
     );
@@ -64,7 +65,7 @@ export default async function NewsPage({
 
   return (
     <Section>
-      <SectionHeading title={t('title')} subtitle={t('subtitle')} />
+      <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
 
       {/* Featured post — full-width, large image, overlay text */}
       <FadeIn>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
@@ -17,7 +18,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'services' });
-  return { title: t('title'), description: t('subtitle') };
+  return pageMetadata({ locale, path: '/services', title: t('title'), description: t('metaDescription') });
 }
 
 export default function ServicesPage() {
@@ -75,7 +76,7 @@ export default function ServicesPage() {
   return (
     <>
       <Section>
-        <SectionHeading title={t('title')} subtitle={t('subtitle')} />
+        <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
         <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <ServiceCard
             title={t('breakfastTitle')}

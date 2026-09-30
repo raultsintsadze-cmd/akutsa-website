@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
@@ -11,7 +12,6 @@ import PhotoGrid from '@/components/sections/PhotoGrid';
 import RtveliPricing from '@/components/sections/RtveliPricing';
 import RtveliVideo from '@/components/sections/RtveliVideo';
 import { TOURS_IMAGES, MASTERCLASS_IMAGES, PICNIC_IMAGES } from '@/lib/images';
-import { SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -20,11 +20,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'rtveli' });
-  return {
-    title: t('metaTitle'),
-    description: t('metaDescription'),
-    alternates: { canonical: `${SITE_URL}/${locale}/rtveli` }
-  };
+  return pageMetadata({ locale, path: '/rtveli', title: t('metaTitle'), description: t('metaDescription'), image: '/og/og-rtveli.jpg' });
 }
 
 // Itinerary in order; `key` is the translation prefix (e.g. 'step1' → step1Time/Title/Desc).

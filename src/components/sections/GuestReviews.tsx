@@ -83,7 +83,8 @@ export default function GuestReviews({
       <div className="relative max-w-3xl mx-auto">
         {/* Cards */}
         <div className="overflow-hidden rounded-2xl">
-          <AnimatePresence mode="wait">
+          {/* initial={false}: first review is visible in the server HTML; later ones slide in. */}
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={current}
               initial={{ opacity: 0, x: 40 }}

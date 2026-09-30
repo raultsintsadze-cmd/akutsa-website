@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
@@ -14,16 +15,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'guesthousePage' });
-  return {
-    title: t('metaTitle'),
-    description: t('metaDescription'),
-    keywords: t('metaKeywords'),
-    openGraph: {
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      type: 'website'
-    }
-  };
+  return pageMetadata({ locale, path: '/guesthouse', title: t('metaTitle'), description: t('metaDescription'), keywords: t('metaKeywords'), image: '/og/og-guesthouse.jpg' });
 }
 
 const ROOMS = [

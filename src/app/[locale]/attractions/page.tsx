@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
@@ -12,7 +13,7 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'attractions' });
-  return { title: t('title'), description: t('subtitle') };
+  return pageMetadata({ locale, path: '/attractions', title: t('title'), description: t('metaDescription') });
 }
 
 const ATTRACTIONS = [
@@ -73,7 +74,7 @@ export default function AttractionsPage() {
 
   return (
     <Section>
-      <SectionHeading title={t('title')} subtitle={t('subtitle')} />
+      <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {ATTRACTIONS.map((a, i) => (
           <AttractionCard
