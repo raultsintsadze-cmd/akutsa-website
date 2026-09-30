@@ -12,7 +12,7 @@ export const OG_LOCALES: Record<Locale, string> = { ka: 'ka_GE', en: 'en_US', ru
 export function buildAlternates(locale: Locale, path: string): NonNullable<Metadata['alternates']> {
   const languages: Record<string, string> = {};
   for (const l of locales) languages[l] = `${SITE_URL}/${l}${path}`;
-  languages['x-default'] = `${SITE_URL}/ka${path}`;
+  languages['x-default'] = `${SITE_URL}/en${path}`;
   return { canonical: `${SITE_URL}/${locale}${path}`, languages };
 }
 
