@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import BookingButtons from '@/components/ui/BookingButtons';
+import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import FadeIn from '@/components/ui/FadeIn';
 import { ROOM_IMAGES, GUESTHOUSE_SHARED_IMAGES } from '@/lib/images';
 import type { Locale } from '@/i18n/config';
@@ -139,6 +140,7 @@ export default function GuesthousePage() {
               {tCommon('fromPrice', { price: PRICE })}
             </p>
             <p className="text-forest/60 text-sm mt-1">{tCommon('perNight')}</p>
+            <FreeBreakfastBadge className="mt-4" />
             <BookingButtons className="mt-6" />
           </div>
         </div>

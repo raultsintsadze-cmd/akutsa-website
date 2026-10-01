@@ -41,7 +41,8 @@
     "gallery": "Gallery",
     "backToHome": "Back to Home",
     "distance": "Distance",
-    "send": "Send Message"
+    "send": "Send Message",
+    "freeBreakfastBadge": "Free breakfast when you book on our website"
   },
   "home": {
     "heroTitle": "A Family Welcome in the Mountains of Adjara",
@@ -108,7 +109,7 @@
     "amenity5": "Free Wi-Fi",
     "amenity6": "Free parking",
     "amenity7": "Mountain & forest views",
-    "amenity8": "Home-cooked breakfast available",
+    "amenity8": "Home-cooked breakfast — free when you book directly on our website",
     "amenity9": "Shared reception"
   },
   "cottagePage": {
@@ -146,7 +147,7 @@
     "title": "Our Services",
     "subtitle": "Everything you need for a comfortable stay",
     "breakfastTitle": "Home-Cooked Breakfast",
-    "breakfastDesc": "Mornings at Akutsa begin with the scent of a home kitchen. Our breakfast is prepared with local, often homegrown ingredients — fresh bread, homemade cheese, eggs, honey, seasonal fruits and vegetables. This isn't just breakfast — it's a flavourful experience.",
+    "breakfastDesc": "Mornings at Akutsa begin with the scent of a home kitchen. Our breakfast is prepared with local, often homegrown ingredients — fresh bread, homemade cheese, eggs, honey, seasonal fruits and vegetables. This isn't just breakfast — it's a flavourful experience. Breakfast is free for all guests who book directly through our website.",
     "toursTitle": "Local Tours",
     "toursDesc": "Discover the hidden treasures of Adjara with our experienced local guides. We offer trips to Makhuntseti Waterfall, Goderdzi Pass, historic fortresses, wine cellars and many more hidden gems. Every tour is tailored to your interests and wishes.",
     "transferTitle": "Transfer Service",
@@ -420,7 +421,7 @@
     "q4": "Is parking available?",
     "a4": "Yes, free on-site parking is available for all guests.",
     "q5": "Is breakfast included in the price?",
-    "a5": "Breakfast is priced separately. You can order from our menu — home-cooked meals made from local ingredients.",
+    "a5": "Breakfast is free for all guests who book directly through our website; otherwise it can be ordered from the menu.",
     "q6": "Is Wi-Fi available?",
     "a6": "Free Wi-Fi is available throughout the property; the password is given at check-in.",
     "q7": "How do I get to the guesthouse?",
@@ -428,7 +429,7 @@
     "q8": "Is it suitable for children?",
     "a8": "Absolutely! Our guesthouse has a warm family atmosphere and children are very welcome.",
     "q9": "How far is the sea?",
-    "a9": "The Batumi seafront is approximately 60 km away — about a 1-hour drive.",
+    "a9": "The Batumi seafront is about 40 km away — roughly a 1-hour drive.",
     "q10": "Can I pay on arrival?",
     "a10": "Yes, cash payment on arrival is accepted. Bank transfer in advance is also an option.",
     "metaDescription": "Staying at Guest House Akutsa in Keda, Adjara: rooms from 90 GEL a night, check-in, breakfast, parking, Wi-Fi and how to get here from Batumi."

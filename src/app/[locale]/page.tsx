@@ -6,6 +6,7 @@ import { pageMetadata } from '@/lib/seo';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import BookingButtons from '@/components/ui/BookingButtons';
+import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import FadeIn from '@/components/ui/FadeIn';
 import { Link } from '@/i18n/navigation';
 import PropertyCard from '@/components/sections/PropertyCard';
@@ -113,6 +114,9 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
           </p>
           <div className="mt-8 flex justify-center">
             <BookingButtons />
+          </div>
+          <div className="mt-5 flex justify-center">
+            <FreeBreakfastBadge onDark />
           </div>
         </FadeIn>
       </HeroParallax>

@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import Section from '@/components/ui/Section';
 import BookingButtons from '@/components/ui/BookingButtons';
 import FadeIn from '@/components/ui/FadeIn';
+import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import PhotoGrid from '@/components/sections/PhotoGrid';
 
 export default function PropertyPageTemplate({
@@ -81,6 +82,7 @@ export default function PropertyPageTemplate({
           <div className="bg-white rounded-2xl p-6 shadow-sm h-fit lg:sticky lg:top-28">
             <p className="text-gold font-medium text-lg">{tCommon('fromPrice', { price })}</p>
             <p className="text-forest/60 text-sm mt-1">{tCommon('perNight')}</p>
+            <FreeBreakfastBadge className="mt-4" />
             <BookingButtons className="mt-6" />
           </div>
         </div>
