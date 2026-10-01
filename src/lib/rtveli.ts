@@ -4,7 +4,10 @@ import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoint
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const NOTION_RTVELI_DATABASE_ID = process.env.NOTION_RTVELI_DATABASE_ID;
 
-const notion = NOTION_TOKEN ? new Client({ auth: NOTION_TOKEN }) : null;
+// cache: 'no-store' — Next.js would otherwise cache the SDK's requests and serve stale seat counts.
+const notion = NOTION_TOKEN
+  ? new Client({ auth: NOTION_TOKEN, fetch: (url, init) => fetch(url, { ...init, cache: 'no-store' }) })
+  : null;
 
 export interface RtveliDate {
   id: string;

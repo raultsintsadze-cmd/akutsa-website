@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import BookingButtons from '@/components/ui/BookingButtons';
+import { Link } from '@/i18n/navigation';
 import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import FadeIn from '@/components/ui/FadeIn';
 import { ROOM_IMAGES, GUESTHOUSE_SHARED_IMAGES } from '@/lib/images';
@@ -20,10 +21,10 @@ export async function generateMetadata({
 }
 
 const ROOMS = [
-  { nameKey: 'room1Name', bedsKey: 'room1Beds', image: ROOM_IMAGES.lemon },
-  { nameKey: 'room2Name', bedsKey: 'room2Beds', image: ROOM_IMAGES.strawberry },
-  { nameKey: 'room3Name', bedsKey: 'room3Beds', image: ROOM_IMAGES.blueberry },
-  { nameKey: 'room4Name', bedsKey: 'room4Beds', image: ROOM_IMAGES.fig }
+  { unit: 'lemon', nameKey: 'room1Name', bedsKey: 'room1Beds', image: ROOM_IMAGES.lemon },
+  { unit: 'strawberry', nameKey: 'room2Name', bedsKey: 'room2Beds', image: ROOM_IMAGES.strawberry },
+  { unit: 'blueberry', nameKey: 'room3Name', bedsKey: 'room3Beds', image: ROOM_IMAGES.blueberry },
+  { unit: 'fig', nameKey: 'room4Name', bedsKey: 'room4Beds', image: ROOM_IMAGES.fig }
 ];
 
 const SHARED_AMENITIES = [
@@ -88,6 +89,12 @@ export default function GuesthousePage() {
                         <p className="mt-2 text-gold font-medium text-sm">
                           {tCommon('fromPrice', { price: PRICE })}
                         </p>
+                        <Link
+                          href={`/book?unit=${room.unit}`}
+                          className="mt-3 inline-block rounded-full bg-forest text-cream px-4 py-2 text-sm font-medium hover:bg-forest/90 transition-colors"
+                        >
+                          {tCommon('bookOnline')}
+                        </Link>
                       </div>
                     </div>
                   </FadeIn>
@@ -141,7 +148,13 @@ export default function GuesthousePage() {
             </p>
             <p className="text-forest/60 text-sm mt-1">{tCommon('perNight')}</p>
             <FreeBreakfastBadge className="mt-4" />
-            <BookingButtons className="mt-6" />
+            <Link
+              href="/book"
+              className="mt-5 block text-center rounded-full bg-forest text-cream px-6 py-3 font-medium hover:bg-forest/90 transition-colors"
+            >
+              {tCommon('bookOnline')}
+            </Link>
+            <BookingButtons className="mt-3" size="sm" />
           </div>
         </div>
       </Section>

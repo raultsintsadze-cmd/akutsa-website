@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 import { DesktopNavDropdown, MobileNavDropdown } from './NavDropdown';
-import { TELEGRAM_URL } from '@/lib/constants';
 
 export default function Header() {
   const t = useTranslations('nav');
@@ -74,14 +73,12 @@ export default function Header() {
 
         <div className="hidden lg:flex items-center gap-5">
           <LanguageSwitcher />
-          <a
-            href={TELEGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/book"
             className="rounded-full bg-forest text-cream px-5 py-2 text-sm font-medium hover:bg-forest/90 transition-colors"
           >
             {t('bookNow')}
-          </a>
+          </Link>
         </div>
 
         <button
@@ -144,14 +141,13 @@ export default function Header() {
 
           <div className="pt-2 flex items-center justify-between">
             <LanguageSwitcher />
-            <a
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
+              onClick={() => setOpen(false)}
               className="rounded-full bg-forest text-cream px-5 py-2 text-sm font-medium"
             >
               {t('bookNow')}
-            </a>
+            </Link>
           </div>
         </div>
       )}

@@ -8,6 +8,14 @@ const nextConfig = {
   async rewrites() {
     return [{ source: '/:key([0-9a-f]{32}).txt', destination: '/api/indexnow-key/:key' }];
   },
+  async headers() {
+    return [
+      {
+        source: '/api/((?!notion-image).*)',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]
+      }
+    ];
+  },
   images: {
     remotePatterns: [
       {

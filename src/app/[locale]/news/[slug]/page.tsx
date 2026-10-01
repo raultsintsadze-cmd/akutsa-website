@@ -132,9 +132,10 @@ export default async function NewsPostPage({ params }: { params: Params }) {
 
   const { post } = resolved;
   const locale = post.locale ?? params.locale;
-  const [t, tNav, fullContent, { set }] = await Promise.all([
+  const [t, tNav, tCommon, fullContent, { set }] = await Promise.all([
     getTranslations({ locale, namespace: 'news' }),
     getTranslations({ locale, namespace: 'nav' }),
+    getTranslations({ locale, namespace: 'common' }),
     getFullPostContent(post.id).catch(() => [] as RichTextItemResponse[]),
     alternateUrls(post)
   ]);
@@ -248,6 +249,12 @@ export default async function NewsPostPage({ params }: { params: Params }) {
           <h2 className="font-serif text-2xl font-semibold">{t('ctaTitle')}</h2>
           <p className="mt-3 text-cream/80 text-sm leading-relaxed max-w-xl mx-auto">{t('ctaText')}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link
+              href={`/${locale}/book`}
+              className="rounded-full bg-gold text-forest px-5 py-2.5 text-sm font-semibold hover:bg-gold/90 transition-colors"
+            >
+              {tCommon('bookOnline')}
+            </Link>
             {stays.map((s) => (
               <Link
                 key={s.href}

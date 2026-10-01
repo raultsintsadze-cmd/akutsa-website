@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { clsx } from 'clsx';
 import FadeIn from '@/components/ui/FadeIn';
+import { UNITS, type UnitId } from '@/lib/booking/units';
+import { todayInTbilisi } from '@/lib/booking/dates';
+
+interface StayAvailability {
+  checkIn: string;
+  checkOut: string;
+  units: { unit: UnitId; available: boolean; bookUrl: string }[];
+}
 
 const INTERESTS = [
   { key: 'nature', labelKey: 'interestNature' },
@@ -20,6 +28,7 @@ const BUDGETS = [
 
 export default function TourGeneratorForm() {
   const t = useTranslations('tourGenerator');
+  const tAll = useTranslations();
   const locale = useLocale();
 
   const [days, setDays] = useState(3);
@@ -29,6 +38,9 @@ export default function TourGeneratorForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [itinerary, setItinerary] = useState<string | null>(null);
+  const [startDate, setStartDate] = useState('');
+  const [question, setQuestion] = useState('');
+  const [availability, setAvailability] = useState<StayAvailability | null>(null);
 
   function toggleInterest(key: string) {
     setInterests((prev) =>
@@ -41,12 +53,21 @@ export default function TourGeneratorForm() {
     setLoading(true);
     setError(null);
     setItinerary(null);
+    setAvailability(null);
 
     try {
       const res = await fetch('/api/generate-tour', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ days, people, interests, budget, locale })
+        body: JSON.stringify({
+          days,
+          people,
+          interests,
+          budget,
+          locale,
+          startDate: startDate || undefined,
+          question: question.trim() || undefined
+        })
       });
 
       const data = await res.json();
@@ -56,6 +77,7 @@ export default function TourGeneratorForm() {
       }
 
       setItinerary(data.itinerary);
+      setAvailability(data.availability ?? null);
     } catch {
       setError(t('errorGeneric'));
     } finally {
@@ -143,6 +165,35 @@ export default function TourGeneratorForm() {
             </div>
           </div>
 
+          <div>
+            <label htmlFor="tour-start-date" className="block text-sm font-medium text-forest mb-1">
+              {t('startDateLabel')}
+            </label>
+            <input
+              id="tour-start-date"
+              type="date"
+              min={todayInTbilisi()}
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="w-full rounded-lg border border-forest/15 px-4 py-2.5 text-sm focus:outline-none focus:border-gold"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="tour-question" className="block text-sm font-medium text-forest mb-1">
+              {t('questionLabel')}
+            </label>
+            <input
+              id="tour-question"
+              type="text"
+              maxLength={300}
+              placeholder={t('questionPlaceholder')}
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              className="w-full rounded-lg border border-forest/15 px-4 py-2.5 text-sm focus:outline-none focus:border-gold"
+            />
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -162,6 +213,31 @@ export default function TourGeneratorForm() {
           {loading && <p className="text-forest/60 text-sm">{t('generating')}</p>}
 
           {error && <p className="text-red-600 text-sm">{error}</p>}
+
+          {availability && (
+            <div className="mb-5 rounded-xl bg-amber-50 border border-amber-200/70 p-4">
+              <h4 className="text-sm font-semibold text-forest">
+                {t('availabilityTitle')} ({availability.checkIn.split('-').reverse().join('.')} –{' '}
+                {availability.checkOut.split('-').reverse().join('.')})
+              </h4>
+              <ul className="mt-2 space-y-1.5 text-sm">
+                {availability.units.map((u) => (
+                  <li key={u.unit} className="flex items-center justify-between gap-3">
+                    <span className={u.available ? 'text-forest' : 'text-forest/40 line-through'}>
+                      {tAll(UNITS[u.unit].nameKey)}
+                    </span>
+                    {u.available ? (
+                      <a href={u.bookUrl} className="shrink-0 text-gold font-semibold hover:text-forest">
+                        {t('availabilityFree')} · {t('bookLink')} →
+                      </a>
+                    ) : (
+                      <span className="shrink-0 text-forest/40">{t('availabilityBooked')}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {itinerary && (
             <>

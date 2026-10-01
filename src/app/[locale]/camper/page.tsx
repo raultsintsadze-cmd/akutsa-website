@@ -18,6 +18,7 @@ export default function CamperPage() {
   return (
     <PropertyPageTemplate
       namespace="camperPage"
+      bookUnit="camper"
       heroImage={CAMPER_IMAGES[0]}
       galleryImages={[CAMPER_IMAGES[1], CAMPER_IMAGES[2], CAMPER_IMAGES[3]]}
       price="100"

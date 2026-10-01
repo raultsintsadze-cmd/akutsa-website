@@ -7,19 +7,25 @@
     "build": "next build",
     "postbuild": "node scripts/indexnow-submit.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@notionhq/client": "^5.22.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
+    "ical.js": "^2.2.1",
     "lucide-react": "^1.21.0",
     "next": "14.2.32",
     "next-intl": "^3.17.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -27,6 +33,7 @@
     "postcss": "^8.4.39",
     "sharp": "^0.35.5",
     "tailwindcss": "^3.4.6",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "vitest": "^3.2.7"
   }
 }

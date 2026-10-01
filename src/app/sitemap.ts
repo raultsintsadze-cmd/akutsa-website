@@ -22,6 +22,7 @@ const paths = [
   '/news',
   '/contact',
   '/faq',
+  '/book',
   '/rtveli'
 ];
 

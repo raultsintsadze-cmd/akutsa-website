@@ -18,6 +18,7 @@ export default function CottagePage() {
   return (
     <PropertyPageTemplate
       namespace="cottagePage"
+      bookUnit="cottage"
       heroImage={COTTAGE_IMAGES[0]}
       galleryImages={[COTTAGE_IMAGES[1], COTTAGE_IMAGES[2]]}
       price="150"

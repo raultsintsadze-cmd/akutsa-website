@@ -3,6 +3,8 @@ import { useTranslations } from 'next-intl';
 import Section from '@/components/ui/Section';
 import BookingButtons from '@/components/ui/BookingButtons';
 import FadeIn from '@/components/ui/FadeIn';
+import { Link } from '@/i18n/navigation';
+import type { UnitId } from '@/lib/booking/units';
 import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import PhotoGrid from '@/components/sections/PhotoGrid';
 
@@ -12,12 +14,15 @@ export default function PropertyPageTemplate({
   galleryImages,
   price,
   rooms,
+  bookUnit,
   amenityCount = 8
 }: {
   namespace: 'guesthousePage' | 'cottagePage' | 'camperPage';
   heroImage: string;
   galleryImages: string[];
   price: string;
+  // Unit preselected on the booking page.
+  bookUnit?: UnitId;
   rooms?: { nameKey: string; descKey: string }[];
   amenityCount?: number;
 }) {
@@ -83,7 +88,13 @@ export default function PropertyPageTemplate({
             <p className="text-gold font-medium text-lg">{tCommon('fromPrice', { price })}</p>
             <p className="text-forest/60 text-sm mt-1">{tCommon('perNight')}</p>
             <FreeBreakfastBadge className="mt-4" />
-            <BookingButtons className="mt-6" />
+            <Link
+              href={bookUnit ? `/book?unit=${bookUnit}` : '/book'}
+              className="mt-5 block text-center rounded-full bg-forest text-cream px-6 py-3 font-medium hover:bg-forest/90 transition-colors"
+            >
+              {tCommon('bookOnline')}
+            </Link>
+            <BookingButtons className="mt-3" size="sm" />
           </div>
         </div>
 
