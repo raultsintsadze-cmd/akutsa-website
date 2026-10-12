@@ -22,7 +22,8 @@ export default function Header() {
     { href: '/', label: t('home') },
     { href: '/guesthouse', label: t('guesthouse') },
     { href: '/cottage', label: t('cottage') },
-    { href: '/camper', label: t('camper') }
+    { href: '/camper', label: t('camper') },
+    { href: '/tours', label: t('tours') }
   ];
 
   const servicesDropdown = [

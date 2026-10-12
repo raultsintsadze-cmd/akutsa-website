@@ -3,6 +3,7 @@ import { isAvailable, suggestAlternatives } from '@/lib/availability';
 import { BOOKING_POLICY, UNITS, UNIT_IDS, isUnitId, type UnitId } from '@/lib/booking/units';
 import { addDays, isDateStr, nightsBetween, todayInTbilisi } from '@/lib/booking/dates';
 import { bookUrl, unitLabel, type Lang } from '@/lib/booking/messages';
+import { TOURS_TOOL, runToursTool, toursPromptBlock } from '@/lib/tours/assistant';
 
 export const runtime = 'nodejs';
 
@@ -254,7 +255,7 @@ export async function POST(req: Request) {
   }
 
   const messages: ChatMessage[] = [
-    { role: 'system', content: SYSTEM_PROMPT + AVAILABILITY_RULES },
+    { role: 'system', content: SYSTEM_PROMPT + AVAILABILITY_RULES + (await toursPromptBlock()) },
     {
       role: 'user',
       content: buildPrompt(
@@ -278,7 +279,7 @@ export async function POST(req: Request) {
           messages,
           temperature: 0.7,
           // No tools on the last round, so it has to answer.
-          ...(round < 3 ? { tools: [AVAILABILITY_TOOL] } : {})
+          ...(round < 3 ? { tools: [AVAILABILITY_TOOL, TOURS_TOOL] } : {})
         })
       });
 
@@ -314,7 +315,9 @@ export async function POST(req: Request) {
         const result =
           call.function?.name === 'check_availability'
             ? await runAvailabilityTool(call.function.arguments ?? '{}', lang)
-            : { error: 'Unknown tool.' };
+            : call.function?.name === 'plan_tours_link'
+              ? await runToursTool(call.function.arguments ?? '{}', lang)
+              : { error: 'Unknown tool.' };
         messages.push({ role: 'tool', tool_call_id: call.id, content: JSON.stringify(result) });
       }
     }

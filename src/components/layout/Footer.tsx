@@ -12,6 +12,7 @@ export default function Footer() {
     { href: '/guesthouse', label: tNav('guesthouse') },
     { href: '/cottage', label: tNav('cottage') },
     { href: '/camper', label: tNav('camper') },
+    { href: '/tours', label: tNav('tours') },
     { href: '/services', label: tNav('services') },
     { href: '/menu', label: tNav('menu') },
     { href: '/gallery', label: tNav('gallery') },

@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AttractionCard from '@/components/sections/AttractionCard';
+import ToursCta from '@/components/sections/tours/ToursCta';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -69,7 +70,7 @@ const ATTRACTIONS = [
   }
 ] as const;
 
-export default function AttractionsPage() {
+export default function AttractionsPage({ params: { locale } }: { params: { locale: Locale } }) {
   const t = useTranslations('attractions');
 
   return (
@@ -87,6 +88,9 @@ export default function AttractionsPage() {
             delay={(i % 3) * 0.1}
           />
         ))}
+      </div>
+      <div className="mt-12">
+        <ToursCta locale={locale} />
       </div>
     </Section>
   );

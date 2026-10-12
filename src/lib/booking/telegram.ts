@@ -44,3 +44,23 @@ export function bookingKeyboard(bookingId: string) {
     ]
   };
 }
+
+// Tour requests use the same webhook with their own prefix: "tr:c:<id>" / "tr:d:<id>".
+export const tourCallback = (action: 'c' | 'd', requestId: string) =>
+  `tr:${action}:${requestId.replace(/-/g, '')}`;
+
+export function parseTourCallback(data: unknown): { action: 'confirm' | 'decline'; requestId: string } | null {
+  const match = typeof data === 'string' ? data.match(/^tr:([cd]):([0-9a-f]{32})$/) : null;
+  return match ? { action: match[1] === 'c' ? 'confirm' : 'decline', requestId: match[2] } : null;
+}
+
+export function tourKeyboard(requestId: string) {
+  return {
+    inline_keyboard: [
+      [
+        { text: '✅ დადასტურება', callback_data: tourCallback('c', requestId) },
+        { text: '❌ უარყოფა', callback_data: tourCallback('d', requestId) }
+      ]
+    ]
+  };
+}

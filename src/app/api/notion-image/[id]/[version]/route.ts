@@ -1,11 +1,12 @@
 import { getRawImageUrl, isNewsDatabasePage, isPublished, retrievePage } from '@/lib/notion';
+import { isActiveTourPage } from '@/lib/tours/catalog';
 
 export const runtime = 'nodejs';
 
 // Serves a news post's cover from a stable URL. Notion's file URLs are signed and expire after
 // ~1 hour, so each cache miss asks Notion for a fresh URL; the CDN then keeps the bytes.
 // `version` is the post's last-edit timestamp: an edited post gets a new URL, so caching can
-// be immutable. Only covers of published posts in the news database are served.
+// be immutable. Only covers of published news posts and photos of active tours are served.
 export async function GET(
   _req: Request,
   { params }: { params: { id: string; version: string } }
@@ -15,7 +16,9 @@ export async function GET(
   }
 
   const page = await retrievePage(params.id);
-  const src = page && isNewsDatabasePage(page) && isPublished(page) ? getRawImageUrl(page) : null;
+  const src = page && ((isNewsDatabasePage(page) && isPublished(page)) || isActiveTourPage(page))
+      ? getRawImageUrl(page)
+      : null;
   if (!src) return new Response('Not found', { status: 404 });
 
   const upstream = await fetch(src, { cache: 'no-store' });

@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { locales } from '@/i18n/config';
 import { SITE_URL, buildAlternates } from '@/lib/seo';
 import { getAllPosts, type NewsPost } from '@/lib/notion';
+import { getTours } from '@/lib/tours/catalog';
 
 // Regenerate hourly so new Notion posts show up without a redeploy.
 export const revalidate = 3600;
@@ -23,6 +24,8 @@ const paths = [
   '/contact',
   '/faq',
   '/book',
+  '/tours',
+  '/tours/plan',
   '/rtveli'
 ];
 
@@ -48,5 +51,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return { ...entry, alternates: { languages } };
   });
 
-  return [...staticEntries, ...postEntries];
+  const tourEntries = (await getTours()).flatMap((tour) =>
+    locales.map((locale) => ({
+      url: `${SITE_URL}/${locale}/tours/${tour.slug}`,
+      lastModified: STATIC_LAST_MODIFIED,
+      alternates: { languages: buildAlternates(locale, `/tours/${tour.slug}`).languages as Record<string, string> }
+    }))
+  );
+
+  return [...staticEntries, ...tourEntries, ...postEntries];
 }

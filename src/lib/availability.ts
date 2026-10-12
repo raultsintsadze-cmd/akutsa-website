@@ -37,7 +37,8 @@ function icalUrls(unit: UnitId): string[] {
 async function fetchIcal(url: string, fresh: boolean): Promise<Range[]> {
   try {
     const res = await fetch(url, {
-      ...(fresh ? { cache: 'no-store' as const } : { next: { revalidate: 600 } }),
+      // BOOKING_CACHE=off (end-to-end tests) also bypasses the 10-minute feed cache.
+      ...(fresh || process.env.BOOKING_CACHE === 'off' ? { cache: 'no-store' as const } : { next: { revalidate: 600 } }),
       signal: AbortSignal.timeout(8000)
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

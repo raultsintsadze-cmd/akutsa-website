@@ -8,7 +8,14 @@ import {
   whatsappLink,
   type Lang
 } from '@/lib/booking/messages';
-import { OWNER_CHAT_ID, bookingKeyboard, parseBookingCallback, telegram } from '@/lib/booking/telegram';
+import {
+  OWNER_CHAT_ID,
+  bookingKeyboard,
+  parseBookingCallback,
+  parseTourCallback,
+  telegram
+} from '@/lib/booking/telegram';
+import { handleTourDecision } from '@/lib/tours/webhook';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -27,7 +34,7 @@ interface CallbackQuery {
   message?: { message_id: number; chat: { id: number }; text?: string };
 }
 
-// Telegram webhook for the ✅ Confirm / ❌ Decline buttons on booking requests.
+// Telegram webhook for the ✅ Confirm / ❌ Decline buttons on booking and tour requests.
 // Telegram sends the secret set in setWebhook as X-Telegram-Bot-Api-Secret-Token.
 // Any other kind of update is acknowledged and ignored, so nothing else the bot does changes.
 export async function POST(req: Request) {
@@ -39,7 +46,8 @@ export async function POST(req: Request) {
   const update = (await req.json().catch(() => null)) as { callback_query?: CallbackQuery } | null;
   const query = update?.callback_query;
   const parsed = parseBookingCallback(query?.data);
-  if (!query || !parsed) return NextResponse.json({ ok: true });
+  const tour = parseTourCallback(query?.data);
+  if (!query || (!parsed && !tour)) return NextResponse.json({ ok: true });
 
   const answer = (text: string) =>
     telegram('answerCallbackQuery', { callback_query_id: query.id, text, show_alert: false });
@@ -50,6 +58,17 @@ export async function POST(req: Request) {
     await answer('⛔');
     return NextResponse.json({ ok: true });
   }
+
+  if (tour) {
+    try {
+      await handleTourDecision(tour.action, tour.requestId, chatId, query.message, answer);
+    } catch (err) {
+      console.error('Telegram tour action failed:', err);
+      await answer('შეცდომა — სცადეთ თავიდან');
+    }
+    return NextResponse.json({ ok: true });
+  }
+  if (!parsed) return NextResponse.json({ ok: true });
 
   try {
     const booking = await getBooking(parsed.bookingId);

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
+import ToursCta, { tourSlugsForText } from '@/components/sections/tours/ToursCta';
 import { OG_DEFAULT_IMAGE, OG_LOCALES, SITE_URL } from '@/lib/seo';
 import { WHATSAPP_URL } from '@/lib/constants';
 import {
@@ -274,6 +275,11 @@ export default async function NewsPostPage({ params }: { params: Params }) {
             </a>
           </div>
         </aside>
+
+        {/* Matching tours for posts about fishing, mushrooms, wine or honey. */}
+        <div className="mt-8">
+          <ToursCta locale={locale} slugs={tourSlugsForText(`${post.title} ${content.map((c) => c.plain_text).join(' ')}`)} />
+        </div>
       </div>
     </Section>
   );

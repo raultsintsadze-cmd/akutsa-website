@@ -9,6 +9,7 @@ import FadeIn from '@/components/ui/FadeIn';
 import PhotoGrid from '@/components/sections/PhotoGrid';
 import TransferSection from '@/components/sections/TransferSection';
 import ServiceCard from '@/components/sections/ServiceCard';
+import ToursCta from '@/components/sections/tours/ToursCta';
 import { BREAKFAST_IMAGES, TOURS_IMAGES, PICNIC_IMAGES, MASTERCLASS_IMAGES, PRODUCT_IMAGES, TRANSFER_IMAGES } from '@/lib/images';
 import type { Locale } from '@/i18n/config';
 
@@ -21,7 +22,7 @@ export async function generateMetadata({
   return pageMetadata({ locale, path: '/services', title: t('title'), description: t('metaDescription') });
 }
 
-export default function ServicesPage() {
+export default function ServicesPage({ params: { locale } }: { params: { locale: Locale } }) {
   const t = useTranslations('services');
   const tExp = useTranslations('experiences');
 
@@ -187,6 +188,10 @@ export default function ServicesPage() {
             </FadeIn>
           ))}
         </div>
+      </Section>
+
+      <Section>
+        <ToursCta locale={locale} />
       </Section>
     </>
   );
