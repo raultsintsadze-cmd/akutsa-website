@@ -21,7 +21,10 @@
     "contact": "Contact",
     "faq": "FAQ",
     "bookNow": "Book Now",
-    "tours": "Tours"
+    "tours": "Tours",
+    "stay": "Stay",
+    "checkAvailability": "Check availability / Book",
+    "book": "Book"
   },
   "footer": {
     "tagline": "Family hospitality in the heart of Adjara's mountains.",

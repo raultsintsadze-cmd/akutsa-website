@@ -2,13 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { clsx } from 'clsx';
 import { Link } from '@/i18n/navigation';
+import { GUESTHOUSE_SHARED_IMAGES, COTTAGE_IMAGES, CAMPER_IMAGES } from '@/lib/images';
 import LanguageSwitcher from './LanguageSwitcher';
-import { DesktopNavDropdown, MobileNavDropdown } from './NavDropdown';
+import { DesktopNavDropdown, MobileNavDropdown, type DropdownItem } from './NavDropdown';
+
+const linkClass =
+  'whitespace-nowrap text-forest/80 hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream rounded-md';
 
 export default function Header() {
   const t = useTranslations('nav');
   const tNews = useTranslations('news');
+  const tProps = useTranslations('properties');
+  const tCommon = useTranslations('common');
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -18,25 +25,33 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  const links = [
-    { href: '/', label: t('home') },
-    { href: '/guesthouse', label: t('guesthouse') },
-    { href: '/cottage', label: t('cottage') },
-    { href: '/camper', label: t('camper') },
-    { href: '/tours', label: t('tours') }
+  // Esc closes the mobile menu.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  // Prices come from the same messages the property cards use.
+  const stayDropdown: DropdownItem[] = [
+    { href: '/guesthouse', label: t('guesthouse'), image: GUESTHOUSE_SHARED_IMAGES.terrace, sub: tCommon('fromPrice', { price: tProps('guesthouse.price') }) },
+    { href: '/cottage', label: tProps('cottage.name'), image: COTTAGE_IMAGES[0], sub: tCommon('fromPrice', { price: tProps('cottage.price') }) },
+    { href: '/camper', label: t('camper'), image: CAMPER_IMAGES[0], sub: tCommon('fromPrice', { price: tProps('camper.price') }) },
+    { href: '/book', label: `📅 ${t('checkAvailability')}`, highlight: true }
   ];
 
-  const servicesDropdown = [
+  const servicesDropdown: DropdownItem[] = [
     { href: '/services', label: t('services') },
     { href: '/menu', label: t('menu') }
   ];
 
-  const exploreDropdown = [
+  const exploreDropdown: DropdownItem[] = [
     { href: '/gallery', label: t('exploreGallery') },
     { href: '/attractions', label: t('attractions') }
   ];
 
-  const newsDropdown = [
+  const newsDropdown: DropdownItem[] = [
     { href: '/news', label: tNews('dropdownAll') },
     { href: { pathname: '/news', query: { category: 'guests' } }, label: tNews('dropdownGuests') },
     { href: { pathname: '/news', query: { category: 'events' } }, label: tNews('dropdownEvents') }
@@ -44,48 +59,45 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 border-b transition-all duration-300 ${scrolled ? 'bg-cream/95 backdrop-blur-md shadow-sm border-forest/20' : 'bg-cream/90 backdrop-blur-sm border-forest/10'}`}>
-      <div className="container-px max-w-7xl mx-auto flex items-center justify-between h-20">
-        <Link href="/" className="font-serif text-xl md:text-2xl text-forest font-semibold">
+      <div className="container-px max-w-7xl mx-auto flex items-center justify-between gap-6 h-20">
+        <Link href="/" className="shrink-0 font-serif text-xl md:text-2xl text-forest font-semibold">
           Akutsa
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-forest/80 hover:text-gold transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-3.5 xl:gap-6 text-[13px] xl:text-sm font-medium ml-2 xl:ml-6 mr-auto">
+          {/* 1024–1279 px: the logo is the home link, so "Home" is shown only from xl up. */}
+          <Link href="/" className={clsx(linkClass, 'hidden xl:inline')}>
+            {t('home')}
+          </Link>
+          <DesktopNavDropdown label={t('stay')} items={stayDropdown} wide />
+          <Link href="/tours" className={linkClass}>
+            {t('tours')}
+          </Link>
           <DesktopNavDropdown label={t('services')} items={servicesDropdown} />
           <DesktopNavDropdown label={t('explore')} items={exploreDropdown} />
           <DesktopNavDropdown label={t('news')} items={newsDropdown} />
-
-          <Link href="/contact" className="text-forest/80 hover:text-gold transition-colors">
+          <Link href="/contact" className={linkClass}>
             {t('contact')}
-          </Link>
-          <Link href="/faq" className="text-forest/80 hover:text-gold transition-colors">
-            {t('faq')}
           </Link>
         </nav>
 
-        <div className="hidden lg:flex items-center gap-5">
+        <div className="hidden lg:flex items-center gap-3 xl:gap-5 shrink-0">
           <LanguageSwitcher />
           <Link
             href="/book"
-            className="rounded-full bg-forest text-cream px-5 py-2 text-sm font-medium hover:bg-forest/90 transition-colors"
+            className="whitespace-nowrap rounded-full bg-gold text-forest px-4 xl:px-5 py-2 text-sm font-semibold shadow-sm hover:bg-gold/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2"
           >
-            {t('bookNow')}
+            {t('book')}
           </Link>
         </div>
 
         <button
+          type="button"
           className="lg:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           <span className="block w-6 h-[2px] bg-forest" />
           <span className="block w-6 h-[2px] bg-forest" />
@@ -94,50 +106,19 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden bg-cream border-t border-forest/10 px-6 py-6 flex flex-col gap-4">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="text-forest/80 hover:text-gold transition-colors text-base"
-            >
-              {link.label}
-            </Link>
-          ))}
-
-          <MobileNavDropdown
-            label={t('services')}
-            items={servicesDropdown}
-            onNavigate={() => setOpen(false)}
-          />
-
-          <MobileNavDropdown
-            label={t('explore')}
-            items={exploreDropdown}
-            onNavigate={() => setOpen(false)}
-          />
-
-          <MobileNavDropdown
-            label={t('news')}
-            items={newsDropdown}
-            onNavigate={() => setOpen(false)}
-          />
-
-          <Link
-            href="/contact"
-            onClick={() => setOpen(false)}
-            className="text-forest/80 hover:text-gold transition-colors text-base"
-          >
-            {t('contact')}
+        <nav id="mobile-menu" aria-label="Main" className="lg:hidden bg-cream border-t border-forest/10 px-6 py-6 flex flex-col gap-4 max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <Link href="/" onClick={() => setOpen(false)} className={clsx(linkClass, 'text-base')}>
+            {t('home')}
           </Link>
-
-          <Link
-            href="/faq"
-            onClick={() => setOpen(false)}
-            className="text-forest/80 hover:text-gold transition-colors text-base"
-          >
-            {t('faq')}
+          <MobileNavDropdown label={t('stay')} items={stayDropdown} onNavigate={() => setOpen(false)} />
+          <Link href="/tours" onClick={() => setOpen(false)} className={clsx(linkClass, 'text-base')}>
+            {t('tours')}
+          </Link>
+          <MobileNavDropdown label={t('services')} items={servicesDropdown} onNavigate={() => setOpen(false)} />
+          <MobileNavDropdown label={t('explore')} items={exploreDropdown} onNavigate={() => setOpen(false)} />
+          <MobileNavDropdown label={t('news')} items={newsDropdown} onNavigate={() => setOpen(false)} />
+          <Link href="/contact" onClick={() => setOpen(false)} className={clsx(linkClass, 'text-base')}>
+            {t('contact')}
           </Link>
 
           <div className="pt-2 flex items-center justify-between">
@@ -145,12 +126,12 @@ export default function Header() {
             <Link
               href="/book"
               onClick={() => setOpen(false)}
-              className="rounded-full bg-forest text-cream px-5 py-2 text-sm font-medium"
+              className="rounded-full bg-gold text-forest px-5 py-2 text-sm font-semibold"
             >
               {t('bookNow')}
             </Link>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );
