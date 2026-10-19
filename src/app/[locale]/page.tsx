@@ -17,6 +17,11 @@ import GalleryCarousel from '@/components/sections/GalleryCarousel';
 import HeroParallax from '@/components/sections/HeroParallax';
 import StatsCounter from '@/components/sections/StatsCounter';
 import RtveliBanner from '@/components/sections/RtveliBanner';
+import { RtveliPromoStrip } from '@/components/sections/RtveliPromo';
+import { isPromoActive } from '@/lib/rtveli-promo';
+
+// Re-render at least every 10 minutes so the Rtveli promo strip appears/disappears on time.
+export const revalidate = 600;
 import {
   GUESTHOUSE_SHARED_IMAGES,
   COTTAGE_IMAGES,
@@ -122,7 +127,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
       </HeroParallax>
 
       <WeatherCurrencyWidget locale={locale} />
-      <RtveliBanner />
+      {isPromoActive() ? <RtveliPromoStrip locale={locale} /> : <RtveliBanner />}
 
       {/* Intro */}
       <Section>

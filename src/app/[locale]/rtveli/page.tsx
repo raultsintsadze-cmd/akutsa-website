@@ -11,6 +11,11 @@ import RtveliBooking from '@/components/sections/RtveliBooking';
 import PhotoGrid from '@/components/sections/PhotoGrid';
 import RtveliPricing from '@/components/sections/RtveliPricing';
 import RtveliVideo from '@/components/sections/RtveliVideo';
+import { RtveliPromoBanner } from '@/components/sections/RtveliPromo';
+import { isPromoActive } from '@/lib/rtveli-promo';
+
+// Re-render at least every 10 minutes so the promo appears/disappears on time without a deploy.
+export const revalidate = 600;
 import { TOURS_IMAGES, MASTERCLASS_IMAGES, PICNIC_IMAGES } from '@/lib/images';
 import type { Locale } from '@/i18n/config';
 
@@ -85,8 +90,9 @@ function GrapeDivider() {
   );
 }
 
-export default function RtveliPage() {
+export default function RtveliPage({ params: { locale } }: { params: { locale: Locale } }) {
   const t = useTranslations('rtveli');
+  const promoActive = isPromoActive();
   const tCommon = useTranslations('common');
 
   const steps = STEPS.map((s) => ({
@@ -98,6 +104,8 @@ export default function RtveliPage() {
 
   return (
     <>
+      {promoActive && <RtveliPromoBanner locale={locale} />}
+
       {/* ── Autumn Hero ──────────────────────────────────────── */}
       <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
         <Image
@@ -190,7 +198,7 @@ export default function RtveliPage() {
         </div>
 
         <FadeIn>
-          <RtveliPricing className="max-w-2xl mx-auto mt-4" />
+          <RtveliPricing className="max-w-2xl mx-auto mt-4" promo={promoActive} />
         </FadeIn>
       </Section>
 
@@ -206,7 +214,7 @@ export default function RtveliPage() {
       <RtveliVideo src="/videos/rtveli-2026.mp4" bookingAnchor="book" />
 
       {/* ── Booking ───────────────────────────────────────────── */}
-      <RtveliBooking id="book" />
+      <RtveliBooking id="book" promoActive={promoActive} />
 
       {/* ── Overnight option ──────────────────────────────────── */}
       <Section>

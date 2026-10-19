@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { TELEGRAM_ORDER_CHAT_ID, RTVELI_PRICES, type RtveliTransport } from '@/lib/constants';
+import { rtveliPrice } from '@/lib/rtveli-promo';
 
 export const runtime = 'nodejs';
 
@@ -45,7 +46,9 @@ export async function POST(req: Request) {
   });
 
   // Computed here, not taken from the client.
-  const total = RTVELI_PRICES[transport] * seats;
+  const unit = rtveliPrice(transport, date);
+  const total = unit * seats;
+  const promo = unit !== RTVELI_PRICES[transport];
 
   const text = [
     '🍇 New Rtveli Booking Request',
@@ -56,7 +59,7 @@ export async function POST(req: Request) {
     ...(transport === 'with' ? [`🚌 Vehicle: ${vehicle || 'Not specified'}`] : []),
     `👤 Name: ${name}`,
     `📱 Contact: ${contact}`,
-    `💰 Total: ${total} GEL`
+    `💰 Total: ${total} GEL${promo ? ` (promo: ${unit} × ${seats}, normally ${RTVELI_PRICES[transport]})` : ''}`
   ].join('\n');
 
   try {

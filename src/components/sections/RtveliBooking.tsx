@@ -6,6 +6,7 @@ import FadeIn from '@/components/ui/FadeIn';
 import Section from '@/components/ui/Section';
 import RtveliPricing from '@/components/sections/RtveliPricing';
 import { RTVELI_PRICES, type RtveliTransport } from '@/lib/constants';
+import { RTVELI_PROMO } from '@/lib/rtveli-promo';
 
 const MAX_SEATS = 6;
 
@@ -18,7 +19,7 @@ interface RtveliDate {
   seatsRemaining: number;
 }
 
-export default function RtveliBooking({ id }: { id?: string }) {
+export default function RtveliBooking({ id, promoActive = false }: { id?: string; promoActive?: boolean }) {
   const t = useTranslations('rtveli');
   const locale = useLocale();
 
@@ -33,7 +34,14 @@ export default function RtveliBooking({ id }: { id?: string }) {
   useEffect(() => {
     fetch('/api/rtveli-dates')
       .then((res) => res.json())
-      .then((data) => setDates(data.dates ?? []))
+      .then((data: { dates?: RtveliDate[] }) => {
+        const list = data.dates ?? [];
+        setDates(list);
+        // ?date=YYYY-MM-DD (promo banner button) preselects that date.
+        const wanted = new URLSearchParams(window.location.search).get('date');
+        const match = list.find((d) => d.date === wanted);
+        if (match) setSelectedId(match.id);
+      })
       .catch(() => setDates([]));
   }, []);
 
@@ -42,7 +50,9 @@ export default function RtveliBooking({ id }: { id?: string }) {
   const vanFull = selected !== null && selected.seatsRemaining === 0;
   const maxSeats =
     selected && transport === 'with' ? Math.min(MAX_SEATS, selected.seatsRemaining) : MAX_SEATS;
-  const total = transport ? RTVELI_PRICES[transport] * seats : null;
+  const isPromoDate = promoActive && selected?.date === RTVELI_PROMO.date;
+  const unitPrice = (value: RtveliTransport) => (isPromoDate ? RTVELI_PROMO.prices[value] : RTVELI_PRICES[value]);
+  const total = transport ? unitPrice(transport) * seats : null;
 
   function chooseDate(d: RtveliDate) {
     setSelectedId(d.id);
@@ -194,8 +204,9 @@ export default function RtveliBooking({ id }: { id?: string }) {
                             className="accent-amber-700"
                           />
                           {t(value === 'with' ? 'transportWith' : 'transportWithout', {
-                            price: RTVELI_PRICES[value]
+                            price: unitPrice(value)
                           })}
+                          {isPromoDate && <s className="text-forest/40 text-xs">{RTVELI_PRICES[value]}</s>}
                         </label>
                       );
                     })}
@@ -253,7 +264,7 @@ export default function RtveliBooking({ id }: { id?: string }) {
                     {total !== null ? `${total} GEL` : '—'}
                     {total !== null && seats > 1 && (
                       <span className="ml-2 font-sans text-xs text-forest/50 font-normal">
-                        {RTVELI_PRICES[transport!]} × {seats}
+                        {unitPrice(transport!)} × {seats}
                       </span>
                     )}
                   </span>
@@ -276,7 +287,7 @@ export default function RtveliBooking({ id }: { id?: string }) {
         )}
         </div>
 
-        <RtveliPricing className="lg:col-span-2 lg:sticky lg:top-28" />
+        <RtveliPricing className="lg:col-span-2 lg:sticky lg:top-28" promo={promoActive} />
       </div>
     </Section>
   );
