@@ -11,7 +11,7 @@ export default function StickyTourButton() {
   if (hideFloatingButtons) return null;
 
   return (
-    <div className="fixed bottom-20 sm:bottom-5 left-5 z-50 group [html[data-trip-bar]_&]:bottom-40 sm:[html[data-trip-bar]_&]:bottom-28">
+    <div className="hidden md:block fixed bottom-5 left-5 z-50 group [html[data-trip-bar]_&]:bottom-28">
       <Link
         href="/tour-planner"
         aria-label={t('floatingLabel')}

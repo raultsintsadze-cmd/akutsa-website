@@ -41,7 +41,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
       data-tour={tour.slug}
       className={clsx('bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col', offSeason && 'opacity-60 grayscale')}
     >
-      <Link href={`/tours/${tour.slug}`} className="block relative h-44 bg-forest/10">
+      <Link href={`/tours/${tour.slug}`} aria-label={tour.name[locale]} className="block relative h-44 bg-forest/10">
         {tour.image ? (
           <Image src={tour.image} alt={tour.name[locale]} fill sizes="(max-width: 640px) 100vw, 400px" className="object-cover" />
         ) : (

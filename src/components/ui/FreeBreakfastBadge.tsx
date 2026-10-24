@@ -15,7 +15,7 @@ export default function FreeBreakfastBadge({
       className={clsx(
         'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold leading-tight',
         onDark
-          ? 'bg-gold text-forest shadow-md'
+          ? 'bg-gold text-ink shadow-md'
           : 'bg-gold/15 text-forest border border-gold/40',
         className
       )}

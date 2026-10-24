@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Montserrat, Noto_Sans_Georgian, Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -15,8 +15,10 @@ import { SITE_URL } from '@/lib/constants';
 import { OG_DEFAULT_IMAGE, OG_LOCALES } from '@/lib/seo';
 import '../globals.css';
 
-const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' });
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
+// Montserrat for Latin/Cyrillic body text, Noto Sans Georgian for Georgian, Playfair for headings.
+const montserrat = Montserrat({ subsets: ['latin', 'cyrillic'], variable: '--font-montserrat', display: 'swap' });
+const georgian = Noto_Sans_Georgian({ subsets: ['georgian'], variable: '--font-georgian', display: 'swap', preload: false });
+const playfair = Playfair_Display({ subsets: ['latin', 'cyrillic'], variable: '--font-playfair', display: 'swap', preload: false });
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -64,7 +66,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+    <html lang={locale} className={`${montserrat.variable} ${georgian.variable} ${playfair.variable}`}>
       <body className="font-sans bg-cream text-forest antialiased">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-SGF4Q9SSR7"

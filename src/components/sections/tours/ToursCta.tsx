@@ -24,7 +24,7 @@ export default async function ToursCta({ locale, slugs }: { locale: Locale; slug
             {tour.name[locale]}
           </Link>
         ))}
-        <Link href={`/${locale}/tours`} className="rounded-full bg-gold text-forest px-4 py-2 text-sm font-semibold">
+        <Link href={`/${locale}/tours`} className="rounded-full bg-gold text-ink px-4 py-2 text-sm font-semibold">
           {t('backToTours')} →
         </Link>
       </div>

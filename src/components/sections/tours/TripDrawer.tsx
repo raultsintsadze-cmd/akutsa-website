@@ -24,7 +24,7 @@ export default function TripDrawer() {
   if (!visible) return null;
 
   return (
-    <div className="fixed left-0 right-0 z-40 bottom-[calc(56px+env(safe-area-inset-bottom))] sm:bottom-4 px-3 pointer-events-none">
+    <div className="fixed left-0 right-0 z-40 bottom-[calc(var(--mobile-bar-h)+env(safe-area-inset-bottom)+8px)] md:bottom-4 px-3 pointer-events-none">
       <div className="max-w-xl mx-auto bg-forest text-cream rounded-2xl shadow-xl pointer-events-auto">
         {open && (
           <ul id="trip-drawer-list" className="px-4 pt-3 space-y-2 text-sm max-h-60 overflow-y-auto">
@@ -55,7 +55,7 @@ export default function TripDrawer() {
           >
             🧭 {t('myTrip', { count: trip.items.length })} {open ? '▾' : '▴'}
           </button>
-          <Link href={planHref} className="rounded-full bg-gold text-forest px-4 py-2.5 text-sm font-semibold">
+          <Link href={planHref} className="rounded-full bg-gold text-ink px-4 py-2.5 text-sm font-semibold">
             {t('openPlanner')}
           </Link>
         </div>

@@ -5,11 +5,9 @@ import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
-import BookingButtons from '@/components/ui/BookingButtons';
 import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import FadeIn from '@/components/ui/FadeIn';
 import { Link } from '@/i18n/navigation';
-import PropertyCard from '@/components/sections/PropertyCard';
 import GuestReviews from '@/components/sections/GuestReviews';
 import AttractionCard from '@/components/sections/AttractionCard';
 import WeatherCurrencyWidget from '@/components/sections/WeatherCurrencyWidget';
@@ -17,6 +15,8 @@ import GalleryCarousel from '@/components/sections/GalleryCarousel';
 import HeroParallax from '@/components/sections/HeroParallax';
 import StatsCounter from '@/components/sections/StatsCounter';
 import RtveliBanner from '@/components/sections/RtveliBanner';
+import DesktopOnly from '@/components/ui/DesktopOnly';
+import { StayCards, WhyAkutsa, ToursCarousel, ContactMap } from '@/components/sections/home/HomeSections';
 import { RtveliPromoStrip } from '@/components/sections/RtveliPromo';
 import { isPromoActive } from '@/lib/rtveli-promo';
 
@@ -24,14 +24,14 @@ import { isPromoActive } from '@/lib/rtveli-promo';
 export const revalidate = 600;
 import {
   GUESTHOUSE_SHARED_IMAGES,
-  COTTAGE_IMAGES,
-  CAMPER_IMAGES,
+
+
   PICNIC_IMAGES,
   MASTERCLASS_IMAGES,
   PRODUCT_IMAGES,
   NATURE_IMAGES
 } from '@/lib/images';
-import { SOCIAL_LINKS, GOOGLE_MAPS_URL, SITE_URL } from '@/lib/constants';
+import { SOCIAL_LINKS, GOOGLE_MAPS_URL, SITE_URL, WHATSAPP_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -76,7 +76,6 @@ const REAL_REVIEWS = [
 
 export default function HomePage({ params: { locale } }: { params: { locale: Locale } }) {
   const t = useTranslations('home');
-  const tProps = useTranslations('properties');
   const tAttr = useTranslations('attractions');
   const tMeta = useTranslations('meta');
   const tExp = useTranslations('experiences');
@@ -111,14 +110,28 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
       {/* Hero with parallax */}
       <HeroParallax src={GUESTHOUSE_SHARED_IMAGES.terrace} alt="Guest House Akutsa" video="/videos/hero.mp4" poster="/videos/hero-poster.jpg">
         <FadeIn>
-          <h1 className="font-serif text-4xl md:text-6xl font-semibold leading-tight">
+          <h1 className="font-serif font-semibold leading-[1.12] text-[clamp(1.75rem,7.4vw,3.75rem)] text-balance">
             {t('heroTitle')}
           </h1>
-          <p className="mt-6 text-base md:text-lg text-cream/90">
-            {t('heroSubtitle')}
+          <p className="mt-4 md:mt-6 text-base md:text-lg text-cream/90">
+            <span className="md:hidden">{t('heroSubtitleShort')}</span>
+            <span className="hidden md:inline">{t('heroSubtitle')}</span>
           </p>
-          <div className="mt-8 flex justify-center">
-            <BookingButtons />
+          <div className="mt-6 md:mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/book"
+              className="inline-flex items-center justify-center min-h-12 px-7 rounded-pill bg-gold text-ink font-semibold hover:bg-gold/90 transition-colors"
+            >
+              {t('ctaBook')}
+            </Link>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center min-h-12 px-7 rounded-pill border border-cream/60 text-cream font-semibold hover:bg-cream/10 transition-colors"
+            >
+              WhatsApp
+            </a>
           </div>
           <div className="mt-5 flex justify-center">
             <FreeBreakfastBadge onDark />
@@ -126,9 +139,41 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
         </FadeIn>
       </HeroParallax>
 
-      <WeatherCurrencyWidget locale={locale} />
+      <DesktopOnly>
+        <WeatherCurrencyWidget locale={locale} />
+      </DesktopOnly>
+
+      {/* Stays: swipe row on phones */}
+      <Section className="bg-white">
+        <SectionHeading title={t('stayOptionsTitle')} subtitle={t('stayOptionsSubtitle')} />
+        <StayCards />
+      </Section>
+
+      <Section>
+        <WhyAkutsa />
+      </Section>
+
+      <Section className="bg-white">
+        <ToursCarousel locale={locale} />
+      </Section>
+
+      {/* Current promo */}
       {isPromoActive() ? <RtveliPromoStrip locale={locale} /> : <RtveliBanner />}
 
+      {/* Reviews */}
+      <Section className="bg-white">
+        <SectionHeading title={t('reviewsTitle')} />
+        <GuestReviews
+          reviews={REAL_REVIEWS}
+          seeAllLabel={t('reviewsSeeAll')}
+          bookingUrl={SOCIAL_LINKS.booking}
+          googleUrl={GOOGLE_MAPS_URL}
+        />
+      </Section>
+
+
+      {/* Desktop extras (the phone layout stays short and focused) */}
+      <div className="hidden md:block">
       {/* Intro */}
       <Section>
         <FadeIn>
@@ -154,36 +199,6 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
             <p className="mt-5 text-forest/80 leading-relaxed">{t('introClosing')}</p>
           </div>
         </FadeIn>
-      </Section>
-
-      {/* Stay options */}
-      <Section className="bg-white">
-        <SectionHeading title={t('stayOptionsTitle')} subtitle={t('stayOptionsSubtitle')} />
-        <div className="grid md:grid-cols-3 gap-8">
-          <PropertyCard
-            href="/guesthouse"
-            image={GUESTHOUSE_SHARED_IMAGES.terrace}
-            name={tProps('guesthouse.name')}
-            description={tProps('guesthouse.short')}
-            price={tProps('guesthouse.price')}
-          />
-          <PropertyCard
-            href="/cottage"
-            image={COTTAGE_IMAGES[0]}
-            name={tProps('cottage.name')}
-            description={tProps('cottage.short')}
-            price={tProps('cottage.price')}
-            delay={0.1}
-          />
-          <PropertyCard
-            href="/camper"
-            image={CAMPER_IMAGES[0]}
-            name={tProps('camper.name')}
-            description={tProps('camper.short')}
-            price={tProps('camper.price')}
-            delay={0.2}
-          />
-        </div>
       </Section>
 
       {/* Experiences & Local Products preview */}
@@ -306,17 +321,6 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
         </div>
       </Section>
 
-      {/* Reviews */}
-      <Section className="bg-white">
-        <SectionHeading title={t('reviewsTitle')} />
-        <GuestReviews
-          reviews={REAL_REVIEWS}
-          seeAllLabel={t('reviewsSeeAll')}
-          bookingUrl={SOCIAL_LINKS.booking}
-          googleUrl={GOOGLE_MAPS_URL}
-        />
-      </Section>
-
       {/* Gallery carousel */}
       <Section>
         <SectionHeading title={t('instagramTitle')} />
@@ -347,16 +351,13 @@ export default function HomePage({ params: { locale } }: { params: { locale: Loc
         </FadeIn>
       </Section>
 
-      {/* CTA */}
-      <Section className="bg-forest text-cream text-center">
-        <FadeIn>
-          <h2 className="font-serif text-3xl md:text-4xl font-semibold">{t('ctaTitle')}</h2>
-          <p className="mt-4 text-cream/80 max-w-xl mx-auto">{t('ctaSubtitle')}</p>
-          <div className="mt-8 flex justify-center">
-            <BookingButtons />
-          </div>
-        </FadeIn>
+      </div>
+
+      {/* Map + contact */}
+      <Section className="bg-forest text-cream">
+        <ContactMap />
       </Section>
+
     </>
   );
 }

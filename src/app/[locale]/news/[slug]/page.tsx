@@ -252,7 +252,7 @@ export default async function NewsPostPage({ params }: { params: Params }) {
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
               href={`/${locale}/book`}
-              className="rounded-full bg-gold text-forest px-5 py-2.5 text-sm font-semibold hover:bg-gold/90 transition-colors"
+              className="rounded-full bg-gold text-ink px-5 py-2.5 text-sm font-semibold hover:bg-gold/90 transition-colors"
             >
               {tCommon('bookOnline')}
             </Link>
@@ -269,7 +269,7 @@ export default async function NewsPostPage({ params }: { params: Params }) {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-[#25D366] text-white px-5 py-2.5 text-sm font-semibold hover:bg-[#1ebe5b] transition-colors"
+              className="rounded-full bg-[#075E54] text-white px-5 py-2.5 text-sm font-semibold hover:bg-[#064c44] transition-colors"
             >
               {t('ctaWhatsapp')}
             </a>

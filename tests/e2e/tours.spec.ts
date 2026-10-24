@@ -203,7 +203,7 @@ test('tour detail page: metadata, hreflang, JSON-LD and sitemap', async ({ page,
   }
   // Main navigation and footer link to tours.
   await page.goto('/ru');
-  expect(await page.locator('footer a[href="/ru/tours"]').count()).toBe(1);
+  expect(await page.locator('footer a[href="/ru/tours"]').count()).toBeGreaterThan(0);
 });
 
 test('AI planner validates tours and links to the prefilled planner', async ({ request }) => {

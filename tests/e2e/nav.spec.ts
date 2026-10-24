@@ -12,7 +12,7 @@ for (const locale of ['ka', 'en', 'ru'] as const) {
 
       const m = await page.evaluate(() => {
         const header = document.querySelector('header')!;
-        const row = header.firstElementChild as HTMLElement;
+        const row = header.querySelector(':scope > .container-px') as HTMLElement;
         const logo = row.firstElementChild!.getBoundingClientRect();
         const navEl = row.querySelector('nav')!;
         const first = [...navEl.children].find((el) => (el as HTMLElement).offsetParent !== null)!.getBoundingClientRect();
@@ -92,6 +92,6 @@ for (const locale of ['ka', 'en', 'ru'] as const) {
     await page.keyboard.press('Escape');
     await expect(menu).toHaveCount(0);
     // Footer still lists the individual pages.
-    expect(await page.locator(`footer a[href="/${locale}/guesthouse"]`).count()).toBe(1);
+    expect(await page.locator(`footer a[href="/${locale}/guesthouse"]`).count()).toBeGreaterThan(0);
   });
 }

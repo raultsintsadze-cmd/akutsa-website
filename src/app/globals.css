@@ -2,27 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+/* ── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Brand colours (RGB channels so Tailwind opacity modifiers work). */
+  --color-forest: 31 61 46; /* #1f3d2e */
+  --color-gold: 184 146 58; /* #b8923a */
+  --color-cream: 247 244 236; /* #f7f4ec */
+  --color-ink: 20 42 31; /* #142a1f, text on gold */
+
+  /* Fonts: set by next/font in the locale layout. */
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-montserrat);
+
+  /* Spacing and shape. */
+  --gutter: 1rem; /* 16 px side gutters on phones */
+  --section-y: 3rem; /* 48 px section padding on phones */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+  --header-h: 3.625rem; /* 58 px */
+  --mobile-bar-h: 3.75rem; /* 60 px bottom action bar */
 }
 
-body {
-  background-color: #FAF8F5;
-  color: #1C3A2E;
-  /* space for the mobile booking bar */
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-@media (max-width: 639px) {
-  body {
-    padding-bottom: calc(56px + env(safe-area-inset-bottom));
+@media (min-width: 400px) {
+  :root {
+    --gutter: 1.25rem;
+    --section-y: 4rem;
   }
 }
 
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2.5rem;
+    --section-y: 6rem;
+    --header-h: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 4rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: rgb(var(--color-cream));
+  color: rgb(var(--color-forest));
+  font-size: 1rem;
+  line-height: 1.6;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Space for the mobile bottom action bar so it never covers content. */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(var(--mobile-bar-h) + env(safe-area-inset-bottom));
+  }
+}
+
+/* Lock page scroll while the full-screen mobile menu is open. */
+html[data-menu-open] body {
+  overflow: hidden;
+}
+
 .font-serif {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-heading), var(--font-georgian), Georgia, serif;
+}
+
+/* Georgian has no capital letters; never transform it. */
+:lang(ka) .uppercase {
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .container-px {
-  @apply px-6 md:px-10 lg:px-16;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* Horizontal swipe rows (stays, tours): snap, hidden scrollbar. */
+.swipe-row {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  padding-inline: var(--gutter);
+  margin-inline: calc(var(--gutter) * -1);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.swipe-row::-webkit-scrollbar {
+  display: none;
+}
+.swipe-row > * {
+  scroll-snap-align: start;
+  flex: 0 0 82%;
+}
+@media (min-width: 768px) {
+  .swipe-row {
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    gap: 1.5rem;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* Accessible gold text: the brand gold (#b8923a) is too light for text on cream/white
+   (2.9:1), so gold text uses a darker shade there and the brand gold on dark sections. */
+:root {
+  --gold-text: 140 106 31; /* #8c6a1f, 5:1 on white */
+}
+.bg-forest,
+footer,
+[data-dark] {
+  --gold-text: 201 168 76; /* #c9a84c, 5.2:1 on forest */
+}
+.bg-cream,
+.bg-white,
+[data-light] {
+  --gold-text: 140 106 31;
+}
+.text-gold {
+  color: rgb(var(--gold-text));
 }

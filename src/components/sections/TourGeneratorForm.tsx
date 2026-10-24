@@ -197,7 +197,7 @@ export default function TourGeneratorForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-full bg-gold text-forest py-3 font-medium hover:bg-gold/90 transition-colors disabled:opacity-60"
+            className="w-full rounded-full bg-gold text-ink py-3 font-medium hover:bg-gold/90 transition-colors disabled:opacity-60"
           >
             {loading ? t('generating') : t('submit')}
           </button>

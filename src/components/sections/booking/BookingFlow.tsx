@@ -204,7 +204,7 @@ export default function BookingFlow({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-[#25D366] text-white px-6 py-3 font-semibold hover:bg-[#1ebe5b] transition-colors"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-[#075E54] text-white px-6 py-3 font-semibold hover:bg-[#064c44] transition-colors"
           >
             {t('whatsappButton')}
           </a>
@@ -527,7 +527,7 @@ export default function BookingFlow({
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="w-full rounded-full bg-gold text-forest py-3.5 font-semibold hover:bg-gold/90 transition-colors disabled:opacity-60"
+            className="w-full rounded-full bg-gold text-ink py-3.5 font-semibold hover:bg-gold/90 transition-colors disabled:opacity-60"
           >
             {status === 'submitting' ? t('submitting') : t('submit')}
           </button>

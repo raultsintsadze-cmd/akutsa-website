@@ -129,7 +129,7 @@ export function MobileNavDropdown({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className={clsx('flex items-center justify-between w-full py-1 text-forest/80 hover:text-gold transition-colors text-base', focusRing)}
+        className={clsx('flex items-center justify-between w-full min-h-11 text-forest/80 hover:text-gold transition-colors text-lg', focusRing)}
         aria-expanded={open}
         aria-controls={panelId}
       >
@@ -137,7 +137,7 @@ export function MobileNavDropdown({
         <ChevronDown className={clsx('w-4 h-4 transition-transform', open && 'rotate-180')} aria-hidden />
       </button>
       <div id={panelId} hidden={!open} className="mt-2 ml-4 border-l border-forest/10 pl-4">
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-1 py-1">
           {items.map((item) => (
             <li key={item.label}>
               <Link
@@ -147,7 +147,7 @@ export function MobileNavDropdown({
                   onNavigate();
                 }}
                 className={clsx(
-                  'block transition-colors text-sm',
+                  'flex items-center min-h-11 transition-colors text-base',
                   focusRing,
                   item.highlight ? 'font-semibold text-forest' : 'text-forest/70 hover:text-gold'
                 )}

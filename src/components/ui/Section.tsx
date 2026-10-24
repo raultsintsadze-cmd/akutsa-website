@@ -10,7 +10,7 @@ export default function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={clsx('container-px py-16 md:py-24', className)}>
+    <section id={id} className={clsx('container-px py-section', className)}>
       <div className="max-w-7xl mx-auto">{children}</div>
     </section>
   );

@@ -31,7 +31,7 @@ export default function BookingButtons({
         rel="noopener noreferrer"
         className={clsx(
           sizing,
-          'rounded-full bg-gold text-forest font-medium hover:bg-gold/90 transition-colors'
+          'rounded-full bg-gold text-ink font-medium hover:bg-gold/90 transition-colors'
         )}
       >
         {t('bookWhatsapp')}

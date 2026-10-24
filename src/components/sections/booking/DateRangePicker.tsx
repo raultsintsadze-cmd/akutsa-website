@@ -177,7 +177,7 @@ export default function DateRangePicker({
                           : inRange
                             ? 'bg-gold/25 text-forest'
                             : enabled
-                              ? 'text-forest hover:bg-gold/20 rounded-full'
+                              ? 'text-ink hover:bg-gold/20 rounded-full'
                               : booked
                                 ? 'text-forest/35 line-through bg-forest/5'
                                 : 'text-forest/25',

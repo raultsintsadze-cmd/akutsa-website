@@ -51,13 +51,13 @@ export default function HeroParallax({
   return (
     <section
       ref={ref}
-      className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden"
+      className="relative h-[75svh] min-h-[480px] md:h-[90vh] md:min-h-[600px] flex items-center justify-center overflow-hidden"
     >
       <motion.div className="absolute inset-0 w-full h-full" style={{ y }}>
         {video ? (
           <>
             {/* Poster image always visible underneath */}
-            <Image src={src} alt={alt} fill priority className="object-cover" />
+            <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover" />
             {/* Video fades in over the poster once it can play */}
             {playVideo && (
               <video
@@ -75,7 +75,7 @@ export default function HeroParallax({
             )}
           </>
         ) : (
-          <Image src={src} alt={alt} fill priority className="object-cover" />
+          <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover" />
         )}
       </motion.div>
       <div className="absolute inset-0 bg-forest/50" />
