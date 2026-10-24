@@ -23,6 +23,7 @@ export default async function MenuPage({
   params: { locale: Locale };
 }) {
   const t = await getTranslations({ locale, namespace: 'menu' });
+  const tA = await getTranslations({ locale, namespace: 'menu.allergens' });
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -36,7 +37,13 @@ export default async function MenuPage({
       hasMenuItem: c.items.map((i) => ({
         '@type': 'MenuItem',
         name: i.name[locale],
-        ...(i[`description_${locale}`] ? { description: i[`description_${locale}`] } : {}),
+        // schema.org has no allergen field for MenuItem, so allergens go into the description.
+        description: [
+          i[`description_${locale}`],
+          i.allergens.length
+            ? `${tA('title')}: ${i.allergens.map((a) => (a.startsWith('may_') ? `${tA('may')} ${tA(a.slice(4))}` : tA(a))).join(', ')}.`
+            : ''
+        ].filter(Boolean).join(' ') || undefined,
         offers: { '@type': 'Offer', price: i.price, priceCurrency: 'GEL' }
       }))
     }))
@@ -46,6 +53,9 @@ export default async function MenuPage({
     <Section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\u003c') }} />
       <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
+      <p className="max-w-2xl mx-auto -mt-6 mb-8 text-center text-sm text-forest/70 bg-amber-50 border border-amber-200/70 rounded-xl px-4 py-3">
+        ⚠️ {t('allergenNote')}
+      </p>
       <MenuExperience />
     </Section>
   );

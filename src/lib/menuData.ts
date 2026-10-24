@@ -1,7 +1,12 @@
+export const ALLERGENS = ['gluten', 'milk', 'eggs', 'nuts', 'sulphites'] as const;
+export type Allergen = (typeof ALLERGENS)[number] | `may_${(typeof ALLERGENS)[number]}`;
+
 export interface MenuItem {
   id: string;
   price: number;
   name: { ka: string; en: string; ru: string };
+  // gluten, milk, eggs, nuts, sulphites; "may_" prefix = may contain. Empty = none.
+  allergens: Allergen[];
   description_ka?: string;
   description_en?: string;
   description_ru?: string;
@@ -22,6 +27,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'khachapuri-adjarian',
         price: 18,
+        allergens: ['gluten', 'milk', 'eggs'],
         name: { ka: "ხაჭაპური აჭარული", en: "Adjarian khachapuri", ru: "Хачапури по-аджарски" },
         description_ka: "ნავისებრი ცომი დნობადი ყველით, კარაქითა და კვერცხის გულით შუაში — აჭარის სავიზიტო ბარათი.",
         description_en: "Boat-shaped bread filled with melted cheese, topped with butter and an egg yolk — the signature dish of Adjara.",
@@ -30,6 +36,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'khinkali',
         price: 12,
+        allergens: ['gluten'],
         name: { ka: "ხინკალი (5 ცალი)", en: "Khinkali (5 pcs)", ru: "Хинкали (5 шт.)" },
         description_ka: "ხელით ნაკეცი ცომის ჩანთები წვნიანი ხორცის შიგთავსით. ჭამენ ხელით, ჯერ წვენს სვამენ.",
         description_en: "Hand-pleated dumplings with a juicy meat filling. Eat them by hand and sip the broth first.",
@@ -38,6 +45,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'mtsvadi',
         price: 22,
+        allergens: [],
         name: { ka: "მწვადი", en: "Mtsvadi", ru: "Мцвади" },
         description_ka: "ხორცის მწვადი ცეცხლზე, ხახვით და ახალი მწვანილით.",
         description_en: "Georgian-style skewered meat grilled over an open fire, served with onion and fresh herbs.",
@@ -46,6 +54,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'chakapuli',
         price: 20,
+        allergens: ['sulphites'],
         name: { ka: "ჩაქაფული", en: "Chakapuli", ru: "Чакапули" },
         description_ka: "ხორცი თეთრ ღვინოში, ტყემლით, ტარხუნითა და მწვანილით მოხარშული — მჟავე-არომატული ქართული კერძი.",
         description_en: "Meat stewed in white wine with tkemali plum, tarragon and herbs — a tangy, fragrant Georgian stew.",
@@ -60,6 +69,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'omelette',
         price: 10,
+        allergens: ['eggs', 'milk'],
         name: { ka: "ომლეტი ბოსტნეულით", en: "Vegetable omelette", ru: "Омлет с овощами" },
         description_ka: "ფაფუკი ომლეტი ახალი ბოსტნეულით, ჩვენი ბაღიდან სეზონის მიხედვით.",
         description_en: "Fluffy omelette with fresh vegetables, from our garden when in season.",
@@ -68,6 +78,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'khacho-bread',
         price: 8,
+        allergens: ['milk', 'gluten'],
         name: { ka: "ხაჭო პურით", en: "Cottage cheese with bread", ru: "Творог с хлебом" },
         description_ka: "სოფლის ახალი ხაჭო თბილ პურთან ერთად.",
         description_en: "Fresh village cottage cheese served with warm bread.",
@@ -76,6 +87,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'honey-matsoni',
         price: 7,
+        allergens: ['milk'],
         name: { ka: "თაფლი და მაწონი", en: "Honey and matsoni", ru: "Мёд и мацони" },
         description_ka: "ადგილობრივი მთის თაფლი და ქართული მაწონი — მსუბუქი და ტკბილი საუზმე.",
         description_en: "Local mountain honey with Georgian matsoni (yoghurt) — a light, sweet breakfast.",
@@ -84,6 +96,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'lobiani',
         price: 8,
+        allergens: ['gluten', 'may_milk', 'may_eggs'],
         name: { ka: "ლობიანი", en: "Lobiani", ru: "Лобиани" },
         description_ka: "გამომცხვარი პური შეზავებული ლობიოს შიგთავსით.",
         description_en: "Baked bread filled with seasoned mashed beans.",
@@ -98,6 +111,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'eggplant-salad',
         price: 9,
+        allergens: ['nuts'],
         name: { ka: "ბადრიჯნის სალათი", en: "Eggplant salad", ru: "Салат из баклажанов" },
         description_ka: "შემწვარი ბადრიჯანი ნიგვზით, ნიორით და მწვანილით.",
         description_en: "Fried eggplant with walnuts, garlic and herbs.",
@@ -106,6 +120,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'fresh-vegetable-salad',
         price: 8,
+        allergens: [],
         name: { ka: "ხელნაკეთი სალათი ბოსტნეულით", en: "Fresh vegetable salad", ru: "Салат из свежих овощей" },
         description_ka: "პომიდორი, კიტრი, ხახვი და მწვანილი, შეკაზმული ზეთით.",
         description_en: "Tomatoes, cucumbers, onion and herbs, dressed with oil.",
@@ -114,6 +129,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'pkhali',
         price: 10,
+        allergens: ['nuts'],
         name: { ka: "ფხალი", en: "Pkhali", ru: "Пхали" },
         description_ka: "დაჭრილი ბოსტნეული ან მწვანილი ნიგვზითა და სანელებლებით.",
         description_en: "Chopped greens or vegetables blended with walnuts and spices.",
@@ -128,6 +144,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'mushroom-dish',
         price: 14,
+        allergens: ['may_milk'],
         name: { ka: "სოკოს კერძი", en: "Mushroom dish", ru: "Блюдо из грибов" },
         description_ka: "ტყის სოკო, მომზადებული ქართულად — სეზონის მიხედვით.",
         description_en: "Forest mushrooms cooked the Georgian way, depending on the season.",
@@ -136,6 +153,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'lobio',
         price: 12,
+        allergens: [],
         name: { ka: "ლობიო ქვაბში", en: "Lobio in a clay pot", ru: "Лобио в горшочке" },
         description_ka: "ლობიო თიხის ქვაბში, მწვანილითა და სანელებლებით, მჭადთან ერთად.",
         description_en: "Bean stew slow-cooked in a clay pot with herbs and spices, served with cornbread.",
@@ -144,6 +162,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'bulgur-vegetables',
         price: 11,
+        allergens: ['gluten'],
         name: { ka: "ცოცხალი ბურღული", en: "Bulgur dish", ru: "Блюдо из булгура" },
         description_ka: "ბურღული ბოსტნეულითა და მწვანილით.",
         description_en: "Bulgur wheat with vegetables and herbs.",
@@ -158,6 +177,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'pelamushi',
         price: 8,
+        allergens: ['nuts', 'may_gluten'],
         name: { ka: "ფელამუში", en: "Pelamushi", ru: "Пеламуши" },
         description_ka: "ყურძნის ტკბილისგან მომზადებული ტრადიციული ქართული დესერტი ნიგვზით.",
         description_en: "Traditional Georgian dessert made from grape juice, topped with walnuts.",
@@ -166,6 +186,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'walnut-cake',
         price: 10,
+        allergens: ['nuts', 'gluten', 'eggs', 'milk'],
         name: { ka: "ნუშის ნამცხვარი", en: "Almond cake", ru: "Миндальный пирог" },
         description_ka: "შინ გამომცხვარი ნამცხვარი ნუშით.",
         description_en: "Homemade cake baked with almonds.",
@@ -174,6 +195,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'fruit-salad',
         price: 7,
+        allergens: [],
         name: { ka: "ხილის სალათი", en: "Fruit salad", ru: "Фруктовый салат" },
         description_ka: "სეზონური ხილი.",
         description_en: "Fresh seasonal fruit.",
@@ -188,6 +210,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'homemade-lemonade',
         price: 6,
+        allergens: [],
         name: { ka: "ლიმონათი ადგილობრივი", en: "Local lemonade", ru: "Местный лимонад" },
         description_ka: "ქართული ლიმონათი — მსხალი, ტარხუნა ან სხვა გემოები.",
         description_en: "Georgian lemonade — pear, tarragon and other flavours.",
@@ -196,6 +219,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'tea-coffee',
         price: 4,
+        allergens: [],
         name: { ka: "ჩაი / ყავა", en: "Tea / Coffee", ru: "Чай / Кофе" },
         description_ka: "ცხელი ჩაი ან ყავა.",
         description_en: "Hot tea or coffee.",
@@ -204,6 +228,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'house-wine',
         price: 8,
+        allergens: ['sulphites'],
         name: { ka: "სახლის ღვინო (ჭიქა)", en: "House wine (glass)", ru: "Домашнее вино (бокал)" },
         description_ka: "ადგილობრივი სახლის ღვინო ჭიქით.",
         description_en: "Local house wine by the glass.",
@@ -212,6 +237,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       {
         id: 'mineral-water',
         price: 3,
+        allergens: [],
         name: { ka: "მინერალური წყალი", en: "Mineral water", ru: "Минеральная вода" },
         description_ka: "ქართული მინერალური წყალი.",
         description_en: "Georgian mineral water.",

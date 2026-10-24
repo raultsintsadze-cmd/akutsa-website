@@ -406,7 +406,17 @@
     "sending": "Sending your order...",
     "successMessage": "Your order was sent! We'll confirm with you shortly.",
     "errorMessage": "Something went wrong sending your order. Please try again or contact us directly.",
-    "currency": "GEL"
+    "currency": "GEL",
+    "allergens": {
+      "gluten": "Gluten",
+      "milk": "Milk",
+      "eggs": "Eggs",
+      "nuts": "Tree nuts",
+      "sulphites": "Sulphites",
+      "may": "May contain",
+      "title": "Allergens"
+    },
+    "allergenNote": "If you have an allergy or dietary restriction, please tell us before ordering and we'll adapt the dish."
   },
   "stats": {
     "guestsLabel": "Happy Guests",
