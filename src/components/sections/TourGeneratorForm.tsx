@@ -210,7 +210,7 @@ export default function TourGeneratorForm() {
             {t('resultTitle')}
           </h3>
 
-          {loading && <p className="text-forest/60 text-sm">{t('generating')}</p>}
+          {loading && <p className="text-forest/75 text-sm">{t('generating')}</p>}
 
           {error && <p className="text-red-600 text-sm">{error}</p>}
 
@@ -223,7 +223,7 @@ export default function TourGeneratorForm() {
               <ul className="mt-2 space-y-1.5 text-sm">
                 {availability.units.map((u) => (
                   <li key={u.unit} className="flex items-center justify-between gap-3">
-                    <span className={u.available ? 'text-forest' : 'text-forest/40 line-through'}>
+                    <span className={u.available ? 'text-forest' : 'text-forest/75 line-through'}>
                       {tAll(UNITS[u.unit].nameKey)}
                     </span>
                     {u.available ? (
@@ -231,7 +231,7 @@ export default function TourGeneratorForm() {
                         {t('availabilityFree')} · {t('bookLink')} →
                       </a>
                     ) : (
-                      <span className="shrink-0 text-forest/40">{t('availabilityBooked')}</span>
+                      <span className="shrink-0 text-forest/75">{t('availabilityBooked')}</span>
                     )}
                   </li>
                 ))}
@@ -244,14 +244,14 @@ export default function TourGeneratorForm() {
               <div className="text-forest/80 text-sm leading-relaxed whitespace-pre-wrap">
                 {itinerary}
               </div>
-              <p className="mt-6 text-xs text-forest/50 border-t border-forest/10 pt-4">
+              <p className="mt-6 text-xs text-forest/75 border-t border-forest/10 pt-4">
                 {t('disclaimer')}
               </p>
             </>
           )}
 
           {!loading && !error && !itinerary && (
-            <p className="text-forest/50 text-sm">{t('subtitle')}</p>
+            <p className="text-forest/75 text-sm">{t('subtitle')}</p>
           )}
         </div>
       </FadeIn>

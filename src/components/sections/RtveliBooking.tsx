@@ -128,11 +128,11 @@ export default function RtveliBooking({ id, promoActive = false }: { id?: string
       <div className="max-w-5xl mx-auto grid lg:grid-cols-5 gap-8 items-start">
         <div className="lg:col-span-3">
         {dates === null && (
-          <p className="text-center text-forest/50 text-sm">…</p>
+          <p className="text-center text-forest/75 text-sm">…</p>
         )}
 
         {dates !== null && dates.length === 0 && (
-          <p className="text-center text-forest/60 bg-amber-50 border border-amber-200 rounded-2xl p-6 text-sm">
+          <p className="text-center text-forest/75 bg-amber-50 border border-amber-200 rounded-2xl p-6 text-sm">
             {t('noAvailableDates')}
           </p>
         )}
@@ -157,13 +157,13 @@ export default function RtveliBooking({ id, promoActive = false }: { id?: string
                       {formatDate(d.date)}
                     </div>
                     <div className="mt-1 flex items-center justify-between text-sm">
-                      <span className="text-forest/60">🚐 {d.vehicle}</span>
+                      <span className="text-forest/75">🚐 {d.vehicle}</span>
                       {d.seatsRemaining > 0 ? (
                         <span className="text-amber-700 font-medium">
                           {t('seatsRemaining', { count: d.seatsRemaining })}
                         </span>
                       ) : (
-                        <span className="text-forest/50 text-xs text-right">{t('vanFull')}</span>
+                        <span className="text-forest/75 text-xs text-right">{t('vanFull')}</span>
                       )}
                     </div>
                   </button>
@@ -185,7 +185,7 @@ export default function RtveliBooking({ id, promoActive = false }: { id?: string
                           key={value}
                           className={`flex items-center gap-2 rounded-lg border-2 px-3 py-2.5 text-sm transition-colors ${
                             disabled
-                              ? 'border-forest/10 text-forest/40 cursor-not-allowed'
+                              ? 'border-forest/10 text-forest/75 cursor-not-allowed'
                               : transport === value
                                 ? 'border-amber-500 bg-amber-50 text-forest cursor-pointer'
                                 : 'border-forest/15 text-forest hover:border-amber-300 cursor-pointer'
@@ -206,7 +206,7 @@ export default function RtveliBooking({ id, promoActive = false }: { id?: string
                           {t(value === 'with' ? 'transportWith' : 'transportWithout', {
                             price: unitPrice(value)
                           })}
-                          {isPromoDate && <s className="text-forest/40 text-xs">{RTVELI_PRICES[value]}</s>}
+                          {isPromoDate && <s className="text-forest/75 text-xs">{RTVELI_PRICES[value]}</s>}
                         </label>
                       );
                     })}
@@ -263,7 +263,7 @@ export default function RtveliBooking({ id, promoActive = false }: { id?: string
                   <span className="font-serif text-2xl text-amber-800 font-semibold">
                     {total !== null ? `${total} GEL` : '—'}
                     {total !== null && seats > 1 && (
-                      <span className="ml-2 font-sans text-xs text-forest/50 font-normal">
+                      <span className="ml-2 font-sans text-xs text-forest/75 font-normal">
                         {unitPrice(transport!)} × {seats}
                       </span>
                     )}

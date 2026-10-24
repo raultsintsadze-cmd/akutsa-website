@@ -57,7 +57,7 @@ export default async function NewsPage({
     return (
       <Section>
         <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
-        <p className="text-center text-forest/60">{t('noPosts')}</p>
+        <p className="text-center text-forest/75">{t('noPosts')}</p>
       </Section>
     );
   }
@@ -131,7 +131,7 @@ export default async function NewsPage({
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-3 flex-wrap">
                       <CategoryTag label={post.category ?? t('categoryDefault')} />
-                      <span className="text-forest/40 text-xs">{readingTime(post)} {t('readMin')}</span>
+                      <span className="text-forest/75 text-xs">{readingTime(post)} {t('readMin')}</span>
                     </div>
                     <h3 className="font-serif text-lg text-forest font-semibold leading-snug group-hover:text-gold transition-colors flex-1">
                       {post.title}
@@ -141,7 +141,7 @@ export default async function NewsPage({
                         {t('publishedOn')} {formatDate(post.date)}
                       </p>
                     )}
-                    <p className="mt-3 text-sm text-forest/60 font-medium group-hover:text-forest transition-colors">
+                    <p className="mt-3 text-sm text-forest/75 font-medium group-hover:text-forest transition-colors">
                       {t('readMore')} →
                     </p>
                   </div>

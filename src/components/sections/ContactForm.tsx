@@ -46,7 +46,7 @@ export default function ContactForm() {
       >
         {t('formSubmit')}
       </button>
-      <p className="text-xs text-forest/60">{t('formNote')}</p>
+      <p className="text-xs text-forest/75">{t('formNote')}</p>
     </form>
   );
 }

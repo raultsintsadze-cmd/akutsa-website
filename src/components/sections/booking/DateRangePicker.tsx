@@ -136,7 +136,7 @@ export default function DateRangePicker({
         <thead>
           <tr>
             {weekdays.map((w) => (
-              <th key={w} scope="col" className="text-xs font-medium text-forest/50 pb-1">
+              <th key={w} scope="col" className="text-xs font-medium text-forest/75 pb-1">
                 {w}
               </th>
             ))}
@@ -194,7 +194,7 @@ export default function DateRangePicker({
         </tbody>
       </table>
 
-      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-forest/60">
+      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-forest/75">
         <span className="flex items-center gap-1.5">
           <span className="inline-block w-4 h-4 rounded bg-forest/5 border border-forest/10" aria-hidden />
           {labels.legendBooked}

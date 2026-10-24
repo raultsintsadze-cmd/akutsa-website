@@ -22,7 +22,7 @@ export default function MenuItemCard({
       <div className="pr-3">
         <p className="font-medium text-forest text-sm">{item.name[locale]}</p>
         {item[`description_${locale}`] && (
-          <p className="mt-0.5 text-xs text-forest/60 leading-snug">{item[`description_${locale}`]}</p>
+          <p className="mt-0.5 text-xs text-forest/75 leading-snug">{item[`description_${locale}`]}</p>
         )}
         {item.allergens.length > 0 && (
           <ul aria-label={t('title')} className="mt-1.5 flex flex-wrap gap-1">

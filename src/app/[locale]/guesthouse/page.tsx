@@ -146,7 +146,7 @@ export default function GuesthousePage() {
             <p className="text-gold font-medium text-lg">
               {tCommon('fromPrice', { price: PRICE })}
             </p>
-            <p className="text-forest/60 text-sm mt-1">{tCommon('perNight')}</p>
+            <p className="text-forest/75 text-sm mt-1">{tCommon('perNight')}</p>
             <FreeBreakfastBadge className="mt-4" />
             <Link
               href="/book"

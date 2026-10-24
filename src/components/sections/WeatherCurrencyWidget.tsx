@@ -46,7 +46,7 @@ export default async function WeatherCurrencyWidget({ locale }: { locale: Locale
         </div>
 
         {currency && (
-          <p className="text-center text-xs text-forest/40 mt-2">{t('sourceLabel')}</p>
+          <p className="text-center text-xs text-forest/75 mt-2">{t('sourceLabel')}</p>
         )}
       </div>
     </FadeIn>

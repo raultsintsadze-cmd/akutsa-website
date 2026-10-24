@@ -210,7 +210,7 @@ export default function BookingFlow({
           </a>
         )}
         <div className="mt-4">
-          <button type="button" onClick={reset} className="text-sm text-forest/60 underline hover:text-forest">
+          <button type="button" onClick={reset} className="text-sm text-forest/75 underline hover:text-forest">
             {t('newBooking')}
           </button>
         </div>
@@ -228,7 +228,7 @@ export default function BookingFlow({
       <div className="mt-3 flex items-baseline justify-between border-t border-amber-200/70 pt-3">
         <span>
           {t('total')}{' '}
-          <span className="text-forest/50">({t('priceLine', { nights, price: selectedUnit.pricePerNight })})</span>
+          <span className="text-forest/75">({t('priceLine', { nights, price: selectedUnit.pricePerNight })})</span>
         </span>
         <span className="font-serif text-xl text-forest font-semibold" data-testid="total">
           {t('totalValue', { total })}
@@ -253,7 +253,7 @@ export default function BookingFlow({
               <p className="mt-1 text-sm text-forest/70">{t('unavailableText')}</p>
               {alternatives.sameUnit.length > 0 && (
                 <div className="mt-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-forest/60">{t('altSameUnit')}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-forest/75">{t('altSameUnit')}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {alternatives.sameUnit.map((r) => (
                       <button
@@ -274,7 +274,7 @@ export default function BookingFlow({
               )}
               {alternatives.otherUnits.length > 0 && (
                 <div className="mt-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-forest/60">{t('altOtherUnits')}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-forest/75">{t('altOtherUnits')}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {alternatives.otherUnits.map((id) => (
                       <button
@@ -322,7 +322,7 @@ export default function BookingFlow({
                   <span className="min-w-0">
                     <span className="block font-medium text-forest">{tAll(u.nameKey)}</span>
                     <span className="block text-sm text-gold font-medium">{t('perNight', { price: u.pricePerNight })}</span>
-                    <span className="block text-xs text-forest/60">{t('upToGuests', { count: u.maxGuests })}</span>
+                    <span className="block text-xs text-forest/75">{t('upToGuests', { count: u.maxGuests })}</span>
                   </span>
                 </button>
               ))}
@@ -334,7 +334,7 @@ export default function BookingFlow({
               <h2 id="book-dates" className="font-serif text-xl text-forest font-semibold mb-2">
                 {t('stepDates')}
               </h2>
-              {availability === 'loading' && <p className="text-sm text-forest/60 mb-2">{t('loadingDates')}</p>}
+              {availability === 'loading' && <p className="text-sm text-forest/75 mb-2">{t('loadingDates')}</p>}
               {availability === 'error' && (
                 <p role="alert" className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-2">
                   {t('availabilityError')}
@@ -371,11 +371,11 @@ export default function BookingFlow({
 
               <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-xl bg-white p-3 shadow-sm">
-                  <div className="text-forest/50 text-xs">{t('checkIn')}</div>
+                  <div className="text-forest/75 text-xs">{t('checkIn')}</div>
                   <div className="font-medium text-forest" data-testid="check-in">{checkIn ? formatDate(checkIn) : '—'}</div>
                 </div>
                 <div className="rounded-xl bg-white p-3 shadow-sm">
-                  <div className="text-forest/50 text-xs">{t('checkOut')}</div>
+                  <div className="text-forest/75 text-xs">{t('checkOut')}</div>
                   <div className="font-medium text-forest" data-testid="check-out">{checkOut ? formatDate(checkOut) : '—'}</div>
                 </div>
               </div>
@@ -402,7 +402,7 @@ export default function BookingFlow({
                       setCheckIn(null);
                       setCheckOut(null);
                     }}
-                    className="h-12 px-3 text-sm text-forest/60 underline hover:text-forest"
+                    className="h-12 px-3 text-sm text-forest/75 underline hover:text-forest"
                   >
                     {t('clearDates')}
                   </button>
@@ -433,7 +433,7 @@ export default function BookingFlow({
           <button
             type="button"
             onClick={() => setStep(1)}
-            className="text-sm text-forest/60 hover:text-forest"
+            className="text-sm text-forest/75 hover:text-forest"
           >
             ← {t('back')}
           </button>
@@ -470,7 +470,7 @@ export default function BookingFlow({
               aria-describedby="phone-hint"
               className={clsx(inputClass, 'mt-1.5', invalid.includes('phone') && 'border-red-500')}
             />
-            <span id="phone-hint" className="mt-1 block text-xs font-normal text-forest/60">
+            <span id="phone-hint" className="mt-1 block text-xs font-normal text-forest/75">
               {t('phoneHint')}
             </span>
           </label>

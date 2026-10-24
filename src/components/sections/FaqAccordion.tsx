@@ -19,7 +19,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
               </span>
               <span
                 aria-hidden
-                className="shrink-0 w-7 h-7 rounded-full border border-forest/20 flex items-center justify-center text-forest/60 transition-all duration-300 group-hover:border-gold group-hover:text-gold group-open:rotate-45 group-open:border-gold group-open:text-gold"
+                className="shrink-0 w-7 h-7 rounded-full border border-forest/20 flex items-center justify-center text-forest/75 transition-all duration-300 group-hover:border-gold group-hover:text-gold group-open:rotate-45 group-open:border-gold group-open:text-gold"
               >
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4">
                   <path d="M8 3v10M3 8h10" strokeLinecap="round" />

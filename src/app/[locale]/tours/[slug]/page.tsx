@@ -49,7 +49,7 @@ export default async function TourPage({ params: { locale, slug } }: { params: {
       />
       <Section>
         <div className="max-w-3xl mx-auto">
-          <Link href="/tours" className="text-sm text-forest/60 hover:text-forest">
+          <Link href="/tours" className="text-sm text-forest/75 hover:text-forest">
             ← {t('backToTours')}
           </Link>
           <article className="mt-6 bg-white rounded-2xl overflow-hidden shadow-sm">
@@ -91,7 +91,7 @@ export default async function TourPage({ params: { locale, slug } }: { params: {
                     <dd className="text-forest/70">🏡 {t('overnightPrice', { price: tour.overnightPrice })}</dd>
                   </div>
                 )}
-                {tour.operator === 'Partner' && <dd className="text-forest/60 text-xs">{t('partner')}</dd>}
+                {tour.operator === 'Partner' && <dd className="text-forest/75 text-xs">{t('partner')}</dd>}
               </dl>
               <div className="mt-8 flex flex-wrap gap-3">
                 <AddToTripButton tour={tour} />

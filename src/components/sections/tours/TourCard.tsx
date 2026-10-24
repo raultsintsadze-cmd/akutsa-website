@@ -62,7 +62,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
         </div>
         <div className="mt-4 flex items-center gap-3">
           <AddToTripButton tour={tour} />
-          <Link href={`/tours/${tour.slug}`} className="text-sm text-forest/60 underline hover:text-forest">
+          <Link href={`/tours/${tour.slug}`} className="text-sm text-forest/75 underline hover:text-forest">
             {t('details')}
           </Link>
         </div>

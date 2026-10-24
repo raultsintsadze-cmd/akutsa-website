@@ -112,12 +112,12 @@ export default function BookingModal({
                   type="button"
                   onClick={onClose}
                   aria-label="Close"
-                  className="text-forest/50 hover:text-forest text-xl leading-none"
+                  className="text-forest/75 hover:text-forest text-xl leading-none"
                 >
                   &times;
                 </button>
               </div>
-              <p className="text-forest/60 text-sm mt-2 mb-5">{labels.subtitle}</p>
+              <p className="text-forest/75 text-sm mt-2 mb-5">{labels.subtitle}</p>
 
               {lines.length > 0 && status !== 'success' && (
                 <div className="bg-cream rounded-xl p-4 mb-5 border border-forest/10">

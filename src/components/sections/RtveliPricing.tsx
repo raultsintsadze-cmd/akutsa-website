@@ -35,13 +35,13 @@ export default function RtveliPricing({ className, promo = false }: { className?
             </div>
             {promo ? (
               <div className="mt-1 flex items-baseline justify-center gap-2">
-                <s className="text-forest/40 text-lg">{o.price}</s>
+                <s className="text-forest/75 text-lg">{o.price}</s>
                 <span className="font-serif text-3xl text-amber-800 font-semibold">{o.promoPrice}</span>
               </div>
             ) : (
               <div className="mt-1 font-serif text-3xl text-amber-800 font-semibold">{o.price}</div>
             )}
-            <div className="text-xs text-forest/60">{t('perPerson')}</div>
+            <div className="text-xs text-forest/75">{t('perPerson')}</div>
           </div>
         ))}
       </div>

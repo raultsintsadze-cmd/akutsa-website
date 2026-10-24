@@ -20,7 +20,7 @@ export default function LanguageSwitcher({ large = false }: { large?: boolean })
               (large ? 'min-w-12 min-h-11 rounded-pill border px-3 ' : '') +
               (l === locale
                 ? 'text-gold uppercase ' + (large ? 'border-gold' : '')
-                : 'text-forest/60 hover:text-forest uppercase transition-colors ' + (large ? 'border-forest/15' : ''))
+                : 'text-forest/75 hover:text-forest uppercase transition-colors ' + (large ? 'border-forest/15' : ''))
             }
             aria-label={localeNames[l]}
           >

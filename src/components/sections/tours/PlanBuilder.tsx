@@ -167,7 +167,7 @@ export default function PlanBuilder() {
     }
   }
 
-  if (!ready) return <p className="text-center text-forest/50">…</p>;
+  if (!ready) return <p className="text-center text-forest/75">…</p>;
 
   if (status === 'success') {
     return (
@@ -192,7 +192,7 @@ export default function PlanBuilder() {
               setTrip((p) => ({ ...p, items: [] }));
               setStatus('idle');
             }}
-            className="text-sm text-forest/60 underline"
+            className="text-sm text-forest/75 underline"
           >
             {t('newTrip')}
           </button>
@@ -260,7 +260,7 @@ export default function PlanBuilder() {
           {t('timeline')}
         </h2>
         {trip.items.length === 0 ? (
-          <p className="rounded-xl bg-white p-5 text-sm text-forest/60">{t('emptyTrip')}</p>
+          <p className="rounded-xl bg-white p-5 text-sm text-forest/75">{t('emptyTrip')}</p>
         ) : (
           <ul className="space-y-3">
             {trip.items.map((item, index) => {
@@ -289,7 +289,7 @@ export default function PlanBuilder() {
                     <button
                       type="button"
                       onClick={() => setTrip((p) => ({ ...p, items: p.items.filter((_, i) => i !== index) }))}
-                      className="text-sm text-forest/50 hover:text-red-700"
+                      className="text-sm text-forest/75 hover:text-red-700"
                       aria-label={`${t('remove')}: ${tour.name[locale]}`}
                     >
                       ✕
@@ -297,7 +297,7 @@ export default function PlanBuilder() {
                   </div>
                   <div className="mt-3 grid grid-cols-2 gap-2">
                     {trip.mode === 'many' && (
-                      <label className="text-xs text-forest/60">
+                      <label className="text-xs text-forest/75">
                         {t('itemDate')}
                         <input
                           type="date"
@@ -309,7 +309,7 @@ export default function PlanBuilder() {
                       </label>
                     )}
                     {tour.dayType !== 'Full day' && (
-                      <label className="text-xs text-forest/60">
+                      <label className="text-xs text-forest/75">
                         {t('itemTime')}
                         <select
                           value={item.slot ?? ''}
@@ -337,7 +337,7 @@ export default function PlanBuilder() {
                     )}
                   </div>
                   {tour.startTimes.length === 0 && tour.dayType !== 'Full day' && (
-                    <p className="mt-1 text-xs text-forest/50">{t('timeByAgreement')}</p>
+                    <p className="mt-1 text-xs text-forest/75">{t('timeByAgreement')}</p>
                   )}
                   {ppl && (
                     <p role="alert" className="mt-2 text-xs text-red-700">
@@ -382,7 +382,7 @@ export default function PlanBuilder() {
             >
               <span>
                 <span className="block font-medium text-forest">{tour.name[locale]}</span>
-                <span className="block text-xs text-forest/60">
+                <span className="block text-xs text-forest/75">
                   {tour.dayType === 'Full day' ? t('fullDay') : t('shortActivity')} · {priceLabel(tour)}
                 </span>
               </span>
@@ -471,8 +471,8 @@ export default function PlanBuilder() {
               {total === null ? t('onRequest') : `${total} GEL`}
             </span>
           </div>
-          {total === null && <p className="mt-1 text-xs text-forest/60">{t('totalOnRequest')}</p>}
-          {trip.transfer && <p className="mt-1 text-xs text-forest/60">{t('transferExtra')}</p>}
+          {total === null && <p className="mt-1 text-xs text-forest/75">{t('totalOnRequest')}</p>}
+          {trip.transfer && <p className="mt-1 text-xs text-forest/75">{t('transferExtra')}</p>}
         </section>
       )}
 
@@ -497,7 +497,7 @@ export default function PlanBuilder() {
               aria-describedby="tour-phone-hint"
               className={clsx(inputClass, 'mt-1.5')}
             />
-            <span id="tour-phone-hint" className="mt-1 block text-xs font-normal text-forest/60">
+            <span id="tour-phone-hint" className="mt-1 block text-xs font-normal text-forest/75">
               {tBook('phoneHint')}
             </span>
           </label>
