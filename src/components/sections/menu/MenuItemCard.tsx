@@ -18,6 +18,9 @@ export default function MenuItemCard({
     <div className="flex items-center justify-between bg-white rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
       <div className="pr-3">
         <p className="font-medium text-forest text-sm">{item.name[locale]}</p>
+        {item[`description_${locale}`] && (
+          <p className="mt-0.5 text-xs text-forest/60 leading-snug">{item[`description_${locale}`]}</p>
+        )}
         <p className="text-gold text-sm mt-1 font-medium">
           {item.price} {currency}
         </p>
