@@ -24,7 +24,9 @@
     "tours": "Tours",
     "stay": "Stay",
     "checkAvailability": "Check availability / Book",
-    "book": "Book"
+    "book": "Book",
+    "houseRules": "House rules",
+    "yogaRetreat": "Yoga retreat"
   },
   "footer": {
     "tagline": "Family hospitality in the heart of Adjara's mountains.",
@@ -538,7 +540,8 @@
     "errorRate": "Too many requests. Please try again in a few minutes.",
     "errorServer": "Something went wrong. Please try again or message us on WhatsApp.",
     "loadingDates": "Loading availability…",
-    "availabilityError": "Could not load availability. You can still send a request — we will check the dates."
+    "availabilityError": "Could not load availability. You can still send a request — we will check the dates.",
+    "houseRulesConsent": "I have read and agree to the <link>house rules</link>"
   },
   "tours": {
     "metaTitle": "Activities in Keda — fishing, rafting, horse riding, wine",
@@ -630,5 +633,171 @@
     "whatsappButton": "Send it to us on WhatsApp",
     "newTrip": "Plan another trip",
     "errorTrip": "Some activities in your plan need attention (see the warnings above)."
+  },
+  "houseRules": {
+    "title": "House rules",
+    "metaTitle": "House Rules | Guest House Akutsa",
+    "metaDescription": "House rules at Guest House Akutsa: check-in from 14:00, check-out by 12:00, no smoking indoors, no street shoes inside, quiet hours 22:00–08:00, pets by agreement.",
+    "subtitle": "A few simple rules so that everyone feels at home with us.",
+    "sections": [
+      {
+        "icon": "clock",
+        "title": "Check-in and check-out",
+        "text": "Check-in from 14:00, check-out by 12:00. Early check-in or late check-out by prior arrangement, subject to availability. Please show an ID card or passport at check-in. Free cancellation up to 48 hours before arrival."
+      },
+      {
+        "icon": "smoke",
+        "title": "Smoking",
+        "text": "No smoking (including e-cigarettes and hookah) inside the buildings or rooms. Smoking only outside in the yard; cottage guests may also smoke on the balcony. Please use the ashtrays."
+      },
+      {
+        "icon": "shoe",
+        "title": "Shoes",
+        "text": "No street shoes inside — please leave them at the entrance. Slippers are provided."
+      },
+      {
+        "icon": "moon",
+        "title": "Quiet hours",
+        "text": "22:00–08:00 — no loud music or noise. We live in a village with neighbours; please respect them and other guests."
+      },
+      {
+        "icon": "users",
+        "title": "Visitors and parties",
+        "text": "Only guests named in the booking may stay overnight. Parties and large gatherings indoors only by prior agreement. For large groups we have a picnic area for up to 60 people."
+      },
+      {
+        "icon": "paw",
+        "title": "Pets",
+        "text": "Only by prior agreement. We have a pet of our own, so please tell us before booking and we'll make sure everyone is comfortable."
+      },
+      {
+        "icon": "sparkle",
+        "title": "Cleanliness and property",
+        "text": "Please take care of furniture, appliances and equipment; guests pay for repairing any damage. Rubbish in the bins. Dishes and towels may not be taken away. Take care on the terrace, balcony and in the yard, especially with children."
+      },
+      {
+        "icon": "shield",
+        "title": "Safety",
+        "text": "No open flames, candles or personal heaters in the rooms. Barbecues and campfires only in the designated area. When you go out, switch off lights and heaters and close doors and windows. We cannot take responsibility for valuables."
+      },
+      {
+        "icon": "home",
+        "title": "Guest house — shared spaces",
+        "text": "The kitchen and bathroom are shared — leave them clean and wash your dishes. Label your food in the fridge or keep it separate. The 60 m² terrace is shared — please keep voices down during quiet hours."
+      },
+      {
+        "icon": "mountain",
+        "title": "Panorama Akutsa cottage",
+        "text": "Maximum 2 guests. Own kitchen and bathroom — leave the dishes washed at check-out. Smoking is allowed on the balcony."
+      }
+    ],
+    "questionsTitle": "Questions",
+    "questionsText": "WhatsApp / Telegram +995 577 22 52 89. Thank you for respecting our home!",
+    "keyTitle": "Key rules",
+    "keyItems": [
+      "Check-in from 14:00, check-out by 12:00",
+      "No smoking indoors",
+      "No street shoes inside",
+      "Quiet hours 22:00–08:00",
+      "Pets by prior agreement"
+    ],
+    "keyLink": "All house rules"
+  },
+  "yoga": {
+    "metaTitle": "Yoga Retreat Venue in Georgia near Batumi | Guest House Akutsa",
+    "metaDescription": "Yoga retreat venue in the mountains of Adjara, 40 km from Batumi: a 60 m² terrace with mountain views, rooms, a cottage, home-cooked meals and group transfers.",
+    "heroTitle": "Yoga retreat venue in the mountains of Adjara, Georgia",
+    "heroSubtitle": "40 km from Batumi",
+    "heroText": "Guest House Akutsa is in the mountain village of Akutsa (Keda Municipality, Adjara), 40 km from Batumi — about one hour by car. We offer a 60 m² terrace with mountain views, rooms, a private cottage, home-cooked meals and the kind of quiet you cannot find in the city. We welcome yoga teachers who want to bring a group, and participants who want to practise yoga in the mountains.",
+    "heroCta": "Message us",
+    "teachersTitle": "For yoga teachers: host your retreat with us",
+    "teachersIntro": "If you teach yoga and are planning a retreat or a weekend practice, we take care of everything except the practice itself:",
+    "teachersItems": [
+      {
+        "icon": "",
+        "title": "Practice space",
+        "text": "A 60 m² terrace overlooking the valley and mountains; for larger groups, the yard and a picnic area for up to 60 people."
+      },
+      {
+        "icon": "",
+        "title": "Accommodation",
+        "text": "4 themed rooms in the guest house, the Panorama Akutsa cottage and a camper."
+      },
+      {
+        "icon": "",
+        "title": "Meals",
+        "text": "Home-cooked breakfast and dinner from our kitchen; vegetarian menu available."
+      },
+      {
+        "icon": "",
+        "title": "Transfers",
+        "text": "We bring your group from Batumi or Batumi Airport in a Mitsubishi Delica 4x4 (7 seats) or a Mercedes Sprinter (8 seats)."
+      },
+      {
+        "icon": "",
+        "title": "Extra activities",
+        "text": "Waterfall hikes, wine tasting, cooking masterclass, mushroom picking."
+      }
+    ],
+    "teachersOffer": "We prepare an individual offer for every group. The price depends on the number of nights, guests and meals. Send us your dates and group size.",
+    "participantsTitle": "For participants: yoga in the mountains near Batumi",
+    "participantsText": "Yoga in fresh mountain air, mornings with a view and quiet evenings: that is what you get with us. Retreats are led by visiting teachers. If you want to be the first to hear about our next yoga retreat, message us on WhatsApp or Telegram and we will let you know.",
+    "whyTitle": "Why Akutsa for yoga",
+    "whyItems": [
+      {
+        "icon": "moon",
+        "title": "Quiet",
+        "text": "A mountain village with no tourist crowds or traffic."
+      },
+      {
+        "icon": "mountain",
+        "title": "Nature",
+        "text": "Forests, mountains and waterfalls nearby — Dzentsmani Waterfall 7 km, Makhuntseti Waterfall 10 km, Merisi Waterfall 12 km."
+      },
+      {
+        "icon": "car",
+        "title": "Easy to reach",
+        "text": "One hour from Batumi, with transfers from Batumi Airport."
+      },
+      {
+        "icon": "home",
+        "title": "Family hospitality",
+        "text": "Your hosts live on site and plan everything together with you."
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "Where is Guest House Akutsa?",
+        "a": "In Akutsa village, Keda Municipality, Adjara, Georgia. 40 km from Batumi."
+      },
+      {
+        "q": "How big a group can you host?",
+        "a": "For practice: the 60 m² terrace; for larger groups, the yard and a picnic area for up to 60 people. Accommodation: 4 rooms, a cottage and a camper. We agree the exact number for each group."
+      },
+      {
+        "q": "Do you have your own yoga teacher?",
+        "a": "No. We are the venue and the hosts; the retreat is led by your own or a visiting teacher."
+      },
+      {
+        "q": "How much does it cost?",
+        "a": "Rooms from 90 GEL per night, the cottage 150 GEL, the camper 100 GEL. Groups get an individual price including meals and transfers."
+      },
+      {
+        "q": "When is the best time to come?",
+        "a": "Spring, summer and autumn for practice on the terrace. In winter it snows in the mountains and the air is especially clean."
+      }
+    ],
+    "contactTitle": "Contact us",
+    "contactText": "Send us your dates and group size and we will prepare an individual offer.",
+    "datesLabel": "Dates",
+    "datesPlaceholder": "e.g. 10–14 May",
+    "groupLabel": "Group size",
+    "groupPlaceholder": "e.g. 8 people",
+    "message": "Hello! I'm interested in a yoga retreat at Guest House Akutsa.",
+    "address": "Guest House Akutsa, Akutsa village, Keda Municipality, Adjara, Georgia. 40 km from Batumi.",
+    "servicesTitle": "Yoga retreats at Akutsa",
+    "servicesText": "For yoga teachers: a terrace with mountain views, accommodation, meals and transfers for your group.",
+    "servicesLink": "Learn more"
   }
 }

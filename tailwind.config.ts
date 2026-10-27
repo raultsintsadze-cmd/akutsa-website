@@ -11,6 +11,7 @@ const config: Config = {
         cream: token('--color-cream'),
         forest: token('--color-forest'),
         gold: token('--color-gold'),
+        'gold-text': token('--color-gold-text'),
         // Dark green for text on gold (WCAG AA).
         ink: token('--color-ink')
       },

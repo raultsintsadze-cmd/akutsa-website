@@ -4,8 +4,8 @@ import { SITE_URL, buildAlternates } from '@/lib/seo';
 import { getAllPosts, type NewsPost } from '@/lib/notion';
 import { getTours } from '@/lib/tours/catalog';
 
-// Regenerate hourly so new Notion posts show up without a redeploy.
-export const revalidate = 3600;
+// Regenerate every 30 minutes so new Notion posts show up without a redeploy.
+export const revalidate = 1800;
 
 // Bump when static page content changes meaningfully (new Date() would claim daily changes).
 const STATIC_LAST_MODIFIED = new Date('2026-09-30');
@@ -26,7 +26,9 @@ const paths = [
   '/book',
   '/tours',
   '/tours/plan',
-  '/rtveli'
+  '/rtveli',
+  '/house-rules',
+  '/yoga-retreat'
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -10,7 +10,7 @@ import { getPublishedPosts } from '@/lib/notion';
 import type { NewsPost } from '@/lib/notion';
 import type { Locale } from '@/i18n/config';
 
-export const revalidate = 3600;
+export const revalidate = 1800;
 
 export async function generateMetadata({
   params: { locale }

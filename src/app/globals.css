@@ -8,6 +8,7 @@
   --color-forest: 31 61 46; /* #1f3d2e */
   --color-gold: 184 146 58; /* #b8923a */
   --color-cream: 247 244 236; /* #f7f4ec */
+  --color-gold-text: 140 106 31; /* #8c6a1f, gold text on white (WCAG AA) */
   --color-ink: 20 42 31; /* #142a1f, text on gold */
 
   /* Fonts: set by next/font in the locale layout. */

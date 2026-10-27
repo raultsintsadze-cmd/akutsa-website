@@ -21,8 +21,11 @@ export interface NewsPost {
   group: string | null;
   date: string | null;
   lastEdited: string;
-  // Stable proxy path (see /api/notion-image); Notion's own file URLs expire after ~1 hour.
+  // Stable proxy paths (see /api/news-image); Notion's own file URLs expire after ~1 hour.
+  // `image` is the "Cover", falling back to another post's Cover in the same translation group.
   image: string | null;
+  gallery: string[];
+  video: string | null;
   category: string | null;
   content: RichTextItemResponse[];
 }
@@ -62,10 +65,31 @@ export function getRawImageUrl(page: PageObjectResponse): string | null {
   return null;
 }
 
-// Proxy URL versioned by last edit, so a changed cover gets a new, separately cached URL.
-function imagePath(page: PageObjectResponse): string | null {
-  if (!getRawImageUrl(page)) return null;
-  return `/api/notion-image/${normalizeId(page.id)}/${Date.parse(page.last_edited_time)}`;
+function fileUrls(page: PageObjectResponse, name: string): string[] {
+  const prop = findProp(page, 'files', [name]);
+  if (prop?.type !== 'files') return [];
+  return prop.files.map((f) => (f.type === 'file' ? f.file.url : f.external.url));
+}
+
+// News images by index: 0 = first "Cover" file (else the page cover), 1.. = "Gallery" files.
+// Raw, expiring URLs; only the /api/news-image route should use this.
+export function getNewsImageUrl(page: PageObjectResponse, index: number): string | null {
+  if (index === 0) {
+    const cover = fileUrls(page, 'cover')[0];
+    if (cover) return cover;
+    if (page.cover?.type === 'file') return page.cover.file.url;
+    if (page.cover?.type === 'external') return page.cover.external.url;
+    return null;
+  }
+  return fileUrls(page, 'gallery')[index - 1] ?? null;
+}
+
+const newsImagePath = (page: PageObjectResponse, index: number) =>
+  `/api/news-image/${normalizeId(page.id)}/${index}`;
+
+function getUrl(page: PageObjectResponse, names: string[]): string | null {
+  const prop = findProp(page, 'url', names);
+  return prop?.type === 'url' ? (prop.url ?? null) : null;
 }
 
 function getCategory(page: PageObjectResponse): string | null {
@@ -96,7 +120,9 @@ function toPost(page: PageObjectResponse): NewsPost {
     group: getText(page, ['translation group']) || null,
     date: getDate(page),
     lastEdited: page.last_edited_time,
-    image: imagePath(page),
+    image: getNewsImageUrl(page, 0) ? newsImagePath(page, 0) : null,
+    gallery: fileUrls(page, 'gallery').map((_, i) => newsImagePath(page, i + 1)),
+    video: getUrl(page, ['video url']),
     category: getCategory(page),
     // May be truncated by Notion for long, heavily formatted text; see getFullPostContent.
     content: textProp?.type === 'rich_text' ? textProp.rich_text : []
@@ -144,18 +170,24 @@ async function queryPublishedPages(): Promise<PageObjectResponse[]> {
   return pages;
 }
 
-// One Notion query shared by the list, post pages, redirects and sitemap; refreshed hourly.
+// One Notion query shared by the list, post pages, redirects and sitemap; refreshed every 30 minutes.
 export const getAllPosts = unstable_cache(
   async (): Promise<NewsPost[]> => {
     try {
-      return (await queryPublishedPages()).map(toPost);
+      const posts = (await queryPublishedPages()).map(toPost);
+      // A translation without its own Cover borrows one from its translation group.
+      for (const post of posts) {
+        if (post.image || !post.group) continue;
+        post.image = posts.find((p) => p.group === post.group && p.image)?.image ?? null;
+      }
+      return posts;
     } catch (err) {
       console.error('Failed to fetch Notion posts:', err);
       return [];
     }
   },
   ['notion-news-posts'],
-  { revalidate: 3600 }
+  { revalidate: 1800 }
 );
 
 export async function getPublishedPosts(locale: Locale): Promise<NewsPost[]> {
@@ -217,7 +249,7 @@ export const getFullPostContent = unstable_cache(
     return items;
   },
   ['notion-post-content'],
-  { revalidate: 3600 }
+  { revalidate: 1800 }
 );
 
 export async function retrievePage(pageId: string): Promise<PageObjectResponse | null> {

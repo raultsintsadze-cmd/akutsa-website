@@ -10,6 +10,7 @@ import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import FadeIn from '@/components/ui/FadeIn';
 import { ROOM_IMAGES, GUESTHOUSE_SHARED_IMAGES } from '@/lib/images';
 import type { Locale } from '@/i18n/config';
+import KeyRules from '@/components/sections/KeyRules';
 
 export async function generateMetadata({
   params: { locale }
@@ -157,6 +158,10 @@ export default function GuesthousePage() {
             <BookingButtons className="mt-3" size="sm" />
           </div>
         </div>
+      </Section>
+
+      <Section>
+        <KeyRules />
       </Section>
     </>
   );

@@ -11,6 +11,7 @@ import TransferSection from '@/components/sections/TransferSection';
 import ServiceCard from '@/components/sections/ServiceCard';
 import ToursCta from '@/components/sections/tours/ToursCta';
 import { BREAKFAST_IMAGES, TOURS_IMAGES, PICNIC_IMAGES, MASTERCLASS_IMAGES, PRODUCT_IMAGES, TRANSFER_IMAGES } from '@/lib/images';
+import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/config';
 
 export async function generateMetadata({
@@ -25,7 +26,7 @@ export async function generateMetadata({
 export default function ServicesPage({ params: { locale } }: { params: { locale: Locale } }) {
   const t = useTranslations('services');
   const tExp = useTranslations('experiences');
-
+  const tYoga = useTranslations('yoga');
 
   const transferVehicles = [
     {
@@ -188,6 +189,21 @@ export default function ServicesPage({ params: { locale } }: { params: { locale:
             </FadeIn>
           ))}
         </div>
+      </Section>
+
+      <Section id="yoga">
+        <FadeIn>
+          <div className="rounded-card bg-forest text-cream p-8 md:p-10 text-center max-w-3xl mx-auto">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold">{tYoga('servicesTitle')}</h2>
+            <p className="mt-3 text-cream/80 text-sm leading-relaxed">{tYoga('servicesText')}</p>
+            <Link
+              href="/yoga-retreat"
+              className="mt-6 inline-flex items-center min-h-11 rounded-pill bg-gold text-ink px-6 text-sm font-semibold hover:bg-gold/90 transition-colors"
+            >
+              {tYoga('servicesLink')} →
+            </Link>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section>

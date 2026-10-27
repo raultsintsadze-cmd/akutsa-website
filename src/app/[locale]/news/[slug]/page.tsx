@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
+import PhotoGrid from '@/components/sections/PhotoGrid';
 import ToursCta, { tourSlugsForText } from '@/components/sections/tours/ToursCta';
 import { OG_DEFAULT_IMAGE, OG_LOCALES, SITE_URL } from '@/lib/seo';
 import { WHATSAPP_URL } from '@/lib/constants';
@@ -19,7 +20,7 @@ import {
 import type { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { Locale } from '@/i18n/config';
 
-export const revalidate = 3600;
+export const revalidate = 1800;
 
 type Params = { locale: Locale; slug: string };
 
@@ -100,6 +101,15 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
+// "Video URL" as an embeddable iframe source: YouTube (privacy-enhanced) or Instagram post/reel.
+function videoEmbed(url: string): { src: string; instagram: boolean } | null {
+  const yt = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/);
+  if (yt) return { src: `https://www.youtube-nocookie.com/embed/${yt[1]}`, instagram: false };
+  const ig = url.match(/instagram\.com\/(?:[\w.]+\/)?(p|reel|tv)\/([\w-]+)/);
+  if (ig) return { src: `https://www.instagram.com/${ig[1]}/${ig[2]}/embed`, instagram: true };
+  return null;
+}
+
 function RichText({ items }: { items: RichTextItemResponse[] }) {
   if (!items.length) return null;
   return (
@@ -160,7 +170,8 @@ export default async function NewsPostPage({ params }: { params: Params }) {
     url
   };
 
-  const whatsappHref = `${WHATSAPP_URL}?text=${encodeURIComponent(t('whatsappMessage'))}`;
+  const embed = post.video ? videoEmbed(post.video) : null;
+  const whatsappHref =`${WHATSAPP_URL}?text=${encodeURIComponent(t('whatsappMessage'))}`;
   const stays = [
     { href: `/${locale}/guesthouse`, label: tNav('guesthouse') },
     { href: `/${locale}/cottage`, label: tNav('cottage') },
@@ -213,19 +224,7 @@ export default async function NewsPostPage({ params }: { params: Params }) {
         </div>
 
         <article className="bg-white rounded-2xl overflow-hidden shadow-sm">
-          {post.image && (
-            <div className="relative w-full h-72 md:h-96">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 768px"
-                className="object-cover"
-              />
-            </div>
-          )}
-          <div className="p-8">
+          <div className="p-6 md:p-8 pb-0 md:pb-0">
             <h1 className="font-serif text-3xl text-forest font-semibold">{post.title}</h1>
             {post.date && (
               <p className="mt-2 text-sm text-gold font-medium">
@@ -239,9 +238,41 @@ export default async function NewsPostPage({ params }: { params: Params }) {
                 </time>
               </p>
             )}
-            <div className="mt-8">
-              <RichText items={content} />
+          </div>
+          {post.image && (
+            <div className="relative w-full aspect-[16/10] mt-6">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
+              />
             </div>
+          )}
+          <div className="p-6 md:p-8">
+            <RichText items={content} />
+            {embed && (
+              <div className="mt-8 rounded-xl overflow-hidden bg-forest/5">
+                <iframe
+                  src={embed.src}
+                  title={post.title}
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className={embed.instagram ? 'w-full max-w-[540px] mx-auto block h-[640px]' : 'w-full aspect-video'}
+                />
+              </div>
+            )}
+            {post.gallery.length > 0 && (
+              <PhotoGrid
+                images={post.gallery}
+                alt={post.title}
+                className="mt-8"
+                gridClassName="grid-cols-2 md:grid-cols-3 gap-2"
+              />
+            )}
           </div>
         </article>
 

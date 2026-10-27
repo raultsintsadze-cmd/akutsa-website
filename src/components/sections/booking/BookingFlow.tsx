@@ -518,6 +518,24 @@ export default function BookingFlow({
 
           {summary}
 
+          <label className="flex items-start gap-3 text-sm text-forest">
+            <input type="checkbox" name="houseRules" required className="mt-0.5 h-5 w-5 shrink-0 accent-forest" />
+            <span>
+              {t.rich('houseRulesConsent', {
+                link: (chunks) => (
+                  <a
+                    href={`/${locale}/house-rules`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-gold-text hover:text-forest"
+                  >
+                    {chunks}
+                  </a>
+                )
+              })}
+            </span>
+          </label>
+
           {error && (
             <p role="alert" className="text-sm text-red-700">
               {error}

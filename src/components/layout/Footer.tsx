@@ -15,6 +15,7 @@ export default function Footer() {
         { href: '/guesthouse', label: tNav('guesthouse') },
         { href: '/cottage', label: tNav('cottage') },
         { href: '/camper', label: tNav('camper') },
+        { href: '/house-rules', label: tNav('houseRules') },
         { href: '/book', label: tNav('checkAvailability') }
       ]
     },
@@ -24,6 +25,7 @@ export default function Footer() {
         { href: '/tours', label: tNav('tours') },
         { href: '/services', label: tNav('services') },
         { href: '/menu', label: tNav('menu') },
+        { href: '/yoga-retreat', label: tNav('yogaRetreat') },
         { href: '/gallery', label: tNav('gallery') },
         { href: '/attractions', label: tNav('attractions') },
         { href: '/news', label: tNav('news') }

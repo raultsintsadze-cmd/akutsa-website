@@ -7,6 +7,7 @@ import { Link } from '@/i18n/navigation';
 import type { UnitId } from '@/lib/booking/units';
 import FreeBreakfastBadge from '@/components/ui/FreeBreakfastBadge';
 import PhotoGrid from '@/components/sections/PhotoGrid';
+import KeyRules from '@/components/sections/KeyRules';
 
 export default function PropertyPageTemplate({
   namespace,
@@ -109,6 +110,10 @@ export default function PropertyPageTemplate({
             imageClassName="h-56 rounded-xl"
           />
         </div>
+      </Section>
+
+      <Section>
+        <KeyRules />
       </Section>
     </>
   );

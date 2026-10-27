@@ -43,12 +43,14 @@ export default function Header() {
     { href: '/guesthouse', label: t('guesthouse'), image: GUESTHOUSE_SHARED_IMAGES.terrace, sub: tCommon('fromPrice', { price: tProps('guesthouse.price') }) },
     { href: '/cottage', label: tProps('cottage.name'), image: COTTAGE_IMAGES[0], sub: tCommon('fromPrice', { price: tProps('cottage.price') }) },
     { href: '/camper', label: t('camper'), image: CAMPER_IMAGES[0], sub: tCommon('fromPrice', { price: tProps('camper.price') }) },
+    { href: '/house-rules', label: t('houseRules') },
     { href: '/book', label: `📅 ${t('checkAvailability')}`, highlight: true }
   ];
 
   const servicesDropdown: DropdownItem[] = [
     { href: '/services', label: t('services') },
-    { href: '/menu', label: t('menu') }
+    { href: '/menu', label: t('menu') },
+    { href: '/yoga-retreat', label: t('yogaRetreat') }
   ];
 
   const exploreDropdown: DropdownItem[] = [
