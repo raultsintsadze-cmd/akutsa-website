@@ -239,7 +239,11 @@
     "filterGuesthouse": "Гостевой дом",
     "filterCottage": "Коттедж",
     "filterCamper": "Кемпер",
-    "filterNature": "Природа"
+    "filterNature": "Природа",
+    "filterAccommodation": "Проживание",
+    "filterTours": "Туры",
+    "filterNews": "События/Новости",
+    "openPost": "Открыть пост"
   },
   "attractions": {
     "title": "Достопримечательности рядом с Акуца",

@@ -11,9 +11,16 @@ export default function Lightbox({
   index,
   alt,
   onClose,
-  onIndexChange
+  onIndexChange,
+  captions,
+  links,
+  linkLabel
 }: {
   images: readonly string[];
+  // Optional per-image caption and link (e.g. news photos link to their post).
+  captions?: readonly (string | null)[];
+  links?: readonly (string | null)[];
+  linkLabel?: string;
   index: number | null;
   alt: string;
   onClose: () => void;
@@ -81,6 +88,23 @@ export default function Lightbox({
         onClick={(e) => e.stopPropagation()}
         className="w-auto h-auto max-w-[92vw] max-h-[80vh] md:max-w-[85vw] object-contain rounded-lg select-none"
       />
+
+      {(captions?.[index] || links?.[index]) && (
+        <div
+          className="absolute bottom-4 inset-x-4 flex flex-col items-center gap-2 text-center"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {captions?.[index] && <p className="text-cream text-sm md:text-base max-w-2xl">{captions[index]}</p>}
+          {links?.[index] && (
+            <a
+              href={links[index]!}
+              className="inline-flex items-center min-h-11 rounded-full bg-gold text-ink px-5 text-sm font-semibold hover:bg-gold/90 transition-colors"
+            >
+              {linkLabel} →
+            </a>
+          )}
+        </div>
+      )}
 
       <div className="absolute top-4 left-1/2 -translate-x-1/2 text-cream/80 text-sm tabular-nums">
         {index + 1} / {total}

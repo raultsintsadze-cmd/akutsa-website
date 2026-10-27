@@ -190,6 +190,38 @@ export const getAllPosts = unstable_cache(
   { revalidate: 1800 }
 );
 
+export interface NewsPhoto {
+  src: string;
+  title: string;
+  href: string;
+}
+
+// Cover + Gallery photos of all published posts, newest post first, one set per translation
+// group; captioned and linked with the group's post in `locale` (else English, else any).
+export async function getNewsPhotos(locale: Locale): Promise<NewsPhoto[]> {
+  const posts = await getAllPosts();
+  const groups = new Map<string, NewsPost[]>();
+  for (const post of posts) {
+    const key = post.group ?? post.id;
+    groups.set(key, [...(groups.get(key) ?? []), post]);
+  }
+  const seen = new Set<string>();
+  const photos: NewsPhoto[] = [];
+  for (const members of Array.from(groups.values())) {
+    const post =
+      members.find((p) => p.locale === locale) ??
+      members.find((p) => p.locale === 'en') ??
+      members[0];
+    const href = `/${post.locale ?? locale}/news/${post.slug}`;
+    for (const src of members.flatMap((p) => [p.image, ...p.gallery])) {
+      if (!src || seen.has(src)) continue;
+      seen.add(src);
+      photos.push({ src, title: post.title, href });
+    }
+  }
+  return photos;
+}
+
 export async function getPublishedPosts(locale: Locale): Promise<NewsPost[]> {
   const posts = await getAllPosts();
   return posts.filter((post) => post.locale === null || post.locale === locale);

@@ -239,7 +239,11 @@
     "filterGuesthouse": "Guest House",
     "filterCottage": "Cottage",
     "filterCamper": "Camper",
-    "filterNature": "Nature"
+    "filterNature": "Nature",
+    "filterAccommodation": "Accommodation",
+    "filterTours": "Tours",
+    "filterNews": "Events/News",
+    "openPost": "Open post"
   },
   "attractions": {
     "title": "Attractions Near Akutsa",

@@ -4,7 +4,11 @@ import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import GalleryGrid from '@/components/sections/GalleryGrid';
+import { getNewsPhotos } from '@/lib/notion';
 import type { Locale } from '@/i18n/config';
+
+// Photos uploaded to Notion news posts appear without a redeploy.
+export const revalidate = 1800;
 
 export async function generateMetadata({
   params: { locale }
@@ -20,12 +24,15 @@ export default async function GalleryPage({
 }: {
   params: { locale: Locale };
 }) {
-  const t = await getTranslations({ locale, namespace: 'gallery' });
+  const [t, newsPhotos] = await Promise.all([
+    getTranslations({ locale, namespace: 'gallery' }),
+    getNewsPhotos(locale)
+  ]);
 
   return (
     <Section>
       <SectionHeading as="h1" title={t('title')} subtitle={t('subtitle')} />
-      <GalleryGrid />
+      <GalleryGrid newsPhotos={newsPhotos} />
     </Section>
   );
 }

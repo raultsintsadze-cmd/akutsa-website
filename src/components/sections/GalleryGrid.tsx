@@ -6,26 +6,55 @@ import { useTranslations } from 'next-intl';
 import { galleryImages } from '@/lib/images';
 import { clsx } from 'clsx';
 import Lightbox from '@/components/ui/Lightbox';
+import type { NewsPhoto } from '@/lib/notion';
 
-const filters = ['all', 'guesthouse', 'cottage', 'camper', 'nature'] as const;
+const filters = ['all', 'accommodation', 'tours', 'news'] as const;
+type Filter = (typeof filters)[number];
 
-export default function GalleryGrid() {
+// Static photos keep their own category; it maps onto the filter chips.
+const STATIC_FILTER: Record<string, Filter> = {
+  guesthouse: 'accommodation',
+  cottage: 'accommodation',
+  camper: 'accommodation',
+  nature: 'tours'
+};
+
+interface Item {
+  src: string;
+  alt: string;
+  filter: Filter;
+  caption?: string;
+  href?: string;
+}
+
+export default function GalleryGrid({ newsPhotos }: { newsPhotos: NewsPhoto[] }) {
   const t = useTranslations('gallery');
-  const [active, setActive] = useState<(typeof filters)[number]>('all');
+  const [active, setActive] = useState<Filter>('all');
   const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const filterLabels: Record<(typeof filters)[number], string> = {
+  const filterLabels: Record<Filter, string> = {
     all: t('filterAll'),
-    guesthouse: t('filterGuesthouse'),
-    cottage: t('filterCottage'),
-    camper: t('filterCamper'),
-    nature: t('filterNature')
+    accommodation: t('filterAccommodation'),
+    tours: t('filterTours'),
+    news: t('filterNews')
   };
 
-  const images =
-    active === 'all'
-      ? galleryImages
-      : galleryImages.filter((image) => image.category === active);
+  // Static photos first, then news photos (already newest post first).
+  const items: Item[] = [
+    ...galleryImages.map((image) => ({
+      src: image.src,
+      alt: image.category,
+      filter: STATIC_FILTER[image.category] ?? 'tours'
+    })),
+    ...newsPhotos.map((photo) => ({
+      src: photo.src,
+      alt: photo.title,
+      filter: 'news' as const,
+      caption: photo.title,
+      href: photo.href
+    }))
+  ];
+  const images = active === 'all' ? items : items.filter((item) => item.filter === active);
 
   return (
     <div>
@@ -33,12 +62,14 @@ export default function GalleryGrid() {
         {filters.map((f) => (
           <button
             key={f}
+            type="button"
+            aria-pressed={active === f}
             onClick={() => {
               setActive(f);
               setLightbox(null);
             }}
             className={clsx(
-              'px-4 py-2 rounded-full text-sm font-medium transition-colors',
+              'px-4 min-h-11 rounded-full text-sm font-medium transition-colors',
               active === f
                 ? 'bg-forest text-cream'
                 : 'bg-white text-forest/70 hover:bg-forest/10'
@@ -53,13 +84,17 @@ export default function GalleryGrid() {
         {images.map((image, i) => (
           <button
             key={image.src}
+            type="button"
             onClick={() => setLightbox(i)}
+            aria-label={image.caption ?? `${filterLabels[image.filter]} ${i + 1}`}
             className="relative aspect-square rounded-xl overflow-hidden group cursor-zoom-in"
           >
             <Image
               src={image.src}
-              alt={image.category}
+              alt={image.alt}
               fill
+              loading="lazy"
+              sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1280px) 25vw, 300px"
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </button>
@@ -68,6 +103,9 @@ export default function GalleryGrid() {
 
       <Lightbox
         images={images.map((image) => image.src)}
+        captions={images.map((image) => image.caption ?? null)}
+        links={images.map((image) => image.href ?? null)}
+        linkLabel={t('openPost')}
         index={lightbox}
         alt={filterLabels[active]}
         onClose={() => setLightbox(null)}

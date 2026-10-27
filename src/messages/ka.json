@@ -239,7 +239,11 @@
     "filterGuesthouse": "სასტუმრო სახლი",
     "filterCottage": "კოტეჯი",
     "filterCamper": "კემპერი",
-    "filterNature": "გარემო"
+    "filterNature": "გარემო",
+    "filterAccommodation": "განთავსება",
+    "filterTours": "ტურები",
+    "filterNews": "ღონისძიებები/სიახლეები",
+    "openPost": "პოსტის გახსნა"
   },
   "attractions": {
     "title": "ღირსშესანიშნაობები აქუცის მახლობლად",
