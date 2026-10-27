@@ -32,5 +32,7 @@ export interface Tour {
   image: string | null;
   // Further "Photo" files, as /api/tour-image paths.
   gallery: string[];
+  // First "Video" file, as an /api/tour-video path (redirects to Notion's signed URL).
+  video: string | null;
   sortOrder: number;
 }

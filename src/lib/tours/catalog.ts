@@ -52,10 +52,17 @@ const select = (page: PageObjectResponse, name: string) => {
   return p?.type === 'select' ? (p.select?.name ?? null) : null;
 };
 
-function photoUrls(page: PageObjectResponse): string[] {
-  const p = page.properties['Photo'];
+function fileUrls(page: PageObjectResponse, name: string): string[] {
+  const p = page.properties[name];
   return p?.type === 'files' ? p.files.map((f) => (f.type === 'file' ? f.file.url : f.external.url)) : [];
 }
+
+// "Video" files (raw, expiring URLs); only the /api/tour-video route should use this.
+export function getTourVideoUrl(page: PageObjectResponse, index: number): string | null {
+  return fileUrls(page, 'Video')[index] ?? null;
+}
+
+const photoUrls = (page: PageObjectResponse) => fileUrls(page, 'Photo');
 
 // "Photo" files: index 0 is the cover (else the page cover), the rest are the gallery.
 // Raw, expiring URLs; only the /api/tour-image route should use this.
@@ -127,6 +134,7 @@ function toTour(page: PageObjectResponse): Tour | null {
     includes: text(page, 'Includes'),
     image: getTourImageUrl(page, 0) ? tourImagePath(page, 0) : null,
     gallery: photoUrls(page).slice(1).map((_, i) => tourImagePath(page, i + 1)),
+    video: getTourVideoUrl(page, 0) ? `/api/tour-video/${normalizeId(page.id)}/0` : null,
     sortOrder: num(page, 'Sort order') ?? 999
   };
 }

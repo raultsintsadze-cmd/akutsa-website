@@ -9,6 +9,7 @@ import { isInSeason } from '@/lib/tours/schedule';
 import type { Tour } from '@/lib/tours/types';
 import type { Locale } from '@/i18n/config';
 import TourFacts from './TourFacts';
+import TourVideo from './TourVideo';
 import { useTrip } from './TripContext';
 
 export function AddToTripButton({ tour, className }: { tour: Tour; className?: string }) {
@@ -41,8 +42,15 @@ export default function TourCard({ tour }: { tour: Tour }) {
       data-tour={tour.slug}
       className={clsx('bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col', offSeason && 'opacity-60 grayscale')}
     >
-      <Link href={`/tours/${tour.slug}`} aria-label={tour.name[locale]} className="block relative h-44 bg-forest/10">
-        {tour.image ? (
+      {/* A (vertical) video gets a taller frame on phones; from sm the card frame stays h-44. */}
+      <Link
+        href={`/tours/${tour.slug}`}
+        aria-label={tour.name[locale]}
+        className={clsx('block relative bg-forest/10 overflow-hidden', tour.video ? 'aspect-[4/5] sm:aspect-auto sm:h-44' : 'h-44')}
+      >
+        {tour.video ? (
+          <TourVideo src={tour.video} poster={tour.image ?? undefined} label={tour.name[locale]} />
+        ) : tour.image ? (
           <Image src={tour.image} alt={tour.name[locale]} fill sizes="(max-width: 640px) 100vw, 400px" className="object-cover" />
         ) : (
           <span className="absolute inset-0 flex items-center justify-center text-5xl" aria-hidden>

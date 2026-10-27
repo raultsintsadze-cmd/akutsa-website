@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
 import PhotoGrid from '@/components/sections/PhotoGrid';
+import TourVideo from '@/components/sections/tours/TourVideo';
 import TourFacts from'@/components/sections/tours/TourFacts';
 import TripDrawer from '@/components/sections/tours/TripDrawer';
 import { AddToTripButton } from '@/components/sections/tours/TourCard';
@@ -54,7 +55,11 @@ export default async function TourPage({ params: { locale, slug } }: { params: {
             ← {t('backToTours')}
           </Link>
           <article className="mt-6 bg-white rounded-2xl overflow-hidden shadow-sm">
-            {tour.image && (
+            {tour.video ? (
+              <div className="relative aspect-[4/5] md:aspect-[4/3] bg-forest/10">
+                <TourVideo src={tour.video} poster={tour.image ?? undefined} label={tour.name[locale]} playButton />
+              </div>
+            ) : tour.image && (
               <div className="relative aspect-[4/3] md:aspect-[16/9]">
                 <Image src={tour.image} alt={tour.name[locale]} fill priority sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
               </div>

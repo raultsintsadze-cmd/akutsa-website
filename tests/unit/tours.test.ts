@@ -32,6 +32,7 @@ function tour(p: Partial<Tour> & Pick<Tour, 'slug' | 'dayType'>): Tour {
     includes: '',
     image: null,
     gallery: [],
+    video: null,
     sortOrder: 0,
     ...p
   };
