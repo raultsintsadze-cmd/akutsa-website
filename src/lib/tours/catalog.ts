@@ -9,7 +9,7 @@ export const TOURS_DATABASE_ID = process.env.NOTION_TOURS_DATABASE_ID ?? 'db1ef0
 export const TOUR_REQUESTS_DATABASE_ID =
   process.env.NOTION_TOUR_REQUESTS_DATABASE_ID ?? '04c3db80048f4467a581aacfc07732b9';
 
-// 'live' (API routes: tour requests) never caches. 'catalog' revalidates hourly, which also lets
+// 'live' (API routes: tour requests) never caches. 'catalog' revalidates every 30 minutes, which also lets
 // tour pages be prerendered (a no-store fetch would make Next abort static rendering).
 export function notionClient(mode: 'live' | 'catalog' = 'live'): Client | null {
   const auth = process.env.NOTION_TOKEN;
@@ -20,7 +20,7 @@ export function notionClient(mode: 'live' | 'catalog' = 'live'): Client | null {
     // NOTION_API_BASE_URL is only set by the end-to-end tests (mock Notion server).
     baseUrl: process.env.NOTION_API_BASE_URL || undefined,
     fetch: (url, init) =>
-      fetch(url, live ? { ...init, cache: 'no-store' } : { ...init, next: { revalidate: 3600, tags: ['tours'] } })
+      fetch(url, live ? { ...init, cache: 'no-store' } : { ...init, next: { revalidate: 1800, tags: ['tours'] } })
   });
 }
 
@@ -52,10 +52,24 @@ const select = (page: PageObjectResponse, name: string) => {
   return p?.type === 'select' ? (p.select?.name ?? null) : null;
 };
 
-export function hasTourPhoto(page: PageObjectResponse): boolean {
+function photoUrls(page: PageObjectResponse): string[] {
   const p = page.properties['Photo'];
-  return (p?.type === 'files' && p.files.length > 0) || Boolean(page.cover);
+  return p?.type === 'files' ? p.files.map((f) => (f.type === 'file' ? f.file.url : f.external.url)) : [];
 }
+
+// "Photo" files: index 0 is the cover (else the page cover), the rest are the gallery.
+// Raw, expiring URLs; only the /api/tour-image route should use this.
+export function getTourImageUrl(page: PageObjectResponse, index: number): string | null {
+  const photos = photoUrls(page);
+  if (index === 0 && !photos.length) {
+    if (page.cover?.type === 'file') return page.cover.file.url;
+    if (page.cover?.type === 'external') return page.cover.external.url;
+  }
+  return photos[index] ?? null;
+}
+
+const tourImagePath = (page: PageObjectResponse, index: number) =>
+  `/api/tour-image/${normalizeId(page.id)}/${index}`;
 
 // Only active catalog pages may be served by the image proxy.
 export function isActiveTourPage(page: PageObjectResponse): boolean {
@@ -111,9 +125,8 @@ function toTour(page: PageObjectResponse): Tour | null {
     operator: operator === 'Akutsa' || operator === 'Partner' ? operator : null,
     distanceKm: num(page, 'Distance from Akutsa km'),
     includes: text(page, 'Includes'),
-    image: hasTourPhoto(page)
-      ? `/api/notion-image/${normalizeId(page.id)}/${Date.parse(page.last_edited_time)}`
-      : null,
+    image: getTourImageUrl(page, 0) ? tourImagePath(page, 0) : null,
+    gallery: photoUrls(page).slice(1).map((_, i) => tourImagePath(page, i + 1)),
     sortOrder: num(page, 'Sort order') ?? 999
   };
 }
@@ -138,9 +151,9 @@ async function queryTours(): Promise<Tour[]> {
   }
 }
 
-const cachedTours = unstable_cache(queryTours, ['tour-catalog'], { revalidate: 3600, tags: ['tours'] });
+const cachedTours = unstable_cache(queryTours, ['tour-catalog'], { revalidate: 1800, tags: ['tours'] });
 
-// Active tours, sorted. Cached for 1 hour (BOOKING_CACHE=off in end-to-end tests).
+// Active tours, sorted. Cached for 30 minutes (BOOKING_CACHE=off in end-to-end tests).
 export function getTours(): Promise<Tour[]> {
   return process.env.BOOKING_CACHE === 'off' ? queryTours() : cachedTours();
 }

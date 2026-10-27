@@ -31,6 +31,7 @@ function tour(p: Partial<Tour> & Pick<Tour, 'slug' | 'dayType'>): Tour {
     distanceKm: null,
     includes: '',
     image: null,
+    gallery: [],
     sortOrder: 0,
     ...p
   };

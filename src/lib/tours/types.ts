@@ -30,5 +30,7 @@ export interface Tour {
   includes: string;
   // Stable image path through the proxy, or null.
   image: string | null;
+  // Further "Photo" files, as /api/tour-image paths.
+  gallery: string[];
   sortOrder: number;
 }

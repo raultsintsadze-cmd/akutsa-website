@@ -243,7 +243,8 @@
     "filterAccommodation": "Проживание",
     "filterTours": "Туры",
     "filterNews": "События/Новости",
-    "openPost": "Открыть пост"
+    "openPost": "Открыть пост",
+    "openTour": "Открыть тур"
   },
   "attractions": {
     "title": "Достопримечательности рядом с Акуца",

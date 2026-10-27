@@ -11,7 +11,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/api/((?!notion-image|news-image).*)',
+        source: '/api/((?!notion-image|news-image|tour-image).*)',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]
       }
     ];

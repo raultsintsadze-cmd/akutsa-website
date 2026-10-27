@@ -27,7 +27,14 @@ interface Item {
   href?: string;
 }
 
-export default function GalleryGrid({ newsPhotos }: { newsPhotos: NewsPhoto[] }) {
+export default function GalleryGrid({
+  newsPhotos,
+  tourPhotos
+}: {
+  newsPhotos: NewsPhoto[];
+  // Notion tour photos, filed under "Tours"; same shape as news photos.
+  tourPhotos: NewsPhoto[];
+}) {
   const t = useTranslations('gallery');
   const [active, setActive] = useState<Filter>('all');
   const [lightbox, setLightbox] = useState<number | null>(null);
@@ -39,12 +46,19 @@ export default function GalleryGrid({ newsPhotos }: { newsPhotos: NewsPhoto[] })
     news: t('filterNews')
   };
 
-  // Static photos first, then news photos (already newest post first).
+  // Static photos first, then tour photos, then news photos (already newest post first).
   const items: Item[] = [
     ...galleryImages.map((image) => ({
       src: image.src,
       alt: image.category,
       filter: STATIC_FILTER[image.category] ?? 'tours'
+    })),
+    ...tourPhotos.map((photo) => ({
+      src: photo.src,
+      alt: photo.title,
+      filter: 'tours' as const,
+      caption: photo.title,
+      href: photo.href
     })),
     ...newsPhotos.map((photo) => ({
       src: photo.src,
@@ -105,7 +119,7 @@ export default function GalleryGrid({ newsPhotos }: { newsPhotos: NewsPhoto[] })
         images={images.map((image) => image.src)}
         captions={images.map((image) => image.caption ?? null)}
         links={images.map((image) => image.href ?? null)}
-        linkLabel={t('openPost')}
+        linkLabel={images[lightbox ?? 0]?.filter === 'tours' ? t('openTour') : t('openPost')}
         index={lightbox}
         alt={filterLabels[active]}
         onClose={() => setLightbox(null)}

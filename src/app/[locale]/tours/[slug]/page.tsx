@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import Section from '@/components/ui/Section';
-import TourFacts from '@/components/sections/tours/TourFacts';
+import PhotoGrid from '@/components/sections/PhotoGrid';
+import TourFacts from'@/components/sections/tours/TourFacts';
 import TripDrawer from '@/components/sections/tours/TripDrawer';
 import { AddToTripButton } from '@/components/sections/tours/TourCard';
 import { TripProvider } from '@/components/sections/tours/TripContext';
@@ -14,7 +15,7 @@ import { jsonLdScript, touristTrip } from '@/lib/tours/jsonld';
 import { addDays, todayInTbilisi } from '@/lib/booking/dates';
 import { locales, type Locale } from '@/i18n/config';
 
-export const revalidate = 3600;
+export const revalidate = 1800;
 
 export async function generateStaticParams() {
   const tours = await getTours();
@@ -54,9 +55,20 @@ export default async function TourPage({ params: { locale, slug } }: { params: {
           </Link>
           <article className="mt-6 bg-white rounded-2xl overflow-hidden shadow-sm">
             {tour.image && (
-              <div className="relative h-64 md:h-96">
+              <div className="relative aspect-[4/3] md:aspect-[16/9]">
                 <Image src={tour.image} alt={tour.name[locale]} fill priority sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
               </div>
+            )}
+            {/* Gallery: swipeable row on phones, grid from md; tap opens the lightbox. */}
+            {tour.gallery.length > 0 && (
+              <PhotoGrid
+                images={tour.gallery}
+                alt={tour.name[locale]}
+                className="px-6 md:px-8 pt-4"
+                gridClassName="grid-flow-col auto-cols-[78%] overflow-x-auto snap-x snap-mandatory gap-2 md:grid-flow-row md:auto-cols-auto md:grid-cols-3 md:overflow-visible"
+                imageClassName="aspect-[4/3] rounded-lg snap-start"
+                sizes="(max-width: 768px) 80vw, 260px"
+              />
             )}
             <div className="p-6 md:p-8">
               <h1 className="font-serif text-3xl md:text-4xl text-forest font-semibold">{tour.name[locale]}</h1>

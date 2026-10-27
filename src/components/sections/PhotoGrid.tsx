@@ -10,13 +10,15 @@ export default function PhotoGrid({
   alt,
   className,
   imageClassName = 'aspect-square rounded-lg',
-  gridClassName = 'grid-cols-3 sm:grid-cols-5 gap-2'
+  gridClassName = 'grid-cols-3 sm:grid-cols-5 gap-2',
+  sizes = '(max-width: 640px) 33vw, 20vw'
 }: {
   images: readonly string[];
   alt: string;
   className?: string;
   imageClassName?: string;
   gridClassName?: string;
+  sizes?: string;
 }) {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -35,7 +37,7 @@ export default function PhotoGrid({
               src={src}
               alt={`${alt} ${i + 1}`}
               fill
-              sizes="(max-width: 640px) 33vw, 20vw"
+              sizes={sizes}
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </button>

@@ -243,7 +243,8 @@
     "filterAccommodation": "Accommodation",
     "filterTours": "Tours",
     "filterNews": "Events/News",
-    "openPost": "Open post"
+    "openPost": "Open post",
+    "openTour": "Open tour"
   },
   "attractions": {
     "title": "Attractions Near Akutsa",

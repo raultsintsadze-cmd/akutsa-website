@@ -12,7 +12,7 @@ import { jsonLdScript, touristTrip } from '@/lib/tours/jsonld';
 import { SITE_URL } from '@/lib/constants';
 import type { Locale } from '@/i18n/config';
 
-export const revalidate = 3600;
+export const revalidate = 1800;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'tours' });

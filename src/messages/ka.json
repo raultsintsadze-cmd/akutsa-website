@@ -243,7 +243,8 @@
     "filterAccommodation": "განთავსება",
     "filterTours": "ტურები",
     "filterNews": "ღონისძიებები/სიახლეები",
-    "openPost": "პოსტის გახსნა"
+    "openPost": "პოსტის გახსნა",
+    "openTour": "ტურის ნახვა"
   },
   "attractions": {
     "title": "ღირსშესანიშნაობები აქუცის მახლობლად",
